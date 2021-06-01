@@ -1,0 +1,25 @@
+.cuerpoInicio{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+// .cardInicio{
+
+// }
+.botonVerdeInicio{
+    background-color: #7bffc6;
+    color: white;
+    font-weight: bold;
+
+}
+.botonVerdeSecundario{
+   border-color: #7bffc6;
+   color: #719e8b;
+}
+.botonVerdeSecundario:hover{
+    background-color:#7bffc6;
+    color: white;
+}
+.card-footer{
+    box-sizing: border-box;
+}
