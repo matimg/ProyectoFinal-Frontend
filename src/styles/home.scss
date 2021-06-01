@@ -1,0 +1,18 @@
+body{
+    background: radial-gradient(circle, #8c395a, #77274d); 
+    height: 100%;   
+};
+
+.cuerpoHome{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.botonAmarillo{
+    border-color: #b1b251;
+    color: white;
+}
+.botonVerde{
+    border-color: #49ac9f;
+    color: white;
+}
