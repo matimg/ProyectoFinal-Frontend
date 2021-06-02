@@ -7,9 +7,11 @@ import "../../styles/demo.scss";
 
 export const Demo = () => {
 	const { store, actions } = useContext(Context);
+	var colores = store.colores;
+	console.log(colores.fondo);
 
 	return (
-		<div className="container">
+		<div className="container" style={{ backgroundColor: colores.fondo }}>
 			<ul className="list-group">
 				{store.demo.map((item, index) => {
 					return (
@@ -23,7 +25,7 @@ export const Demo = () => {
 							{// Conditional render example
 							// Check to see if the background is orange, if so, display the message
 							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
+								<p style={{ color: colores.fondo }}>
 									Check store/flux.js scroll to the actions to see the code
 								</p>
 							) : null}
