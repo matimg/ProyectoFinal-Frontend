@@ -1,20 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "../../styles/registro.scss";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { Context } from "../store/appContext";
 
 export const Registro = () => {
+	const { store, actions } = useContext(Context);
+	const history = useHistory();
+	const [ocultar, setOcultar] = useState("");
+
 	const {
 		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm();
-	const onSubmit = data => console.log(data);
+	const onSubmit = data => {
+		actions.crearUsuario(data.Nombre, data.Apellido, data.Fechanacimiento, data.Email, data.Contraseña);
+		history.push("/");
+		setOcultar("modal");
+	};
 
 	return (
 		<div>
-			<div className="modal-dialog modal-dialog-centered">
+			<div className="modal-dialog modal-dialog-centered ">
 				<div className="modal-content">
 					<div className="modal-header">
 						<h3 className="modal-title text-center">Registrarme</h3>
@@ -82,9 +91,16 @@ export const Registro = () => {
 									{...register("Repetircontraseña", { required: true })}
 								/>
 							</div>
-							<button type="submit" className="btn btn-block botonRegistrarme mt-4 mb-2">
+							<button
+								type="submit"
+								className="btn btn-block botonRegistrarme mt-4 mb-2"
+								data-dismiss={ocultar}>
 								Registrarme
 							</button>
+							<Link to="/" data-dismiss="modal">
+								{" "}
+								Volver
+							</Link>
 						</form>
 					</div>
 				</div>
