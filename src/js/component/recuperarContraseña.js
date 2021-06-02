@@ -1,8 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/recuperarContraseña.scss";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 
 export const RecuperarContraseña = () => {
+	const {
+		register,
+		formState: { errors },
+		handleSubmit
+	} = useForm();
+	const onSubmit = data => console.log(data);
+
 	return (
 		<div>
 			<div className="modal-dialog modal-dialog-centered">
@@ -14,13 +23,14 @@ export const RecuperarContraseña = () => {
 						</button>
 					</div>
 					<div className="modal-body">
-						<form>
+						<form onSubmit={handleSubmit(onSubmit)}>
 							<div className="form-group">
 								<input
 									type="email"
-									className="form-control"
+									className={"form-control" + (!errors.Email ? " " : " errvalidacion")}
 									id="exampleInputEmail1"
 									placeholder="Email"
+									{...register("Email", { required: true, pattern: /^\S+@\S+$/i })}
 									aria-describedby="emailHelp"
 								/>
 							</div>
