@@ -7,6 +7,7 @@ import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import { InicioSesion } from "./views/inicioSesion";
 import injectContext from "./store/appContext";
+import { Registro } from "./component/registro";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";

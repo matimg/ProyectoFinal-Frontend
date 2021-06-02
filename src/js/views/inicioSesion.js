@@ -1,5 +1,7 @@
 import React from "react";
 import "../../styles/inicioSesion.scss";
+import { Registro } from "../component/registro";
+import { RecuperarContraseña } from "../component/recuperarContraseña";
 
 export const InicioSesion = () => (
 	<div className="container cuerpoInicio d-flex justify-content-center align-items-center mt-n4">
@@ -28,34 +30,26 @@ export const InicioSesion = () => (
 				</button>
 			</form>
 			<div className="d-flex justify-content-center">
-				<button className="btn border-0 btn-sm">¿Olvidaste tu contraseña?</button>
+				<button
+					className="btn border-0 btn-sm olvidasteContraseña"
+					data-toggle="modal"
+					data-target="#recuperarModal">
+					¿Olvidaste tu contraseña?
+				</button>
+				<div
+					className="modal fade"
+					id="recuperarModal"
+					aria-labelledby="recuperarModalLabel"
+					aria-hidden="true">
+					<RecuperarContraseña />
+				</div>
 			</div>
 			<div className="card-footer d-flex justify-content-center mt-4">
-				<button className="btn botonVerdeSecundario" data-toggle="modal" data-target="#exampleModal">
+				<button className="btn botonVerdeSecundario" data-toggle="modal" data-target="#registroModal">
 					Registrarme
 				</button>
-				<div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div className="modal-dialog">
-						<div className="modal-content">
-							<div className="modal-header">
-								<h5 className="modal-title">Modal title</h5>
-								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div className="modal-body">
-								<p>Modal body text goes here.</p>
-							</div>
-							<div className="modal-footer">
-								<button type="button" className="btn btn-secondary" data-dismiss="modal">
-									Close
-								</button>
-								<button type="button" className="btn btn-primary">
-									Save changes
-								</button>
-							</div>
-						</div>
-					</div>
+				<div className="modal fade" id="registroModal" aria-labelledby="registroModalLabel" aria-hidden="true">
+					<Registro />
 				</div>
 			</div>
 		</div>
