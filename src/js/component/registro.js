@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "../../styles/registro.scss";
 import { useForm } from "react-hook-form";
@@ -7,9 +7,8 @@ import { Context } from "../store/appContext";
 
 export const Registro = () => {
 	const { store, actions } = useContext(Context);
-	const history = useHistory();
-	const [ocultar, setOcultar] = useState("");
-
+	const [registrar, setRegistrar] = useState("");
+	const [finalizar, setFinalizar] = useState("d-none");
 	const {
 		register,
 		formState: { errors },
@@ -17,13 +16,13 @@ export const Registro = () => {
 	} = useForm();
 	const onSubmit = data => {
 		actions.crearUsuario(data.Nombre, data.Apellido, data.Fechanacimiento, data.Email, data.Contraseña);
-		history.push("/");
-		setOcultar("modal");
+		setRegistrar("d-none");
+		setFinalizar("");
 	};
 
 	return (
 		<div>
-			<div className="modal-dialog modal-dialog-centered ">
+			<div className={"modal-dialog modal-dialog-centered " + registrar}>
 				<div className="modal-content">
 					<div className="modal-header">
 						<h3 className="modal-title text-center">Registrarme</h3>
@@ -94,14 +93,33 @@ export const Registro = () => {
 							<button
 								type="submit"
 								className="btn btn-block botonRegistrarme mt-4 mb-2"
-								data-dismiss={ocultar}>
+								data-target="#usuarioCreadoModal"
+								data-toggle="modal">
 								Registrarme
 							</button>
+
 							<Link to="/" data-dismiss="modal">
 								{" "}
 								Volver
 							</Link>
 						</form>
+					</div>
+				</div>
+			</div>
+			<div className={"modal-dialog modal-dialog-centered " + finalizar}>
+				<div
+					className="modal fade"
+					id="usuarioCreadoModal"
+					aria-labelledby="usuarioCreadoModalLabel"
+					aria-hidden="true">
+					<div className="modal-dialog modal-dialog-centered">
+						<div className="modal-content">
+							<div className="modal-body">
+								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+									Usuario registrado
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
