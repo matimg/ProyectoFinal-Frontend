@@ -97,11 +97,6 @@ export const Registro = () => {
 								data-toggle="modal">
 								Registrarme
 							</button>
-
-							<Link to="/" data-dismiss="modal">
-								{" "}
-								Volver
-							</Link>
 						</form>
 					</div>
 				</div>
@@ -115,9 +110,21 @@ export const Registro = () => {
 					<div className="modal-dialog modal-dialog-centered">
 						<div className="modal-content">
 							<div className="modal-body">
-								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
-									Usuario registrado
-								</button>
+								<div className="card text-center">
+									<div className="card-body">
+										<h5 className="card-title">Usuario registrado</h5>
+										<p className="card-text">Verifique su casilla de correo</p>
+									</div>
+									<div className="card-footer text-muted">
+										<Link
+											to="/"
+											className="btn botonRegistrarme"
+											data-dismiss="modal"
+											aria-label="Close">
+											Volver
+										</Link>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
