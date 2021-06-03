@@ -13,20 +13,20 @@ export const InicioSesion = () => {
 	} = useForm();
 	const onSubmit = data => console.log(data);
 	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
-	const [mostrarLogin, setMostrarLogin] = useState("d-none");
-	const [habilitar, setHabilitar] = useState(false);
-	const [abc, setAbc] = useState("");
+	const [modalRegistro, setModalRegistro] = useState("");
 
 	const mostrarModal = () => {
-		setHabilitar(true);
 		setMostrarRegistro(" ");
-		// setMostrarLogin(" d-none");
-		setAbc(<Registro habilitar={true} />);
+		setModalRegistro(<Registro habilitar={true} funcion={escucharRegistro} />);
 	};
+
+	function escucharRegistro() {
+		setModalRegistro("");
+	}
 
 	return (
 		<div className="container cuerpoInicio d-flex justify-content-center align-items-center mt-n4">
-			<div className={"container bg-white rounded cardInicio card" + mostrarLogin} style={{ width: "350px" }}>
+			<div className="container bg-white rounded cardInicio card" style={{ width: "350px" }}>
 				<h3 className="text-center mt-4 mb-3">Iniciar sesión</h3>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +79,7 @@ export const InicioSesion = () => {
 					</button>
 				</div>
 			</div>
-			<div className={mostrarRegistro}>{abc}</div>
+			<div className={mostrarRegistro}>{modalRegistro}</div>
 		</div>
 	);
 };

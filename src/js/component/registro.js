@@ -13,24 +13,42 @@ import { ModalDialog } from "react-bootstrap";
 import { ModalFooter } from "react-bootstrap";
 import { ModalTitle } from "react-bootstrap";
 import { ModalHeader } from "react-bootstrap";
+
+import { Form } from "react-bootstrap";
+import { FormGroup } from "react-bootstrap";
+import { FormLabel } from "react-bootstrap";
+import { FormControl } from "react-bootstrap";
+import { FormText } from "react-bootstrap";
+
 import PropTypes from "prop-types";
-export const Registro = props => {
-	console.log(props.habilitar);
+export const Registro = e => {
+	const props = e;
 	const [show, setShow] = useState(props.habilitar);
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+
+	const handleClose = () => {
+		props.funcion();
+		setShow(false);
+	};
+	// const handleShow = () => setShow(true);
 
 	return (
 		<>
-			{/* <Button variant="primary" onClick={handleShow}>
-				Launch demo modal
-			</Button> */}
-
-			<Modal show={show} onHide={handleClose}>
+			{/* <div className="d-flex justify-content-start align-items-center"> */}
+			<Modal centered show={show} onHide={() => handleClose()}>
 				<Modal.Header closeButton>
-					<Modal.Title>Modal heading</Modal.Title>
+					<Modal.Title>Registrarme</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>Woohoo, you re reading this text in a modal!</Modal.Body>
+				<Modal.Body>
+					<Form>
+						<Form.Group className="mb-3" controlId="formBasicEmail">
+							<Form.Label>Email address</Form.Label>
+							<Form.Control type="email" placeholder="Enter email" />
+							<Form.Text className="text-muted">
+								We will never share your email with anyone else.
+							</Form.Text>
+						</Form.Group>
+					</Form>
+				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
 						Close
@@ -40,14 +58,10 @@ export const Registro = props => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
+			{/* </div> */}
 		</>
 	);
 };
-Registro.propTypes = {
-	habilitar: PropTypes.boolean
-};
-
-// render(<Example />);
 
 // export const Registro = () => {
 // 	const { store, actions } = useContext(Context);
