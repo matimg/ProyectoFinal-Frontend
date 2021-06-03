@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/inicioSesion.scss";
 import { Registro } from "../component/registro";
 import { RecuperarContraseña } from "../component/recuperarContraseña";
@@ -12,10 +12,21 @@ export const InicioSesion = () => {
 		handleSubmit
 	} = useForm();
 	const onSubmit = data => console.log(data);
+	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
+	const [mostrarLogin, setMostrarLogin] = useState("d-none");
+	const [habilitar, setHabilitar] = useState(false);
+	const [abc, setAbc] = useState("");
+
+	const mostrarModal = () => {
+		setHabilitar(true);
+		setMostrarRegistro(" ");
+		// setMostrarLogin(" d-none");
+		setAbc(<Registro habilitar={true} />);
+	};
 
 	return (
 		<div className="container cuerpoInicio d-flex justify-content-center align-items-center mt-n4">
-			<div className="container bg-white rounded cardInicio card" style={{ width: "350px" }}>
+			<div className={"container bg-white rounded cardInicio card" + mostrarLogin} style={{ width: "350px" }}>
 				<h3 className="text-center mt-4 mb-3">Iniciar sesión</h3>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
@@ -59,18 +70,16 @@ export const InicioSesion = () => {
 					</div>
 				</div>
 				<div className="card-footer d-flex justify-content-center mt-4">
-					<button className="btn botonVerdeSecundario" data-toggle="modal" data-target="#registroModal">
+					<button
+						onClick={mostrarModal}
+						className="btn botonVerdeSecundario"
+						data-toggle="modal"
+						data-target="#registroModal">
 						Registrarme
 					</button>
-					<div
-						className="modal fade"
-						id="registroModal"
-						aria-labelledby="registroModalLabel"
-						aria-hidden="true">
-						<Registro />
-					</div>
 				</div>
 			</div>
+			<div className={mostrarRegistro}>{abc}</div>
 		</div>
 	);
 };
