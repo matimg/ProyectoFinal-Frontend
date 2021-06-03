@@ -9,15 +9,32 @@ export const Registro = () => {
 	const { store, actions } = useContext(Context);
 	const [registrar, setRegistrar] = useState("");
 	const [finalizar, setFinalizar] = useState("d-none");
+	const [fondoFecha, setFondoFecha] = useState("");
+	const [fondoContraseña, setFondoContraseña] = useState("");
+
 	const {
 		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm();
+
 	const onSubmit = data => {
-		actions.crearUsuario(data.Nombre, data.Apellido, data.Fechanacimiento, data.Email, data.Contraseña);
-		setRegistrar("d-none");
-		setFinalizar("");
+		if (data.Contraseña === data.Repetircontraseña && data.Fechanacimiento < "2003-01-02") {
+			actions.crearUsuario(data.Nombre, data.Apellido, data.Fechanacimiento, data.Email, data.Contraseña);
+			setRegistrar("d-none");
+			setFinalizar("");
+		} else {
+			if (data.Contraseña !== data.Repetircontraseña) {
+				setFondoContraseña(" errvalidacion");
+			} else {
+				setFondoContraseña("");
+			}
+			if (data.Fechanacimiento > "2003-01-02") {
+				setFondoFecha(" errvalidacion");
+			} else {
+				setFondoFecha("");
+			}
+		}
 	};
 
 	return (
@@ -56,7 +73,9 @@ export const Registro = () => {
 								<input
 									type="date"
 									name="entry_date"
-									className={"form-control" + (!errors.Fechanacimiento ? " " : " errvalidacion")}
+									className={
+										"form-control" + (!errors.Fechanacimiento ? " " : " errvalidacion") + fondoFecha
+									}
 									id="entry_date"
 									placeholder="Fechanacimiento"
 									{...register("Fechanacimiento", { required: true })}
@@ -83,7 +102,9 @@ export const Registro = () => {
 								<input
 									type="password"
 									className={
-										"form-control mt-3" + (!errors.Repetircontraseña ? " " : " errvalidacion")
+										"form-control mt-3" +
+										(!errors.Repetircontraseña ? " " : " errvalidacion") +
+										fondoContraseña
 									}
 									id="exampleInputPassword1"
 									placeholder="Repetir contraseña"
