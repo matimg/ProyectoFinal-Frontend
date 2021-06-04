@@ -31,7 +31,14 @@ export const Registro = e => {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-
+		if (form.password.value !== form.confirmPassword.value) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
+		if (form.fechaNacimiento.value > "01-01-2000") {
+			event.preventDefault();
+			event.stopPropagation();
+		}
 		setValidated(true);
 	};
 
@@ -53,28 +60,31 @@ export const Registro = e => {
 						<Form noValidate validated={validated} onSubmit={handleSubmit}>
 							<div className="row">
 								<div className="col p-0 ml-3">
-									<Form.Group className="mb-3" controlId="validationCustom01">
+									<Form.Group className="mb-3" controlId="nombre">
 										<Form.Control type="text" placeholder="Nombre" required />
 									</Form.Group>
 								</div>
 								<div className="col">
-									<Form.Group className="mb-3" controlId="validationCustom02">
+									<Form.Group className="mb-3" controlId="apellido">
 										<Form.Control type="text" placeholder="Apellido" required />
 									</Form.Group>
 								</div>
 							</div>
-							<Form.Group className="mb-3" controlId="validationCustom03">
+							<Form.Group className="mb-3" controlId="fechaNacimiento">
 								<Form.Control type="date" placeholder="Fecha de nacimiento" required />
 							</Form.Group>
-							<Form.Group className="mb-3" controlId="validationCustom04">
+							<Form.Group className="mb-3" controlId="email">
 								<Form.Control type="email" placeholder="Email" required />
 								<Form.Control.Feedback type="invalid">Ingrese un correo válido</Form.Control.Feedback>
 							</Form.Group>
-							<Form.Group className="mb-3" controlId="validationCustom05">
+							<Form.Group className="mb-3" controlId="password">
 								<Form.Control type="password" placeholder="Contraseña" required />
 							</Form.Group>
-							<Form.Group className="mb-3" controlId="validationCustom06">
+							<Form.Group className="mb-3" controlId="confirmPassword">
 								<Form.Control type="password" placeholder="Repetir contraseña" required />
+								<Form.Control.Feedback type="invalid">
+									Las contraseñas no coinciden
+								</Form.Control.Feedback>
 							</Form.Group>
 							<div className="d-flex justify-content-center align-items-center mt-4">
 								<Button className="botonRegistrarme pl-4 pr-4 p-2" type="submit">

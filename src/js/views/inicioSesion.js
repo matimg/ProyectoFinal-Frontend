@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/inicioSesion.scss";
 import { Registro } from "../component/registro";
 import { RecuperarContraseña } from "../component/recuperarContraseña";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { Context } from "../store/appContext";
+import { useHistory } from "react-router-dom";
 
 export const InicioSesion = () => {
+	const history = useHistory();
+	const { store, actions } = useContext(Context);
 	const {
 		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm();
-	const onSubmit = data => console.log(data);
+	var result;
+	const onSubmit = async data => {
+		let result = await actions.login(data.email, data.password);
+		console.log(result);
+		if (result == "ok") history.push("/");
+	};
 	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
 	const [modalRegistro, setModalRegistro] = useState("");
 
@@ -26,6 +35,9 @@ export const InicioSesion = () => {
 
 	return (
 		<div className="container cuerpoInicio d-flex justify-content-center align-items-center mt-n4">
+			<div className={"alert alert-danger" + store.errorLogin.style} role="alert">
+				{store.errorLogin.mensaje}
+			</div>
 			<div className="container bg-white rounded cardInicio card" style={{ width: "350px" }}>
 				<h3 className="text-center mt-4 mb-3">Iniciar sesión</h3>
 
