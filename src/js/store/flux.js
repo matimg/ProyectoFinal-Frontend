@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						sessionStorage.setItem("token", data.token);
 						return "ok";
 					} catch (error) {
-						console.log("chau", error);
+						console.log(error);
 					}
 				};
 				let result = fetchLogin();
