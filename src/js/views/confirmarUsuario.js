@@ -8,9 +8,9 @@ export const ConfirmarUsuario = () => (
 			<h1 className="display-4 text-center">Usuario verificado</h1>
 			<p className="lead text-center">Disfruta nuestros servicios</p>
 			<hr className="my-4" />
-			<button className="btn btn-block botonConfirmar mt-n1" href="#" role="button">
+			<Link to="/inicioSesion" className="btn btn-block botonConfirmar mt-n1">
 				Ingresar
-			</button>
+			</Link>
 		</div>
 	</div>
 );
