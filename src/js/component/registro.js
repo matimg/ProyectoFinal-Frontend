@@ -24,21 +24,31 @@ export const Registro = e => {
 	const props = e;
 	const [show, setShow] = useState(props.habilitar);
 	const [validated, setValidated] = useState(false);
+	const { store, actions } = useContext(Context);
 
-	const handleSubmit = event => {
+	const handleSubmit = async event => {
 		const form = event.currentTarget;
 		if (form.checkValidity() === false) {
 			event.preventDefault();
 			event.stopPropagation();
 		}
 		if (form.password.value !== form.confirmPassword.value) {
+			form.confirmPassword.value = "";
 			event.preventDefault();
 			event.stopPropagation();
 		}
-		if (form.fechaNacimiento.value > "01-01-2000") {
+		if (form.fechaNacimiento.value > "2000-01-02") {
+			form.fechaNacimiento.value = "";
 			event.preventDefault();
 			event.stopPropagation();
 		}
+		actions.crearUsuario(
+			form.nombre.value,
+			form.apellido.value,
+			form.fechaNacimiento.value,
+			form.email.value,
+			form.password.value
+		);
 		setValidated(true);
 	};
 
