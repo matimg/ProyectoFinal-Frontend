@@ -23,6 +23,17 @@ import PropTypes from "prop-types";
 export const Registro = e => {
 	const props = e;
 	const [show, setShow] = useState(props.habilitar);
+	const [validated, setValidated] = useState(false);
+
+	const handleSubmit = event => {
+		const form = event.currentTarget;
+		if (form.checkValidity() === false) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
+
+		setValidated(true);
+	};
 
 	const handleClose = () => {
 		props.funcion();
@@ -39,30 +50,31 @@ export const Registro = e => {
 						<Modal.Title>Registrarme</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<Form>
-							<Form.Group className="mb-3" controlId="formBasicEmail">
-								<div className="row">
-									<div className="col p-0 ml-3">
-										<Form.Control type="text" placeholder="Nombre" />
-									</div>
-									<div className="col">
-										<Form.Control type="text" placeholder="Apellido" />
-									</div>
+						<Form noValidate validated={validated} onSubmit={handleSubmit}>
+							<div className="row">
+								<div className="col p-0 ml-3">
+									<Form.Group className="mb-3" controlId="validationCustom01">
+										<Form.Control type="text" placeholder="Nombre" required />
+									</Form.Group>
 								</div>
+								<div className="col">
+									<Form.Group className="mb-3" controlId="validationCustom02">
+										<Form.Control type="text" placeholder="Apellido" required />
+									</Form.Group>
+								</div>
+							</div>
+							<Form.Group className="mb-3" controlId="validationCustom03">
+								<Form.Control type="date" placeholder="Fecha de nacimiento" required />
 							</Form.Group>
-
-							<Form.Group className="mb-3" controlId="formBasicEmail">
-								<Form.Control type="date" placeholder="Fecha de nacimiento" />
+							<Form.Group className="mb-3" controlId="validationCustom04">
+								<Form.Control type="email" placeholder="Email" required />
+								<Form.Control.Feedback type="invalid">Ingrese un correo válido</Form.Control.Feedback>
 							</Form.Group>
-							<Form.Group className="mb-3" controlId="formBasicEmail">
-								<Form.Control type="email" placeholder="Email" />
+							<Form.Group className="mb-3" controlId="validationCustom05">
+								<Form.Control type="password" placeholder="Contraseña" required />
 							</Form.Group>
-
-							<Form.Group className="mb-3" controlId="formBasicPassword">
-								<Form.Control type="password" placeholder="Contraseña" />
-							</Form.Group>
-							<Form.Group className="mb-3" controlId="formBasicPassword">
-								<Form.Control type="password" placeholder="Repetir contraseña" />
+							<Form.Group className="mb-3" controlId="validationCustom06">
+								<Form.Control type="password" placeholder="Repetir contraseña" required />
 							</Form.Group>
 							<div className="d-flex justify-content-center align-items-center mt-4">
 								<Button className="botonRegistrarme pl-4 pr-4 p-2" type="submit">
