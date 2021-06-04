@@ -7,10 +7,11 @@ import { Demo } from "./views/demo";
 import { Single } from "./views/single";
 import { InicioSesion } from "./views/inicioSesion";
 import injectContext from "./store/appContext";
-import { Registro } from "./component/registro";
+import { ConfirmarUsuario } from "./views/confirmarUsuario";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Registro } from "./component/registro";
 
 //create your first component
 const Layout = () => {
@@ -32,6 +33,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/inicioSesion">
 							<InicioSesion />
+						</Route>
+						<Route exact path="/confirmarUsuario">
+							<ConfirmarUsuario />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
