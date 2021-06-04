@@ -13,7 +13,6 @@ import { ModalDialog } from "react-bootstrap";
 import { ModalFooter } from "react-bootstrap";
 import { ModalTitle } from "react-bootstrap";
 import { ModalHeader } from "react-bootstrap";
-
 import { Form } from "react-bootstrap";
 import { FormGroup } from "react-bootstrap";
 import { FormLabel } from "react-bootstrap";
@@ -34,31 +33,47 @@ export const Registro = e => {
 	return (
 		<>
 			{/* <div className="d-flex justify-content-start align-items-center"> */}
-			<Modal centered show={show} onHide={() => handleClose()}>
-				<Modal.Header closeButton>
-					<Modal.Title>Registrarme</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form>
-						<Form.Group className="mb-3" controlId="formBasicEmail">
-							<Form.Label>Email address</Form.Label>
-							<Form.Control type="email" placeholder="Enter email" />
-							<Form.Text className="text-muted">
-								We will never share your email with anyone else.
-							</Form.Text>
-						</Form.Group>
-					</Form>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-					<Button variant="primary" onClick={handleClose}>
-						Save Changes
-					</Button>
-				</Modal.Footer>
-			</Modal>
-			{/* </div> */}
+			<div className="container-sm justify-content-center align-items-center">
+				<Modal centered show={show} onHide={() => handleClose()}>
+					<Modal.Header closeButton>
+						<Modal.Title>Registrarme</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<Form>
+							<Form.Group className="mb-3" controlId="formBasicEmail">
+								<div className="row">
+									<div className="col p-0 ml-3">
+										<Form.Control type="text" placeholder="Nombre" />
+									</div>
+									<div className="col">
+										<Form.Control type="text" placeholder="Apellido" />
+									</div>
+								</div>
+							</Form.Group>
+
+							<Form.Group className="mb-3" controlId="formBasicEmail">
+								<Form.Control type="date" placeholder="Fecha de nacimiento" />
+							</Form.Group>
+							<Form.Group className="mb-3" controlId="formBasicEmail">
+								<Form.Control type="email" placeholder="Email" />
+							</Form.Group>
+
+							<Form.Group className="mb-3" controlId="formBasicPassword">
+								<Form.Control type="password" placeholder="Contraseña" />
+							</Form.Group>
+							<Form.Group className="mb-3" controlId="formBasicPassword">
+								<Form.Control type="password" placeholder="Repetir contraseña" />
+							</Form.Group>
+							<div className="d-flex justify-content-center align-items-center mt-4">
+								<Button className="botonRegistrarme pl-4 pr-4 p-2" type="submit">
+									Registrarme
+								</Button>
+							</div>
+						</Form>
+					</Modal.Body>
+				</Modal>
+				{/* </div> */}
+			</div>
 		</>
 	);
 };
