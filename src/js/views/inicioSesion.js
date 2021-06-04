@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../styles/inicioSesion.scss";
 import { Registro } from "../component/registro";
 import { RecuperarContraseña } from "../component/recuperarContraseña";
@@ -12,6 +12,17 @@ export const InicioSesion = () => {
 		handleSubmit
 	} = useForm();
 	const onSubmit = data => console.log(data);
+	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
+	const [modalRegistro, setModalRegistro] = useState("");
+
+	const mostrarModal = () => {
+		setMostrarRegistro(" ");
+		setModalRegistro(<Registro habilitar={true} funcion={escucharRegistro} />);
+	};
+
+	function escucharRegistro() {
+		setModalRegistro("");
+	}
 
 	return (
 		<div className="container cuerpoInicio d-flex justify-content-center align-items-center mt-n4">
@@ -59,18 +70,16 @@ export const InicioSesion = () => {
 					</div>
 				</div>
 				<div className="card-footer d-flex justify-content-center mt-4">
-					<button className="btn botonVerdeSecundario" data-toggle="modal" data-target="#registroModal">
+					<button
+						onClick={mostrarModal}
+						className="btn botonVerdeSecundario"
+						data-toggle="modal"
+						data-target="#registroModal">
 						Registrarme
 					</button>
-					<div
-						className="modal fade"
-						id="registroModal"
-						aria-labelledby="registroModalLabel"
-						aria-hidden="true">
-						<Registro />
-					</div>
 				</div>
 			</div>
+			<div className={mostrarRegistro}>{modalRegistro}</div>
 		</div>
 	);
 };
