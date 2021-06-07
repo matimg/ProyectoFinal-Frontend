@@ -63,6 +63,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					try {
 						const res = await fetch(process.env.URL + "/login", requestOptions);
 						const data = await res.json();
+
 						if (data.message != "OK") {
 							let newObject = {
 								mensaje: data.message,
