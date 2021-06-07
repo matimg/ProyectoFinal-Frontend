@@ -36,6 +36,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const res = await fetch(process.env.URL + "/registro", requestOptions);
 						const data = await res.json();
 						console.log(data);
+						if (data.message != "Ok") {
+							return "error";
+						} else {
+							return "ok";
+						}
 					} catch (error) {
 						console.log(error);
 					}

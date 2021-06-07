@@ -28,6 +28,7 @@ export const Registro = e => {
 	const [show, setShow] = useState(props.habilitar);
 	const [validated, setValidated] = useState(false);
 	const { store, actions } = useContext(Context);
+	const history = useHistory();
 
 	const MySwal = withReactContent(Swal);
 
@@ -47,28 +48,62 @@ export const Registro = e => {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-		actions.crearUsuario(
-			form.nombre.value,
-			form.apellido.value,
-			form.fechaNacimiento.value,
-			form.email.value,
-			form.password.value
-		);
-		if (form.checkValidity() === true) {
-			event.preventDefault();
-			event.stopPropagation();
-			Swal.fire({
-				title: "Usuario registrado",
-				text: "Verifique su casilla de correo",
-				icon: "success",
-				confirmButtonColor: "#7bffc6",
-				type: "success"
-			}).then(function() {
-				location.href = "/";
-			});
-		}
+
+		let resultado = async () => {
+			return await actions.crearUsuario(
+				form.nombre.value,
+				form.apellido.value,
+				form.fechaNacimiento.value,
+				form.email.value,
+				form.password.value
+			);
+		};
+
+		let a = resultado();
+		a.then(result => console.log(result));
+
+		event.preventDefault();
 		setValidated(true);
+
+		alert(a);
+		console.log(a);
 	};
+
+	function alertaOk() {
+		Swal.fire({
+			title: "Usuario registrado",
+			text: "Verifique su casilla de correo",
+			icon: "success",
+			showConfirmButton: true,
+			confirmButtonColor: "#7bffc6",
+			type: "success"
+		}).then(result => {
+			console.log(result);
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				event.preventDefault();
+				history.replace("/");
+			}
+		});
+	}
+
+	function alertaFallo() {
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "Something went wrong!",
+			showConfirmButton: true,
+			footer: '<a href="">Why do I have this issue?</a>'
+		}).then(result => {
+			console.log(result);
+			/* Read more about isConfirmed, isDenied below */
+			if (result.isConfirmed) {
+				event.preventDefault();
+				history.replace("/");
+			}
+		});
+	}
+
 	const handleClose = () => {
 		props.funcion();
 		setShow(false);
