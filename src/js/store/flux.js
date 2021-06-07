@@ -73,6 +73,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 							return "error";
 						}
 						sessionStorage.setItem("token", data.token);
+						let usuario = data.usuario;
+						let fecha = "";
+						for (let i = 0; i < 10; i++) {
+							fecha += usuario.fechaNacimiento.charAt(i);
+						}
+						console.log(fecha);
+						usuario.fechaNacimiento = fecha;
+						localStorage.setItem("usuario", JSON.stringify(usuario));
 						return "ok";
 					} catch (error) {
 						console.log(error);
@@ -83,6 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			logout: () => {
 				sessionStorage.removeItem("token");
+				localStorage.removeItem("usuario");
 			}
 		}
 	};
