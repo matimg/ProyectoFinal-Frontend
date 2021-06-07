@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -7,15 +7,38 @@ import { CambiarDatosPerfil } from "../component/cambiarDatosPerfil";
 export const Perfil = () => {
 	const { store, actions } = useContext(Context);
 	let usuario = JSON.parse(localStorage.getItem("usuario"));
-	const [modal, setModal] = useState(<h2>Funciona</h2>);
+	const [modal, setModal] = useState("");
+	const [publicaciones, setPublicaciones] = useState([]);
 	const mostrarModal = () => {
-		console.log("Llega");
-		// setModal(<CambiarDatosPerfil habilitar={true} />);
+		setModal(<CambiarDatosPerfil habilitar={true} />);
 	};
 	let nombre = usuario.nombre;
 	let apellido = usuario.apellido;
 	let fecha = usuario.fechaNacimiento;
 	let email = usuario.email;
+
+	useEffect(() => {
+		const fetchPublicaciones = async () => {
+			var myHeaders = new Headers();
+			myHeaders.append("Content-Type", "application/json");
+			myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+			var requestOptions = {
+				method: "GET",
+				headers: myHeaders
+			};
+
+			try {
+				const res = await fetch(process.env.URL + "/usuarios/publicaciones", requestOptions);
+				const data = await res.json();
+				console.log(data);
+				setPublicaciones(data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		fetchPublicaciones();
+	}, []);
 
 	return (
 		<div className="row p-0 mx-1">
@@ -43,54 +66,59 @@ export const Perfil = () => {
 			</div>
 			<div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-5">
 				<div id="publicaciones" className="row m-0 p-0">
-					{/* {publicaciones.map((elem, iterador)=>{ return( 
-                                <button key={iterador} onClick={()=>verificar(elem)} className="col-12 btn btn-primary m-1 border shadow-sm">{elem}</button>
-                    )})} */}
-					<div className="col-md-4 col-6">
-						<img
-							className="rounded w-100 my-2"
-							src="https://i.pinimg.com/originals/8b/da/ca/8bdaca81d5ddbaeb92b61d6b5787d866.jpg"
-							alt=""
-						/>
-					</div>
-					<div className="col-md-4 col-6">
-						<img
-							className="rounded w-100 my-2"
-							src="https://images.theconversation.com/files/254114/original/file-20190116-163292-1fq0u27.jpg?ixlib=rb-1.1.0&rect=2%2C0%2C1914%2C1514&q=45&auto=format&w=496&fit=clip"
-							alt=""
-						/>
-					</div>
-					<div className="col-md-4 col-6">
-						<img
-							className="rounded w-100 my-2"
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJJrtk2k_UxsBaDd2pw_f3HvWvRHHU3N61A&usqp=CAU"
-							alt=""
-						/>
-					</div>
+					{publicaciones.map((elem, iterador) => {
+						console.log(publicaciones);
+						return (
+							<div className="col-md-4 col-6" key={iterador}>
+								<img className="rounded w-100 my-2" src={elem.url} alt="" />
+							</div>
+						);
+					})}
+					{/*<div className="col-md-4 col-6">
+                        <img
+                            className="rounded w-100 my-2"
+                            src="https://i.pinimg.com/originals/8b/da/ca/8bdaca81d5ddbaeb92b61d6b5787d866.jpg"
+                            alt=""
+                        />
+                    </div>
+                    <div className="col-md-4 col-6">
+                        <img
+                            className="rounded w-100 my-2"
+                            src="https://images.theconversation.com/files/254114/original/file-20190116-163292-1fq0u27.jpg?ixlib=rb-1.1.0&rect=2%2C0%2C1914%2C1514&q=45&auto=format&w=496&fit=clip"
+                            alt=""
+                        />
+                    </div>
+                    <div className="col-md-4 col-6">
+                        <img
+                            className="rounded w-100 my-2"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJJrtk2k_UxsBaDd2pw_f3HvWvRHHU3N61A&usqp=CAU"
+                            alt=""
+                        />
+                    </div>
 
-					<div className="col-md-4 col-6">
-						<img
-							className="rounded w-100 my-2"
-							src="https://images.theconversation.com/files/254114/original/file-20190116-163292-1fq0u27.jpg?ixlib=rb-1.1.0&rect=2%2C0%2C1914%2C1514&q=45&auto=format&w=496&fit=clip"
-							alt=""
-						/>
-					</div>
+                    <div className="col-md-4 col-6">
+                        <img
+                            className="rounded w-100 my-2"
+                            src="https://images.theconversation.com/files/254114/original/file-20190116-163292-1fq0u27.jpg?ixlib=rb-1.1.0&rect=2%2C0%2C1914%2C1514&q=45&auto=format&w=496&fit=clip"
+                            alt=""
+                        />
+                    </div>
 
-					<div className="col-md-4 col-6">
-						<img
-							className="rounded w-100 my-2"
-							src="https://i.pinimg.com/originals/8b/da/ca/8bdaca81d5ddbaeb92b61d6b5787d866.jpg"
-							alt=""
-						/>
-					</div>
+                    <div className="col-md-4 col-6">
+                        <img
+                            className="rounded w-100 my-2"
+                            src="https://i.pinimg.com/originals/8b/da/ca/8bdaca81d5ddbaeb92b61d6b5787d866.jpg"
+                            alt=""
+                        />
+                    </div>
 
-					<div className="col-md-4 col-6">
-						<img
-							className="rounded w-100 my-2"
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJJrtk2k_UxsBaDd2pw_f3HvWvRHHU3N61A&usqp=CAU"
-							alt=""
-						/>
-					</div>
+                    <div className="col-md-4 col-6">
+                        <img
+                            className="rounded w-100 my-2"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJJrtk2k_UxsBaDd2pw_f3HvWvRHHU3N61A&usqp=CAU"
+                            alt=""
+                        />
+                </div>*/}
 				</div>
 			</div>
 			<div>{modal}</div>

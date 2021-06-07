@@ -24,6 +24,13 @@ export const CambiarDatosPerfil = e => {
 	const props = e;
 	const [show, setShow] = useState(props.habilitar);
 	const [validated, setValidated] = useState(false);
+
+	const usuario = JSON.parse(localStorage.getItem("usuario")); //Traemos los datos
+
+	const [nombre, setNombre] = useState(usuario.nombre);
+	const [apellido, setApellido] = useState(usuario.apellido);
+	const [fecha, setFecha] = useState(usuario.fecha);
+
 	const { store, actions } = useContext(Context);
 
 	const handleSubmit = async event => {
@@ -32,22 +39,17 @@ export const CambiarDatosPerfil = e => {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-		if (form.password.value !== form.confirmPassword.value) {
-			form.confirmPassword.value = "";
-			event.preventDefault();
-			event.stopPropagation();
+		if (form.nombre.value == "") {
+            event.preventDefault();
+            form.nombre.value = nombre;
+        }
+        if (form.apellido.value == "") {
+            event.preventDefault();
+            form.apellido.value = apellido;
 		}
-		if (form.fechaNacimiento.value > "2000-01-02") {
-			form.fechaNacimiento.value = "";
-			event.preventDefault();
-			event.stopPropagation();
-		}
-		actions.crearUsuario(
+		actions.modificarDatos(
 			form.nombre.value,
 			form.apellido.value,
-			form.fechaNacimiento.value,
-			form.email.value,
-			form.password.value
 		);
 		setValidated(true);
 	};
@@ -64,41 +66,19 @@ export const CambiarDatosPerfil = e => {
 			<div className="container-sm justify-content-center align-items-center">
 				<Modal centered show={show} onHide={() => handleClose()}>
 					<Modal.Header closeButton>
-						<Modal.Title>Registrarme</Modal.Title>
+						<Modal.Title>Cambiar datos</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<Form noValidate validated={validated} onSubmit={handleSubmit}>
-							<div className="row">
-								<div className="col p-0 ml-3">
-									<Form.Group className="mb-3" controlId="nombre">
-										<Form.Control type="text" placeholder="Nombre" required />
-									</Form.Group>
-								</div>
-								<div className="col">
-									<Form.Group className="mb-3" controlId="apellido">
-										<Form.Control type="text" placeholder="Apellido" required />
-									</Form.Group>
-								</div>
-							</div>
-							<Form.Group className="mb-3" controlId="fechaNacimiento">
-								<Form.Control type="date" placeholder="Fecha de nacimiento" required />
+							<Form.Group className="mb-3" controlId="nombre">
+								<Form.Control type="text" placeholder={nombre} required />
 							</Form.Group>
-							<Form.Group className="mb-3" controlId="email">
-								<Form.Control type="email" placeholder="Email" required />
-								<Form.Control.Feedback type="invalid">Ingrese un correo válido</Form.Control.Feedback>
-							</Form.Group>
-							<Form.Group className="mb-3" controlId="password">
-								<Form.Control type="password" placeholder="Contraseña" required />
-							</Form.Group>
-							<Form.Group className="mb-3" controlId="confirmPassword">
-								<Form.Control type="password" placeholder="Repetir contraseña" required />
-								<Form.Control.Feedback type="invalid">
-									Las contraseñas no coinciden
-								</Form.Control.Feedback>
+							<Form.Group className="mb-3" controlId="apellido">
+								<Form.Control type="text" placeholder={apellido} required />
 							</Form.Group>
 							<div className="d-flex justify-content-center align-items-center mt-4">
 								<Button className="botonRegistrarme pl-4 pr-4 p-2" type="submit">
-									Registrarme
+									Confirmar cambios
 								</Button>
 							</div>
 						</Form>
