@@ -19,12 +19,17 @@ import { FormLabel } from "react-bootstrap";
 import { FormControl } from "react-bootstrap";
 import { FormText } from "react-bootstrap";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 import PropTypes from "prop-types";
 export const Registro = e => {
 	const props = e;
 	const [show, setShow] = useState(props.habilitar);
 	const [validated, setValidated] = useState(false);
 	const { store, actions } = useContext(Context);
+
+	const MySwal = withReactContent(Swal);
 
 	const handleSubmit = async event => {
 		const form = event.currentTarget;
@@ -49,9 +54,21 @@ export const Registro = e => {
 			form.email.value,
 			form.password.value
 		);
+		if (form.checkValidity() === true) {
+			event.preventDefault();
+			event.stopPropagation();
+			Swal.fire({
+				title: "Usuario registrado",
+				text: "Verifique su casilla de correo",
+				icon: "success",
+				confirmButtonColor: "#7bffc6",
+				type: "success"
+			}).then(function() {
+				location.href = "/";
+			});
+		}
 		setValidated(true);
 	};
-
 	const handleClose = () => {
 		props.funcion();
 		setShow(false);
