@@ -103,7 +103,7 @@ export const Perfil = () => {
 					Editar perfil
 				</button>
 			</div>
-			<div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-4 ">
+			<div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-5 ">
 				<div id="publicaciones" className="row m-0 p-0">
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
@@ -111,15 +111,36 @@ export const Perfil = () => {
 							<div className="col-md-4 col-6 mb-3" key={iterador}>
 								<div className="">
 									<img className="rounded w-100" src={elem.url} alt="" />
-									<div
-										id="footerImagen"
-										className="bg-dark d-flex justify-content-around text-white py-1">
-										<i className="fas fa-pen" type="button" onClick={editar} />
-										<i
-											className="fas fa-trash-alt"
-											type="button"
-											onClick={() => eliminar(elem.id)}
-										/>
+									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
+										{elem.titulo}
+										<div className="btn-group dropleft ml-auto">
+											<button
+												type="button"
+												className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
+												data-toggle="dropdown"
+												aria-haspopup="true"
+												aria-expanded="false">
+												<i className="fas fa-ellipsis-h" />
+											</button>
+											<div className="dropdown-menu bg-transparent border-0">
+												<div className="row d-flex justify-content-end mr-2 mt-n2">
+													<div className="col-2">
+														<i
+															className="fas fa-pen text-white"
+															type="button"
+															onClick={editar}
+														/>
+													</div>
+													<div className="col-2">
+														<i
+															className="fas fa-trash-alt text-white"
+															type="button"
+															onClick={() => eliminar(elem.id)}
+														/>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
