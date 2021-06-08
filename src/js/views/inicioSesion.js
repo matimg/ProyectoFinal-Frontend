@@ -41,7 +41,6 @@ export const InicioSesion = () => {
 			</div>
 			<div className="container bg-white rounded cardInicio card" style={{ width: "350px" }}>
 				<h3 className="text-center mt-4 mb-3">Iniciar sesión</h3>
-
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="form-group">
 						<input
@@ -67,7 +66,7 @@ export const InicioSesion = () => {
 						Ingresar
 					</button>
 				</form>
-				<div className="d-flex justify-content-center">
+				<div className="d-flex justify-content-center align-items-center">
 					<button
 						className="btn border-0 btn-sm olvidasteContraseña"
 						data-toggle="modal"

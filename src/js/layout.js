@@ -9,6 +9,7 @@ import { InicioSesion } from "./views/inicioSesion";
 import injectContext from "./store/appContext";
 import { ConfirmarUsuario } from "./views/confirmarUsuario";
 import { Perfil } from "./views/perfil";
+import { Publicar } from "./views/publicar";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -40,6 +41,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/verificacion/:email">
 							<ConfirmarUsuario />
+						</Route>
+						<Route exact path="/publicar">
+							<Publicar />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
