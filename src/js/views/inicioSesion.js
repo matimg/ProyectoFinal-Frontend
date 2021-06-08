@@ -62,12 +62,13 @@ export const InicioSesion = () => {
 							{...register("password", { required: true })}
 						/>
 					</div>
-					<button type="submit" className="btn btn-block botonVerdeInicio">
+					<button type="submit" id="botonVerdeInicio" className="btn btn-block botonVerdeInicio">
 						Ingresar
 					</button>
 				</form>
 				<div className="d-flex justify-content-center align-items-center">
 					<button
+						id="olvidasteContraseña"
 						className="btn border-0 btn-sm olvidasteContraseña"
 						data-toggle="modal"
 						data-target="#recuperarModal">
@@ -84,6 +85,7 @@ export const InicioSesion = () => {
 				<div className="card-footer d-flex justify-content-center mt-4">
 					<button
 						onClick={mostrarModal}
+						id="botonVerdeSecundario"
 						className="btn botonVerdeSecundario"
 						data-toggle="modal"
 						data-target="#registroModal">

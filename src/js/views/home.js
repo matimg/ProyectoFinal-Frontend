@@ -17,6 +17,7 @@ export const Home = () => {
 				<Link
 					to="/inicioSesion"
 					type="button"
+					id="botonAmarillo"
 					className="btn m-3 botonAmarillo"
 					onClick={() => cambiarRol("Vendedor")}>
 					Quiero vender
@@ -24,6 +25,7 @@ export const Home = () => {
 				<Link
 					to="/inicioSesion"
 					type="button"
+					id="botonVerde"
 					className="btn m-3 botonVerde"
 					onClick={() => cambiarRol("Comprador")}>
 					Quiero comprar

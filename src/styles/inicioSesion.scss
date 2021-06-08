@@ -6,17 +6,20 @@
 // .cardInicio{
 
 // }
-.botonVerdeInicio{
+#botonVerdeInicio{
     background-color: #7bffc6;
     color: white;
     font-weight: bold;
 
 }
-.botonVerdeSecundario{
+#botonVerdeInicio:hover{
+    color: black;
+}
+#botonVerdeSecundario{
    border-color: #7bffc6;
    color: #719e8b;
 }
-.botonVerdeSecundario:hover{
+#botonVerdeSecundario:hover{
     background-color:#7bffc6;
     color: black;
 }
@@ -24,7 +27,7 @@
     box-sizing: border-box;
 }
 
-.olvidasteContraseña:hover{
+#olvidasteContraseña:hover{
     text-decoration: underline;
 }
 .errvalidacion{
