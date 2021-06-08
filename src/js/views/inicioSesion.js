@@ -19,7 +19,8 @@ export const InicioSesion = () => {
 	const onSubmit = async data => {
 		let result = await actions.login(data.email, data.password);
 		console.log(result);
-		if (result == "ok") history.push("/");
+		console.log(store.usuario);
+		if (result == "ok") history.push("/perfil");
 	};
 	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
 	const [modalRegistro, setModalRegistro] = useState("");
