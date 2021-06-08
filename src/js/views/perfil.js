@@ -7,7 +7,7 @@ import { CambiarDatosPerfil } from "../component/cambiarDatosPerfil";
 export const Perfil = () => {
 	const { store, actions } = useContext(Context);
 	let usuario = JSON.parse(localStorage.getItem("usuario"));
-	const [modal, setModal] = useState("d-none");
+	const [modal, setModal] = useState("");
 	const [publicaciones, setPublicaciones] = useState([]);
 	const mostrarModal = () => {
 		setModal("");
