@@ -149,7 +149,7 @@ export const Registro = e => {
 								</Form.Control.Feedback>
 							</Form.Group>
 							<div className="d-flex justify-content-center align-items-center mt-4">
-								<Button className="botonRegistrarme pl-4 pr-4 p-2" type="submit">
+								<Button id="botonRegistrarme" className="pl-4 pr-4 p-2" type="submit">
 									Registrarme
 								</Button>
 							</div>
