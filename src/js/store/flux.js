@@ -92,6 +92,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				sessionStorage.removeItem("token");
 				localStorage.removeItem("usuario");
+			},
+			modificarDatos: (nombre, apellido) => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var raw = JSON.stringify({
+					nombre: nombre,
+					apellido: apellido
+				});
+
+				console.log(raw);
+
+				var requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: raw
+				};
+
+				const fetchEditarUsuario = async () => {
+					try {
+						const res = await fetch(process.env.URL + "/usuarios", requestOptions);
+						const data = await res.json();
+						if (data.message != "Ok") {
+							return "error";
+						}
+						let usuario = JSON.parse(localStorage.getItem("usuario"));
+						usuario.nombre = data.usuario.nombre;
+						usuario.apellido = data.usuario.apellido;
+
+						localStorage.setItem("usuario", JSON.stringify(usuario));
+						return "ok";
+					} catch (error) {
+						console.log(error);
+					}
+				};
+				let result = fetchEditarUsuario();
+				return result;
 			}
 		}
 	};

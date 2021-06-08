@@ -22,6 +22,7 @@ import { FormText } from "react-bootstrap";
 import PropTypes from "prop-types";
 export const CambiarDatosPerfil = e => {
 	const props = e;
+	console.log(props);
 	const [show, setShow] = useState(props.habilitar);
 	const [validated, setValidated] = useState(false);
 
@@ -40,17 +41,20 @@ export const CambiarDatosPerfil = e => {
 			event.stopPropagation();
 		}
 		if (form.nombre.value == "") {
-            event.preventDefault();
-            form.nombre.value = nombre;
-        }
-        if (form.apellido.value == "") {
-            event.preventDefault();
-            form.apellido.value = apellido;
+			event.preventDefault();
+			form.nombre.value = nombre;
 		}
-		actions.modificarDatos(
-			form.nombre.value,
-			form.apellido.value,
-		);
+		if (form.apellido.value == "") {
+			event.preventDefault();
+			form.apellido.value = apellido;
+		}
+		let result = await actions.modificarDatos(form.nombre.value, form.apellido.value);
+		if (result == "ok") {
+			props.funcion();
+			setShow(false);
+		} else {
+			alert("Algo salio mal!");
+		}
 		setValidated(true);
 	};
 
