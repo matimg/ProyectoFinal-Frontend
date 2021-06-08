@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-
+import "../../styles/perfil.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CambiarDatosPerfil } from "../component/cambiarDatosPerfil";
@@ -72,36 +72,44 @@ export const Perfil = () => {
 	const editar = () => {};
 
 	return (
-		<div className="row p-0 mx-1">
+		<div className="row p-0 mx-1 d-flex justify-content-center align-items-center cuerpoPerfil ">
 			<div
 				id="perfil"
-				style={{ height: "350px" }}
-				className="col-md-4 col-sm-11 shadow rounded bg-primary d-flex flex-column align-items-center mt-5 mx-2 py-3 px-2">
+				style={{ height: "440px" }}
+				className="col-md-4 col-sm-11 shadow rounded d-flex flex-column align-items-center mt-5 mx-2 py-3 px-2">
 				<img
 					src="https://i.pinimg.com/474x/83/a9/a1/83a9a144ab03763667b8d8aa381bb441.jpg"
 					alt="avatar"
-					className="rounded-circle w-25"
+					className="rounded-circle w-25 mb-3"
 				/>
-				<h5 className="text-white">
+				{/* <h5 className="text-white">
 					{nombre} {apellido}
-				</h5>
+				</h5> */}
 				<div id="datos" className="w-75 text-center">
-					<div className="bg-secondary my-2">{nombre}</div>
-					<div className="bg-secondary my-2">{apellido}</div>
-					<div className="bg-secondary my-2">{fecha}</div>
-					<div className="bg-secondary my-2">{email}</div>
+					<div id="inputPerfil" className="rounded">
+						{nombre}
+					</div>
+					<div id="inputPerfil" className="rounded">
+						{apellido}
+					</div>
+					<div id="inputPerfil" className="rounded">
+						{fecha}
+					</div>
+					<div id="inputPerfil" className="rounded">
+						{email}
+					</div>
 				</div>
-				<button onClick={mostrarModal} className="btn btn-secondary mt-2">
+				<button onClick={mostrarModal} id="botonEditarPerfil" className="btn">
 					Editar perfil
 				</button>
 			</div>
-			<div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-5">
+			<div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-4 ">
 				<div id="publicaciones" className="row m-0 p-0">
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
 						return (
 							<div className="col-md-4 col-6 mb-3" key={iterador}>
-								<div className="border border-success">
+								<div className="">
 									<img className="rounded w-100" src={elem.url} alt="" />
 									<div
 										id="footerImagen"
