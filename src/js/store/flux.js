@@ -130,6 +130,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				let result = fetchEditarUsuario();
 				return result;
+			},
+			eliminarPublicacion: id => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var requestOptions = {
+					method: "DELETE",
+					headers: myHeaders
+				};
+				const fetchEliminarPublicacion = async id => {
+					try {
+						const res = await fetch(process.env.URL + "/usuarios/publicaciones/" + id, requestOptions);
+						const data = await res.json();
+						if (data.message != "Ok") {
+							return "error";
+						}
+						return "ok";
+					} catch (error) {
+						console.log(error);
+					}
+				};
+				let result = fetchEliminarPublicacion(id);
+				return result;
 			}
 		}
 	};

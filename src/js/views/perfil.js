@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CambiarDatosPerfil } from "../component/cambiarDatosPerfil";
+import Swal from "sweetalert2";
 
 export const Perfil = () => {
 	const { store, actions } = useContext(Context);
@@ -21,28 +22,54 @@ export const Perfil = () => {
 	let fecha = usuario.fechaNacimiento;
 	let email = usuario.email;
 
-	useEffect(() => {
-		const fetchPublicaciones = async () => {
-			var myHeaders = new Headers();
-			myHeaders.append("Content-Type", "application/json");
-			myHeaders.append("Authorization", sessionStorage.getItem("token"));
+	const fetchPublicaciones = async () => {
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+		myHeaders.append("Authorization", sessionStorage.getItem("token"));
 
-			var requestOptions = {
-				method: "GET",
-				headers: myHeaders
-			};
-
-			try {
-				const res = await fetch(process.env.URL + "/usuarios/publicaciones", requestOptions);
-				const data = await res.json();
-				console.log(data);
-				setPublicaciones(data);
-			} catch (error) {
-				console.log(error);
-			}
+		var requestOptions = {
+			method: "GET",
+			headers: myHeaders
 		};
+
+		try {
+			const res = await fetch(process.env.URL + "/usuarios/publicaciones", requestOptions);
+			const data = await res.json();
+			console.log(data);
+			setPublicaciones(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
 		fetchPublicaciones();
 	}, []);
+
+	const llamar = async id => {
+		let resultado = await actions.eliminarPublicacion(id);
+		if (resultado == "ok") {
+			Swal.fire("Eliminado correctamente", "", "success");
+			fetchPublicaciones();
+		} else {
+			alert("Se rompio");
+		}
+	};
+
+	const eliminar = id => {
+		Swal.fire({
+			title: "¿Está seguro que desea eliminar esta publicación?",
+			showCancelButton: true,
+			confirmButtonText: `Confirmar`,
+			cancelButtonText: `Cancelar`
+		}).then(result => {
+			if (result.isConfirmed) {
+				llamar(id);
+			}
+		});
+	};
+
+	const editar = () => {};
 
 	return (
 		<div className="row p-0 mx-1">
@@ -73,56 +100,23 @@ export const Perfil = () => {
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
 						return (
-							<div className="col-md-4 col-6" key={iterador}>
-								<img className="rounded w-100 my-2" src={elem.url} alt="" />
+							<div className="col-md-4 col-6 mb-3" key={iterador}>
+								<div className="border border-success">
+									<img className="rounded w-100" src={elem.url} alt="" />
+									<div
+										id="footerImagen"
+										className="bg-dark d-flex justify-content-around text-white py-1">
+										<i className="fas fa-pen" type="button" onClick={editar} />
+										<i
+											className="fas fa-trash-alt"
+											type="button"
+											onClick={() => eliminar(elem.id)}
+										/>
+									</div>
+								</div>
 							</div>
 						);
 					})}
-					{/*<div className="col-md-4 col-6">
-                        <img
-                            className="rounded w-100 my-2"
-                            src="https://i.pinimg.com/originals/8b/da/ca/8bdaca81d5ddbaeb92b61d6b5787d866.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div className="col-md-4 col-6">
-                        <img
-                            className="rounded w-100 my-2"
-                            src="https://images.theconversation.com/files/254114/original/file-20190116-163292-1fq0u27.jpg?ixlib=rb-1.1.0&rect=2%2C0%2C1914%2C1514&q=45&auto=format&w=496&fit=clip"
-                            alt=""
-                        />
-                    </div>
-                    <div className="col-md-4 col-6">
-                        <img
-                            className="rounded w-100 my-2"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJJrtk2k_UxsBaDd2pw_f3HvWvRHHU3N61A&usqp=CAU"
-                            alt=""
-                        />
-                    </div>
-
-                    <div className="col-md-4 col-6">
-                        <img
-                            className="rounded w-100 my-2"
-                            src="https://images.theconversation.com/files/254114/original/file-20190116-163292-1fq0u27.jpg?ixlib=rb-1.1.0&rect=2%2C0%2C1914%2C1514&q=45&auto=format&w=496&fit=clip"
-                            alt=""
-                        />
-                    </div>
-
-                    <div className="col-md-4 col-6">
-                        <img
-                            className="rounded w-100 my-2"
-                            src="https://i.pinimg.com/originals/8b/da/ca/8bdaca81d5ddbaeb92b61d6b5787d866.jpg"
-                            alt=""
-                        />
-                    </div>
-
-                    <div className="col-md-4 col-6">
-                        <img
-                            className="rounded w-100 my-2"
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWJJrtk2k_UxsBaDd2pw_f3HvWvRHHU3N61A&usqp=CAU"
-                            alt=""
-                        />
-                </div>*/}
 				</div>
 			</div>
 			<div>{modal}</div>
