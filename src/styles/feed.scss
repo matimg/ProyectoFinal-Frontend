@@ -1,0 +1,36 @@
+#iconoFav{
+    color: #b1b251;
+    font-size: 22px;
+}
+
+// #publicaciones{
+// display: flex;
+//   flex-flow: column wrap; /* Shorthand – you could use ‘flex-direction: column’ and ‘flex-wrap: wrap’ instead */
+//   justify-content: flex-start;
+//   align-items: flex-start;
+// }
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  justify-content: center;
+  margin-left: -30px;
+  width: auto;
+}
+.my-masonry-grid_column {
+    justify-content: center;
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  justify-content: center;
+  background: grey;
+  margin-bottom: 30px;
+}
+
+#divInterno{
+    background: none;
+}

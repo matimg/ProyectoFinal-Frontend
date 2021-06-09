@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
-import "../../styles/perfil.scss";
+import "../../styles/perfilComprador.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CambiarDatosPerfil } from "../component/cambiarDatosPerfil";
 import Swal from "sweetalert2";
 
-export const Perfil = () => {
+export const PerfilComprador = () => {
 	const { store, actions } = useContext(Context);
 	let usuario = JSON.parse(localStorage.getItem("usuario"));
 	const [modal, setModal] = useState("");
