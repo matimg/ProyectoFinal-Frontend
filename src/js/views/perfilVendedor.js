@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CambiarDatosPerfil } from "../component/cambiarDatosPerfil";
 import Swal from "sweetalert2";
+import Masonry from "react-masonry-css";
 
 export const PerfilVendedor = () => {
 	const { store, actions } = useContext(Context);
@@ -71,12 +72,18 @@ export const PerfilVendedor = () => {
 
 	const editar = () => {};
 
+	const breakpointColumnsObj = {
+		default: 4,
+		1100: 3,
+		700: 2
+	};
+
 	return (
-		<div className="row p-0 mx-1 d-flex justify-content-center align-items-center cuerpoPerfil ">
+		<div className="row d-flex justify-content-center align-items-center cuerpoPerfil mx-2 ">
 			<div
 				id="perfil"
 				style={{ height: "440px" }}
-				className="col-md-4 col-sm-11 shadow rounded d-flex flex-column align-items-center mt-5 mx-2 py-3 px-2">
+				className="col-md-3 col-sm-10 shadow rounded d-flex flex-column align-items-center mt-5 py-3 align-self-start">
 				<img
 					src="https://i.pinimg.com/474x/83/a9/a1/83a9a144ab03763667b8d8aa381bb441.jpg"
 					alt="avatar"
@@ -103,16 +110,23 @@ export const PerfilVendedor = () => {
 					Editar perfil
 				</button>
 			</div>
-			<div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-5 ">
-				<div id="publicaciones" className="row m-0 p-0">
+			<div className="col-md-7 col-sm-10 mt-5">
+				<Masonry
+					breakpointCols={breakpointColumnsObj}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column">
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
 						return (
-							<div className="col-md-4 col-6 mb-3" key={iterador}>
-								<div className="">
-									<img className="rounded w-100" src={elem.url} alt="" />
-									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
-										{elem.titulo}
+							<div id="divInterno" key={iterador} className="mx-0">
+								<img className="rounded img-fluid" src={elem.url} alt="" />
+								<div className="row d-flex justify-content-around">
+									<div className="col-xs-8">
+										<div id="footerImagen" className=" text-white py-1">
+											<p className="mt-1">{elem.titulo}</p>
+										</div>
+									</div>
+									<div className="col-xs-4">
 										<div className="btn-group dropleft ml-auto">
 											<button
 												type="button"
@@ -146,9 +160,57 @@ export const PerfilVendedor = () => {
 							</div>
 						);
 					})}
-				</div>
+				</Masonry>
 			</div>
 			<div>{modal}</div>
 		</div>
 	);
 };
+
+// <div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-5 ">
+//     <div id="publicaciones" className="row m-0 p-0">
+/* {publicaciones.map((elem, iterador) => {
+                                console.log(publicaciones); */
+// return (
+// <div className="col-md-4 col-6 mb-3" key={iterador}>
+//     <div className="">
+//         <img className="rounded w-100" src={elem.url} alt="" />
+//         <div
+//             id="footerImagen"
+//             className="d-flex justify-content-around text-white py-1">
+//             {elem.titulo}
+//             <div className="btn-group dropleft ml-auto">
+//                 <button
+//                     type="button"
+//                     className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
+//                     data-toggle="dropdown"
+//                     aria-haspopup="true"
+//                     aria-expanded="false">
+//                     <i className="fas fa-ellipsis-h" />
+//                 </button>
+//                 <div className="dropdown-menu bg-transparent border-0">
+//                     <div className="row d-flex justify-content-end mr-2 mt-n2">
+//                         <div className="col-2">
+//                             <i
+//                                 className="fas fa-pen text-white"
+//                                 type="button"
+//                                 onClick={editar}
+//                             />
+//                         </div>
+//                         <div className="col-2">
+//                             <i
+//                                 className="fas fa-trash-alt text-white"
+//                                 type="button"
+//                                 onClick={() => eliminar(elem.id)}
+//                             />
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>
+// </div>
+//     );
+// })}
+/* </div>
+                    </div> */
