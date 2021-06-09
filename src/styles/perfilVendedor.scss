@@ -1,0 +1,41 @@
+#perfil{
+    background-color: rgba(255, 255, 255, .9);
+}
+#inputPerfil{
+    background-color:#f2f2f2;
+    border:1px solid #d9d9d9;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 2px;
+}
+#botonEditarPerfil {
+    background-color: #7bffc6;
+    color: white;
+    font-weight: bold;
+    margin-top: 18px;
+}
+#botonEditarPerfil:hover{
+    color: black;
+}
+
+.cuerpoPerfil{
+
+    height:100%;
+      margin:0;
+      display: flex;
+    }
+#footerImagen{
+    background-color: none;
+}
+
+#botonCambios{
+    background-color: #7bffc6;
+    color: white;
+    font-weight: bold;
+    border: none!important;
+}
+
+#botonCambios:hover{
+    color: black;
+    background-color: #7bffc6;
+}

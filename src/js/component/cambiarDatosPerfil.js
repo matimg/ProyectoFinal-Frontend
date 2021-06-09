@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 var segundoModal = "d-none";
 import { Link, useHistory } from "react-router-dom";
-import "../../styles/registro.scss";
+import "../../styles/perfilVendedor.scss";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { Context } from "../store/appContext";
@@ -81,7 +81,7 @@ export const CambiarDatosPerfil = e => {
 								<Form.Control type="text" placeholder={apellido} required />
 							</Form.Group>
 							<div className="d-flex justify-content-center align-items-center mt-4">
-								<Button className="botonRegistrarme pl-4 pr-4 p-2" type="submit">
+								<Button id="botonCambios" className="pl-4 pr-4 p-2" type="submit">
 									Confirmar cambios
 								</Button>
 							</div>
