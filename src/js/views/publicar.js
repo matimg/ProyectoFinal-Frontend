@@ -16,12 +16,14 @@ import Swal from "sweetalert2";
 import "../../styles/publicar.scss";
 
 import { Image, Video } from "cloudinary-react";
+import { Spinner } from "../component/spinner";
 
 export const Publicar = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	const [validated, setValidated] = useState(false);
-
+	const s = store.getStore();
+	console.log(s);
 	const mensajeError = () => {
 		Swal.fire({
 			icon: "error",
@@ -116,44 +118,49 @@ export const Publicar = () => {
 		publicar(titulo, descripcion, file, categoria);
 	};
 
-	return (
-		<div className="container-sm justify-content-center align-items-center cuerpoPublicar">
-			<div className="contenedorPublicar justify-content-center align-items-center rounded">
-				<Form noValidate validated={validated} onSubmit={handleSubmit}>
-					<Form.Group className="" controlId="titulo">
-						<Form.Label className="fuentePublicar">Título de la publicación</Form.Label>
-						<Form.Control type="text" placeholder="Ejemplo: Mi titulo" required />
-						<Form.Control.Feedback type="invalid">Ingrese un titulo</Form.Control.Feedback>
-					</Form.Group>
-					<Form.Group className="" controlId="descripcion">
-						<Form.Label className="fuentePublicar">Describe tu publicación</Form.Label>
-						<Form.Control as="textarea" rows={3} placeholder="Descripcion..." required />
-						<Form.Control.Feedback type="invalid">Ingrese una descripción</Form.Control.Feedback>
-					</Form.Group>
-					<div className="row">
-						<div className="col">
-							<Form.Group style={{ height: "150px" }} controlId="url" className="mb-3">
-								<Form.Label>Sube tu archivo aquí</Form.Label>
-								<Form.Control type="file" className="border-dark" required />
-								<Form.Control.Feedback type="invalid">Sube un archivo</Form.Control.Feedback>
-							</Form.Group>
+	if (store.loading) {
+		return <Spinner />;
+	} else {
+		return (
+			<div className="container-sm justify-content-center align-items-center cuerpoPublicar">
+				<Spinner />
+				<div className="contenedorPublicar justify-content-center align-items-center rounded">
+					<Form noValidate validated={validated} onSubmit={handleSubmit}>
+						<Form.Group className="" controlId="titulo">
+							<Form.Label className="fuentePublicar">Título de la publicación</Form.Label>
+							<Form.Control type="text" placeholder="Ejemplo: Mi titulo" required />
+							<Form.Control.Feedback type="invalid">Ingrese un titulo</Form.Control.Feedback>
+						</Form.Group>
+						<Form.Group className="" controlId="descripcion">
+							<Form.Label className="fuentePublicar">Describe tu publicación</Form.Label>
+							<Form.Control as="textarea" rows={3} placeholder="Descripcion..." required />
+							<Form.Control.Feedback type="invalid">Ingrese una descripción</Form.Control.Feedback>
+						</Form.Group>
+						<div className="row">
+							<div className="col">
+								<Form.Group style={{ height: "150px" }} controlId="url" className="mb-3">
+									<Form.Label>Sube tu archivo aquí</Form.Label>
+									<Form.Control type="file" className="border-dark" required />
+									<Form.Control.Feedback type="invalid">Sube un archivo</Form.Control.Feedback>
+								</Form.Group>
+							</div>
+							<div className="col">
+								<Form.Control as="select" id="categoria">
+									<option>Elije el tipo de contenido</option>
+									<option value="Video">Video</option>
+									<option value="Image">Imagen</option>
+									<option value="Sonido">Sonido</option>
+								</Form.Control>
+							</div>
 						</div>
-						<div className="col">
-							<Form.Control as="select" id="categoria">
-								<option>Elije el tipo de contenido</option>
-								<option value="Video">Video</option>
-								<option value="Image">Imagen</option>
-								<option value="Sonido">Sonido</option>
-							</Form.Control>
+						<div className="d-flex justify-content-center align-items-center mt-4">
+							<Button className="botonPublicar mt-4 bg-none" size="lg" type="submit">
+								Publicar
+							</Button>
 						</div>
-					</div>
-					<div className="d-flex justify-content-center align-items-center mt-4">
-						<Button className="botonPublicar mt-4 bg-none" size="lg" type="submit">
-							Publicar
-						</Button>
-					</div>
-				</Form>
+					</Form>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 };
