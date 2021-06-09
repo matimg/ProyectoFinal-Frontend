@@ -160,7 +160,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let result = fetchEliminarPublicacion(id);
 				return result;
 			},
-			publicar: (titulo, descripcion, url, categoria) => {
+			publicar: (titulo, descripcion, url, categoria, tipo) => {
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 				myHeaders.append("Authorization", sessionStorage.getItem("token"));
@@ -169,7 +169,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					titulo: titulo,
 					descripcion: descripcion,
 					url: url,
-					categoria: categoria
+					categoria: categoria,
+					formato: tipo
 				});
 
 				console.log(raw);

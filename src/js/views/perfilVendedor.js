@@ -107,10 +107,16 @@ export const PerfilVendedor = () => {
 				<div id="publicaciones" className="row m-0 p-0">
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
+						let etiqueta;
+						if (elem.formato == "image") {
+							etiqueta = <img className="rounded w-100" src={elem.url} alt="" />;
+						} else {
+							etiqueta = <video className="rounded w-100" src={elem.url} alt="" />;
+						}
 						return (
 							<div className="col-md-4 col-6 mb-3" key={iterador}>
 								<div className="">
-									<img className="rounded w-100" src={elem.url} alt="" />
+									{etiqueta}
 									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
 										{elem.titulo}
 										<div className="btn-group dropleft ml-auto">

@@ -36,8 +36,9 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link className="nav-link" to="/perfil">
-								Perfil <span className="sr-only">(current)</span>
+							<Link className="nav-link" to="/perfilVendedor">
+								Perfil Vendedor
+								<span className="sr-only">(current)</span>
 							</Link>
 						</li>
 						<li className="nav-item active">
