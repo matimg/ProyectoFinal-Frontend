@@ -74,16 +74,15 @@ export const Publicar = () => {
 					</Form.Group>
 					<div className="row">
 						<div className="col">
-							<Form.Group controlId="url" className="mb-3">
+							<Form.Group style={{ height: "150px" }} controlId="url" className="mb-3">
 								<Form.Label>Sube tu archivo aquí</Form.Label>
 								<Form.Control type="file" className="border-dark" required />
-								{/* <input type="file" onChange= {(e)=> setImage(e.target.files[0])}></input> */}
 								<Form.Control.Feedback type="invalid">Sube un archivo</Form.Control.Feedback>
 							</Form.Group>
 						</div>
 						<div className="col">
 							<Form.Control as="select" id="categoria">
-								<option>Open this select menu</option>
+								<option>Elije el tipo de contenido</option>
 								<option value="Video">Video</option>
 								<option value="Image">Imagen</option>
 								<option value="Sonido">Sonido</option>
@@ -91,7 +90,7 @@ export const Publicar = () => {
 						</div>
 					</div>
 					<div className="d-flex justify-content-center align-items-center mt-4">
-						<Button className="botonPublicar mt-4" size="lg" type="submit">
+						<Button className="botonPublicar mt-4 bg-none" size="lg" type="submit">
 							Publicar
 						</Button>
 					</div>
