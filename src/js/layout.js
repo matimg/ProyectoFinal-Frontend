@@ -8,7 +8,8 @@ import { Single } from "./views/single";
 import { InicioSesion } from "./views/inicioSesion";
 import injectContext from "./store/appContext";
 import { ConfirmarUsuario } from "./views/confirmarUsuario";
-import { Perfil } from "./views/perfil";
+import { PerfilVendedor } from "./views/perfilVendedor";
+import { PerfilComprador } from "./views/perfilComprador";
 import { Publicar } from "./views/publicar";
 
 import { Navbar } from "./component/navbar";
@@ -30,8 +31,11 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/perfil">
-							<Perfil />
+						<Route exact path="/perfilVendedor">
+							<PerfilVendedor />
+						</Route>
+						<Route exact path="/perfilComprador">
+							<PerfilComprador />
 						</Route>
 						<Route exact path="/demo">
 							<Demo />
