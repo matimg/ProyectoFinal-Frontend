@@ -11,6 +11,7 @@ import { ConfirmarUsuario } from "./views/confirmarUsuario";
 import { PerfilVendedor } from "./views/perfilVendedor";
 import { PerfilComprador } from "./views/perfilComprador";
 import { Publicar } from "./views/publicar";
+import { Feed } from "./views/feed";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -30,6 +31,9 @@ const Layout = () => {
 					<Switch>
 						<Route exact path="/">
 							<Home />
+						</Route>
+						<Route exact path="/feed">
+							<Feed />
 						</Route>
 						<Route exact path="/perfilVendedor">
 							<PerfilVendedor />
