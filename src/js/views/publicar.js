@@ -20,9 +20,9 @@ import { Spinner } from "../component/spinner";
 
 export const Publicar = () => {
 	const history = useHistory();
-	const { store, actions } = useContext(Context);
+	const { store, actions, setStore } = useContext(Context);
 	const [validated, setValidated] = useState(false);
-	const s = store.getStore();
+	const s = setStore;
 	console.log(s);
 	const mensajeError = () => {
 		Swal.fire({
