@@ -38,10 +38,13 @@ export const Publicar = () => {
 		Swal.fire({
 			icon: "success",
 			title: "Su publicacion ha sido realizada",
-			showDenyButton: true,
+			// customClass: { cancelButton: "btn botonCancelar", confirmButton: "btn botonConfirmar" },
 			showCancelButton: true,
+			// buttonsStyling: false,
+			confirmButtonColor: "#7bffc6",
+			cancelButtonColor: "#de6a6a",
 			confirmButtonText: "Volver al inicio",
-			denyButtonText: `Cancelar`
+			cancelButtonText: `Cancelar`
 		}).then(result => {
 			/* Read more about isConfirmed, isDenied below */
 			if (result.isConfirmed) {
@@ -156,21 +159,20 @@ export const Publicar = () => {
 						<Form.Control as="textarea" rows={3} placeholder="Descripcion..." required />
 						<Form.Control.Feedback type="invalid">Ingrese una descripción</Form.Control.Feedback>
 					</Form.Group>
-					<div className="row">
-						<div className="col">
-							<Form.Group style={{ height: "150px" }} controlId="url" className="mb-3">
-								<Form.Label>Sube tu archivo aquí</Form.Label>
-								<Form.Control type="file" className="border-dark" required />
-								<Form.Control.Feedback type="invalid">Sube un archivo</Form.Control.Feedback>
-							</Form.Group>
-						</div>
-						<div className="col">
+					<div className="row ">
+						<div className="col-12 col-md-6">
 							<Form.Control as="select" id="categoria">
 								<option>Elije el tipo de contenido</option>
 								<option value="Video">Video</option>
 								<option value="Image">Imagen</option>
 								<option value="Sonido">Sonido</option>
 							</Form.Control>
+						</div>
+						<div className="col-12 col-md-6 mt-md-1 mt-sm-3 mt-3 ">
+							<Form.Group style={{ height: "150px" }} controlId="url" className="mb-3">
+								<Form.Control type="file" className="border-dark" required />
+								<Form.Control.Feedback type="invalid">Sube un archivo</Form.Control.Feedback>
+							</Form.Group>
 						</div>
 					</div>
 					<div className="d-flex justify-content-center align-items-center mt-4">
