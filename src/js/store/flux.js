@@ -2,7 +2,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			tipoUsuario: "",
-			errorLogin: { mensaje: "", style: " d-none" }
+			errorLogin: { mensaje: "", style: " d-none" },
+			loading: false
 		},
 
 		actions: {
@@ -33,12 +34,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const fetchUsuario = async () => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/registro", requestOptions);
 						const data = await res.json();
 						console.log(data);
 						if (data.message != "Ok") {
+							setStore({ loading: false });
 							return "error";
 						} else {
+							setStore({ loading: false });
 							return "ok";
 						}
 					} catch (error) {
@@ -66,6 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const fetchLogin = async () => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/login", requestOptions);
 						const data = await res.json();
 
@@ -75,6 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								style: ""
 							};
 							setStore({ errorLogin: newObject });
+							setStore({ loading: false });
 							return "error";
 						}
 						sessionStorage.setItem("token", data.token);
@@ -86,6 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(fecha);
 						usuario.fechaNacimiento = fecha;
 						localStorage.setItem("usuario", JSON.stringify(usuario));
+						setStore({ loading: false });
 						return "ok";
 					} catch (error) {
 						console.log(error);
@@ -118,9 +125,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const fetchEditarUsuario = async () => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/usuarios", requestOptions);
 						const data = await res.json();
 						if (data.message != "Ok") {
+							setStore({ loading: false });
 							return "error";
 						}
 						let usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -128,6 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						usuario.apellido = data.usuario.apellido;
 
 						localStorage.setItem("usuario", JSON.stringify(usuario));
+						setStore({ loading: false });
 						return "ok";
 					} catch (error) {
 						console.log(error);
@@ -147,11 +157,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const fetchEliminarPublicacion = async id => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/usuarios/publicaciones/" + id, requestOptions);
 						const data = await res.json();
 						if (data.message != "Ok") {
+							setStore({ loading: false });
 							return "error";
 						}
+						setStore({ loading: false });
 						return "ok";
 					} catch (error) {
 						console.log(error);
@@ -160,7 +173,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let result = fetchEliminarPublicacion(id);
 				return result;
 			},
-			publicar: (titulo, descripcion, url, categoria) => {
+			publicar: (titulo, descripcion, url, categoria, tipo) => {
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 				myHeaders.append("Authorization", sessionStorage.getItem("token"));
@@ -169,7 +182,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					titulo: titulo,
 					descripcion: descripcion,
 					url: url,
-					categoria: categoria
+					categoria: categoria,
+					formato: tipo
 				});
 
 				console.log(raw);
@@ -182,12 +196,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const fetchPublicar = async () => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/usuarios/publicaciones", requestOptions);
 						const data = await res.json();
 
 						if (data.message != "Ok") {
+							setStore({ loading: false });
 							return "error";
 						}
+						setStore({ loading: false });
 						return "ok";
 					} catch (error) {
 						console.log(error);

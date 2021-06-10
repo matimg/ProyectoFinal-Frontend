@@ -117,16 +117,18 @@ export const PerfilVendedor = () => {
 					columnClassName="my-masonry-grid_column">
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
+						let etiqueta;
+						if (elem.formato == "image") {
+							etiqueta = <img className="rounded w-100" src={elem.url} alt="" />;
+						} else {
+							etiqueta = <video className="rounded w-100" src={elem.url} alt="" />;
+						}
 						return (
-							<div id="divInterno" key={iterador} className="mx-0">
-								<img className="rounded img-fluid" src={elem.url} alt="" />
-								<div className="row d-flex justify-content-around">
-									<div className="col-xs-8">
-										<div id="footerImagen" className=" text-white py-1">
-											<p className="mt-1">{elem.titulo}</p>
-										</div>
-									</div>
-									<div className="col-xs-4">
+							<div className="col-md-4 col-6 mb-3" key={iterador}>
+								<div className="">
+									{etiqueta}
+									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
+										{elem.titulo}
 										<div className="btn-group dropleft ml-auto">
 											<button
 												type="button"
