@@ -20,7 +20,14 @@ export const InicioSesion = () => {
 		let result = await actions.login(data.email, data.password);
 		console.log(result);
 		console.log(store.usuario);
-		if (result == "ok") history.push("/perfilVendedor");
+		if (result == "ok") {
+			console.log(store.tipoUsuario);
+			if (store.tipoUsuario == "Vendedor") {
+				history.push("/perfilVendedor");
+			} else {
+				history.push("/perfilComprador");
+			}
+		}
 	};
 	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
 	const [modalRegistro, setModalRegistro] = useState("");
