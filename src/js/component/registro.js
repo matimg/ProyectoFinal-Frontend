@@ -32,7 +32,16 @@ export const Registro = e => {
 
 	const MySwal = withReactContent(Swal);
 
-	const handleSubmit = async event => {
+	const crearUsuario = async (nombre, apellido, fechaNacimiento, email, password) => {
+		let resultado = await actions.crearUsuario(nombre, apellido, fechaNacimiento, email, password);
+		console.log(resultado);
+		if (resultado == "ok") {
+			alertaOk();
+		} else {
+			alertaFallo();
+		}
+	};
+	const handleSubmit = event => {
 		const form = event.currentTarget;
 		if (form.checkValidity() === false) {
 			event.preventDefault();
@@ -49,24 +58,16 @@ export const Registro = e => {
 			event.stopPropagation();
 		}
 
-		let resultado = async () => {
-			return await actions.crearUsuario(
-				form.nombre.value,
-				form.apellido.value,
-				form.fechaNacimiento.value,
-				form.email.value,
-				form.password.value
-			);
-		};
-
-		let a = resultado();
-		a.then(result => console.log(result));
+		crearUsuario(
+			form.nombre.value,
+			form.apellido.value,
+			form.fechaNacimiento.value,
+			form.email.value,
+			form.password.value
+		);
 
 		event.preventDefault();
 		setValidated(true);
-
-		alert(a);
-		console.log(a);
 	};
 
 	function alertaOk() {

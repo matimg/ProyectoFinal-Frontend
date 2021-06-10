@@ -55,7 +55,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return "error";
 					}
 				};
-				fetchUsuario();
+				let resultado = fetchUsuario();
+				return resultado;
 			},
 			login: (email, password) => {
 				var myHeaders = new Headers();
