@@ -14,7 +14,7 @@ export const Feed = () => {
 	};
 
 	return (
-		<div className="d-flex justify-content-center align-items-center mx-5 mt-5">
+		<div id="divExterno" className=" d-flex justify-content-center align-items-center mx-2 mt-5">
 			<Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"

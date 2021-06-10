@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/navbar.scss";
+import logo from "../../img/logo.png";
 
 export const Navbar = () => {
 	return (
 		<div>
-			<nav className="navbar navbar-expand-lg navbar-light bg-light m-0">
-				<a className="navbar-brand" href="#">
-					Logo
-				</a>
+			<nav className="navbar  navbar-expand-lg navbar-light bg-light m-0">
+				<Link to="/feed">
+					<img className="mb-n4 mt-n43" id="logo" src={logo} />
+				</Link>
 				<button
 					className="navbar-toggler"
 					type="button"
