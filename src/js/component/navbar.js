@@ -23,19 +23,29 @@ export const Navbar = () => {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav ml-auto">
 						<li className="nav-item active ">
-							<a className="nav-link" href="#">
+							<Link className="nav-link" to="/comoVender">
 								¿Cómo vender? <span className="sr-only">(current)</span>
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item active">
-							<a className="nav-link" href="#">
+							<Link className="nav-link" to="/comoComprar">
 								¿Cómo comprar? <span className="sr-only">(current)</span>
-							</a>
+							</Link>
 						</li>
 						<li className="nav-item active">
-							<a className="nav-link" href="#">
+							<Link className="nav-link" to="/quienesSomos">
 								¿Quiénes somos? <span className="sr-only">(current)</span>
-							</a>
+							</Link>
+						</li>
+						<li className="nav-item active">
+							<Link className="nav-link" to="/perfil">
+								Perfil <span className="sr-only">(current)</span>
+							</Link>
+						</li>
+						<li className="nav-item active">
+							<Link className="nav-link" to="/publicar">
+								Publicar <span className="sr-only">(current)</span>
+							</Link>
 						</li>
 					</ul>
 				</div>

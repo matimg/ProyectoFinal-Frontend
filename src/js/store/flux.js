@@ -159,6 +159,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				let result = fetchEliminarPublicacion(id);
 				return result;
+			},
+			publicar: (titulo, descripcion, url, categoria) => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var raw = JSON.stringify({
+					titulo: titulo,
+					descripcion: descripcion,
+					url: url,
+					categoria: categoria
+				});
+
+				console.log(raw);
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: raw
+				};
+
+				const fetchPublicar = async () => {
+					try {
+						const res = await fetch(process.env.URL + "/usuarios/publicaciones", requestOptions);
+						const data = await res.json();
+
+						if (data.message != "Ok") {
+							return "error";
+						}
+						return "ok";
+					} catch (error) {
+						console.log(error);
+					}
+				};
+				let result = fetchPublicar();
+				return result;
 			}
 		}
 	};
