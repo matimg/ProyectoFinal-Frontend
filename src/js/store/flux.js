@@ -3,7 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			tipoUsuario: "",
 			errorLogin: { mensaje: "", style: " d-none" },
-			loading: false
+			loading: false,
+			cantFechtPublicaciones: 0
 		},
 
 		actions: {
