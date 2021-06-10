@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import "../../styles/spinner.scss";
 
 export const Spinner = () => {
 	const estilo = {
@@ -7,14 +8,17 @@ export const Spinner = () => {
 		right: "40%",
 		left: "40%"
 	};
+
 	return (
 		// <div className="m-0 vh-100 row text-center align-content-center justify-content-center">
 		<div style={estilo}>
-			<div className="col-auto">
+			<div className="col-auto d-flex justify-content-center">
 				<div
-					className="spinner-border text-primary"
+					id="spinner"
+					className="spinner-border"
 					role="status"
-					style={{ width: "100px", height: "100px", borderWidth: "10px" }}>
+					// style={{ width: "100px", height: "100px", borderWidth: "10px" }}
+				>
 					<span className="sr-only" />
 				</div>
 			</div>
