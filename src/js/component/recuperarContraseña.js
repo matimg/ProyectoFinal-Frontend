@@ -61,7 +61,7 @@ export const RecuperarContraseña = () => {
 								aria-describedby="emailHelp"
 							/>
 						</div>
-						<button type="submit" className="btn btn-block botonRecuperar mt-4 mb-2">
+						<button type="submit" className="btn btn-block mt-4 mb-2" id="botonRecuperar">
 							Enviar
 						</button>
 					</form>

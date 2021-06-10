@@ -74,8 +74,8 @@ export const PerfilVendedor = () => {
 
 	const breakpointColumnsObj = {
 		default: 4,
-		1100: 3,
-		700: 2
+		1200: 3,
+		800: 2
 	};
 
 	return (
@@ -83,7 +83,7 @@ export const PerfilVendedor = () => {
 			<div
 				id="perfil"
 				style={{ height: "440px" }}
-				className="col-md-3 col-sm-10 shadow rounded d-flex flex-column align-items-center mt-5 py-3 align-self-start">
+				className="col-md-3 col-sm-10 shadow rounded d-flex flex-column align-items-center mr-md-5 mr-0 mt-5 py-3 align-self-start">
 				<img
 					src="https://i.pinimg.com/474x/83/a9/a1/83a9a144ab03763667b8d8aa381bb441.jpg"
 					alt="avatar"
@@ -110,6 +110,7 @@ export const PerfilVendedor = () => {
 					Editar perfil
 				</button>
 			</div>
+
 			<div className="col-md-7 col-sm-10 mt-5">
 				<Masonry
 					breakpointCols={breakpointColumnsObj}
@@ -119,12 +120,12 @@ export const PerfilVendedor = () => {
 						console.log(publicaciones);
 						let etiqueta;
 						if (elem.formato == "image") {
-							etiqueta = <img className="rounded w-100" src={elem.url} alt="" />;
+							etiqueta = <img className="rounded" src={elem.url} alt="" />;
 						} else {
-							etiqueta = <video className="rounded w-100" src={elem.url} alt="" />;
+							etiqueta = <video className="rounded" src={elem.url} alt="" />;
 						}
 						return (
-							<div className="col-md-4 col-6 mb-3" key={iterador}>
+							<div className="col-md-4 col-6 mb-3 " key={iterador} id="contenedor">
 								<div className="">
 									{etiqueta}
 									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
@@ -164,6 +165,7 @@ export const PerfilVendedor = () => {
 					})}
 				</Masonry>
 			</div>
+
 			<div>{modal}</div>
 		</div>
 	);

@@ -19,11 +19,11 @@
 }
 
 .cuerpoPerfil{
-
     height:100%;
-      margin:0;
-      display: flex;
-    }
+    margin:0;
+    display: flex;
+}
+
 #footerImagen{
     background-color: none;
 }
@@ -38,4 +38,71 @@
 #botonCambios:hover{
     color: black;
     background-color: #7bffc6;
+}
+
+#contenedor{
+    background: none;
+
+}
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  justify-content: space-around;
+  width: auto;
+  margin-left: 0px !important;
+  
+}
+.my-masonry-grid_column {
+    justify-content: center;
+  padding-left: 1px !important; /* gutter size */
+  background-clip: padding-box;
+  
+  width: auto;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  justify-content: center;
+  background: none;
+  margin-bottom: 30px;
+}
+
+img{
+    width: 200px;
+}
+
+video{
+    width: 200px;
+}
+
+@media (max-width: 1400px) {
+  img{
+    width: 180px;
+ }
+
+ video{
+    width: 180px;
+ }
+}
+
+@media (max-width: 1300px) {
+  img{
+    width: 150px;
+ }
+
+ video{
+    width: 150px;
+ }
+}
+
+@media (max-width: 350px) {
+  img{
+    width: 120px;
+ }
+
+ video{
+    width: 120px;
+ }
 }

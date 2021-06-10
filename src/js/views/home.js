@@ -3,6 +3,7 @@ import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Carousel } from "../component/carouselFrases";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -12,13 +13,13 @@ export const Home = () => {
 
 	return (
 		<div className="container cuerpoHome d-flex justify-content-center align-items-center mt-n4">
-			<h1 className="text-center text-white">Nunca soñé con el éxito, trabajé para conseguirlo.</h1>
+			<Carousel />
 			<div className="mt-5">
 				<Link
 					to="/inicioSesion"
 					type="button"
 					id="botonAmarillo"
-					className="btn m-3 botonAmarillo"
+					className="btn mr-1 mr-md-4 botonAmarillo"
 					onClick={() => cambiarRol("Vendedor")}>
 					Quiero vender
 				</Link>
@@ -26,7 +27,7 @@ export const Home = () => {
 					to="/inicioSesion"
 					type="button"
 					id="botonVerde"
-					className="btn m-3 botonVerde"
+					className="btn ml-1 ml-md-4  botonVerde"
 					onClick={() => cambiarRol("Comprador")}>
 					Quiero comprar
 				</Link>

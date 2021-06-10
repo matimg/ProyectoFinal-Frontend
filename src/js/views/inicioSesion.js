@@ -42,11 +42,11 @@ export const InicioSesion = () => {
 	}
 
 	return (
-		<div className="container cuerpoInicio d-flex justify-content-center align-items-center mt-n4">
+		<div className="container cuerpoInicio d-flex justify-content-center align-items-center vh-100">
 			<div className={"alert alert-danger" + store.errorLogin.style} role="alert">
 				{store.errorLogin.mensaje}
 			</div>
-			<div className="container bg-white rounded cardInicio card" style={{ width: "350px" }}>
+			<div className="container bg-white rounded cardInicio card " style={{ width: "350px" }}>
 				<h3 className="text-center mt-4 mb-3">Iniciar sesión</h3>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="form-group">
