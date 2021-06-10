@@ -125,7 +125,7 @@ export const PerfilVendedor = () => {
 							etiqueta = <video className="rounded" src={elem.url} alt="" />;
 						}
 						return (
-							<div className="col-md-4 col-6 mb-3 p-0" key={iterador} id="contenedor">
+							<div className="col-md-4 col-6 mb-3 " key={iterador} id="contenedor">
 								<div className="">
 									{etiqueta}
 									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
