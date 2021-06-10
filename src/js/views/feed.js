@@ -19,7 +19,7 @@ export const Feed = () => {
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className="rounded img-fluid"
 						src="https://i.pinimg.com/236x/3b/5d/58/3b5d58a963daa6d83182bbf8c9484210.jpg"
@@ -39,10 +39,10 @@ export const Feed = () => {
 					</div>
 				</div>
 
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className="rounded img-fluid"
-						src="https://i.pinimg.com/236x/a6/01/86/a601862fd7565cdf74a38cc71362e413.jpg"
+						src="https://i.pinimg.com/236x/f8/80/0d/f8800d4e0b268a6ed1d543c1ff52f4f3.jpg"
 						alt=""
 					/>
 					<div className="row d-flex justify-content-around">
@@ -58,7 +58,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className="rounded img-fluid"
 						src="https://i.pinimg.com/236x/40/bd/61/40bd61dfe070e72927d1e8d5a703110f.jpg"
@@ -77,7 +77,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className="rounded img-fluid"
 						src="https://i.pinimg.com/236x/88/6e/aa/886eaaabf842f0da655a8ac33bea72c8.jpg"
@@ -96,7 +96,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className=" rounded img-fluid "
 						src="https://i.pinimg.com/236x/35/bb/5b/35bb5b1e925f08f7fa93d5932636f15b.jpg"
@@ -115,7 +115,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className=" rounded img-fluid "
 						src="https://i.pinimg.com/236x/10/d3/f5/10d3f5258dff019b0888bf1918473860.jpg"
@@ -134,7 +134,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className=" rounded img-fluid "
 						src="https://i.pinimg.com/236x/e7/f4/95/e7f495046e53ce75f6416f752c69b748.jpg"
@@ -153,7 +153,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className=" rounded img-fluid "
 						src="https://i.pinimg.com/236x/b4/04/d8/b404d8a9c2ea248334dba326d066da4d.jpg"
@@ -172,7 +172,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className=" rounded img-fluid "
 						src="https://i.pinimg.com/236x/35/bb/5b/35bb5b1e925f08f7fa93d5932636f15b.jpg"
@@ -191,7 +191,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-				<div id="divInterno">
+				<div id="divInterno" className="mx-2">
 					<img
 						className=" rounded img-fluid "
 						src="https://i.pinimg.com/236x/18/5e/1e/185e1ea10058aa770d8104baae0b3e13.jpg"

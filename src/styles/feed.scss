@@ -34,7 +34,7 @@
 
 #divInterno{
     background: none;
-   
+    width: 200px;
     margin-bottom: 0;
 }
 
@@ -42,3 +42,21 @@
  display: inline-block;
 }
 
+@media (max-width: 1400px) {
+  #divInterno{
+    width: 180px;
+ }
+}
+
+@media (max-width: 1300px) {
+  #divInterno{
+    width: 150px;
+ }
+}
+
+@media (max-width: 350px) {
+  #divInterno{
+    width: 120px;
+ }
+
+}
