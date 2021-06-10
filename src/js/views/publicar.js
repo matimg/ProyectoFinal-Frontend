@@ -20,15 +20,17 @@ import { Spinner } from "../component/spinner";
 
 export const Publicar = () => {
 	const history = useHistory();
-	const { store, actions, setStore } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	const [validated, setValidated] = useState(false);
-	const s = setStore;
-	console.log(s);
-	const mensajeError = () => {
+	const [spinner, setSpinner] = useState("d-none");
+	const [opacidadPublicar, setOpacidadPublicar] = useState("1");
+	const [opacidadSpinner, setOpacidadSpinner] = useState("0");
+
+	const mensajeError = tipoError => {
 		Swal.fire({
 			icon: "error",
 			title: "Oops...",
-			text: "La plataforma no acepta este formato"
+			text: tipoError
 		});
 	};
 
@@ -54,7 +56,7 @@ export const Publicar = () => {
 		if (resultado == "ok") {
 			mensajeOk();
 		} else {
-			mensajeError();
+			mensajeError("Hay problemas con la conexion, vuelva a intentarlo mas tarde");
 		}
 	};
 	const saberFormato = tipo => {
@@ -81,11 +83,12 @@ export const Publicar = () => {
 		console.log(file);
 		let tipo = file.type;
 		if (tipo == "") {
-			mensajeError();
+			mensajeError("La plataforma no soporta este formato");
 		} else {
 			tipo = saberFormato(tipo);
 			console.log("tipo cambiado:", tipo);
 			if (tipo == "image" || tipo == "video") {
+				actions.activarSpinner(true);
 				fetch(process.env.CLOUD + "/" + tipo + "/upload", {
 					method: "post",
 					body: data
@@ -97,9 +100,12 @@ export const Publicar = () => {
 						let url = data.secure_url;
 						llamarPublicar(titulo, descripcion, url, categoria, tipo);
 					})
-					.catch(err => console.log(err));
+					.catch(err => {
+						console.log(err);
+						actions.activarSpinner(false);
+					});
 			} else {
-				mensajeError();
+				mensajeError("La plataforma no soporta este formato");
 			}
 		}
 	};
@@ -118,49 +124,62 @@ export const Publicar = () => {
 		publicar(titulo, descripcion, file, categoria);
 	};
 
-	if (store.loading) {
-		return <Spinner />;
-	} else {
-		return (
-			<div className="container-sm justify-content-center align-items-center cuerpoPublicar">
-				<Spinner />
-				<div className="contenedorPublicar justify-content-center align-items-center rounded">
-					<Form noValidate validated={validated} onSubmit={handleSubmit}>
-						<Form.Group className="" controlId="titulo">
-							<Form.Label className="fuentePublicar">Título de la publicación</Form.Label>
-							<Form.Control type="text" placeholder="Ejemplo: Mi titulo" required />
-							<Form.Control.Feedback type="invalid">Ingrese un titulo</Form.Control.Feedback>
-						</Form.Group>
-						<Form.Group className="" controlId="descripcion">
-							<Form.Label className="fuentePublicar">Describe tu publicación</Form.Label>
-							<Form.Control as="textarea" rows={3} placeholder="Descripcion..." required />
-							<Form.Control.Feedback type="invalid">Ingrese una descripción</Form.Control.Feedback>
-						</Form.Group>
-						<div className="row">
-							<div className="col">
-								<Form.Group style={{ height: "150px" }} controlId="url" className="mb-3">
-									<Form.Label>Sube tu archivo aquí</Form.Label>
-									<Form.Control type="file" className="border-dark" required />
-									<Form.Control.Feedback type="invalid">Sube un archivo</Form.Control.Feedback>
-								</Form.Group>
-							</div>
-							<div className="col">
-								<Form.Control as="select" id="categoria">
-									<option>Elije el tipo de contenido</option>
-									<option value="Video">Video</option>
-									<option value="Image">Imagen</option>
-									<option value="Sonido">Sonido</option>
-								</Form.Control>
-							</div>
+	useEffect(
+		() => {
+			console.log("entra", store.loading);
+			if (store.loading) {
+				setSpinner(<Spinner className={spinner} />);
+				setOpacidadPublicar("0.5");
+			} else {
+				console.log("falso", spinner);
+				setSpinner("");
+				setOpacidadPublicar("1");
+			}
+		},
+		[store.loading]
+	);
+
+	return (
+		<div
+			style={{ opacity: opacidadPublicar }}
+			className="container-sm justify-content-center align-items-center cuerpoPublicar">
+			<div className="contenedorPublicar justify-content-center align-items-center rounded">
+				{spinner}
+				<Form noValidate validated={validated} onSubmit={handleSubmit}>
+					<Form.Group className="" controlId="titulo">
+						<Form.Label className="fuentePublicar">Título de la publicación</Form.Label>
+						<Form.Control type="text" placeholder="Ejemplo: Mi titulo" required />
+						<Form.Control.Feedback type="invalid">Ingrese un titulo</Form.Control.Feedback>
+					</Form.Group>
+					<Form.Group className="" controlId="descripcion">
+						<Form.Label className="fuentePublicar">Describe tu publicación</Form.Label>
+						<Form.Control as="textarea" rows={3} placeholder="Descripcion..." required />
+						<Form.Control.Feedback type="invalid">Ingrese una descripción</Form.Control.Feedback>
+					</Form.Group>
+					<div className="row">
+						<div className="col">
+							<Form.Group style={{ height: "150px" }} controlId="url" className="mb-3">
+								<Form.Label>Sube tu archivo aquí</Form.Label>
+								<Form.Control type="file" className="border-dark" required />
+								<Form.Control.Feedback type="invalid">Sube un archivo</Form.Control.Feedback>
+							</Form.Group>
 						</div>
-						<div className="d-flex justify-content-center align-items-center mt-4">
-							<Button className="botonPublicar mt-4 bg-none" size="lg" type="submit">
-								Publicar
-							</Button>
+						<div className="col">
+							<Form.Control as="select" id="categoria">
+								<option>Elije el tipo de contenido</option>
+								<option value="Video">Video</option>
+								<option value="Image">Imagen</option>
+								<option value="Sonido">Sonido</option>
+							</Form.Control>
 						</div>
-					</Form>
-				</div>
+					</div>
+					<div className="d-flex justify-content-center align-items-center mt-4">
+						<Button className="botonPublicar mt-4 bg-none" size="lg" type="submit">
+							Publicar
+						</Button>
+					</div>
+				</Form>
 			</div>
-		);
-	}
+		</div>
+	);
 };
