@@ -20,7 +20,7 @@ import { Registro } from "./component/registro";
 
 //create your first component
 const Layout = () => {
-	// const { store, actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
@@ -41,7 +41,7 @@ const Layout = () => {
 
 						<PrivateRoute path="/perfilComprador" component={PerfilComprador} exact />
 
-						{/* <RutaLogin path="/iniciarSesion" component={InicioSesion} exact /> */}
+						<RutaLogin path="/inicioSesion" component={InicioSesion} exact />
 
 						<Route exact path="/verificacion/:id">
 							<ConfirmarUsuario />
@@ -63,16 +63,18 @@ const Layout = () => {
 		const token = sessionStorage.getItem("token");
 		return <Route {...rest} render={props => (token ? <Component {...props} /> : <Redirect to="/" />)} />;
 	}
-	// function RutaLogin({ component: Component, ...rest }) {
-	// 	const token = sessionStorage.getItem("token");
-	// 	const tipoUsuario = store.tipoUsuario;
-	// 	if (tipoUsuario == "") {
-	// 		rol = true;
-	// 	} else {
-	// 		rol = false;
-	// 	}
-	// 	return <Route {...rest} render={props => (rol ? <Component {...props} /> : <Redirect to="/" />)} />;
-	// }
+	function RutaLogin({ component: Component, ...rest }) {
+		const token = sessionStorage.getItem("token");
+		const tipoUsuario = store.tipoUsuario;
+		let rol;
+		console.log(tipoUsuario);
+		if (tipoUsuario == "") {
+			rol = false;
+		} else {
+			rol = true;
+		}
+		return <Route {...rest} render={props => (rol ? <Component {...props} /> : <Redirect to="/" />)} />;
+	}
 	// export PrivateRoute;
 };
 
