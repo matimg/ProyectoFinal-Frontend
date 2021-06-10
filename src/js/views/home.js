@@ -18,7 +18,7 @@ export const Home = () => {
 					to="/inicioSesion"
 					type="button"
 					id="botonAmarillo"
-					className="btn m-3 botonAmarillo"
+					className="btn mr-1 mr-md-4 botonAmarillo"
 					onClick={() => cambiarRol("Vendedor")}>
 					Quiero vender
 				</Link>
@@ -26,7 +26,7 @@ export const Home = () => {
 					to="/inicioSesion"
 					type="button"
 					id="botonVerde"
-					className="btn m-3 botonVerde"
+					className="btn ml-1 ml-md-4  botonVerde"
 					onClick={() => cambiarRol("Comprador")}>
 					Quiero comprar
 				</Link>

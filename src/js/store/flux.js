@@ -7,6 +7,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 
 		actions: {
+			activarSpinner: estado => {
+				setStore({ loading: estado });
+			},
+
 			rolUsuario: rol => {
 				setStore({ tipoUsuario: rol });
 			},
@@ -47,9 +51,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
-				fetchUsuario();
+				let resultado = fetchUsuario();
+				return resultado;
 			},
 			login: (email, password) => {
 				var myHeaders = new Headers();
@@ -96,6 +103,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return "ok";
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
 				let result = fetchLogin();
@@ -141,6 +150,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return "ok";
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
 				let result = fetchEditarUsuario();
@@ -168,6 +179,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return "ok";
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
 				let result = fetchEliminarPublicacion(id);
@@ -208,6 +221,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return "ok";
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
 				let result = fetchPublicar();
