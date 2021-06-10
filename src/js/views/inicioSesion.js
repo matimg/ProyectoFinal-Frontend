@@ -15,7 +15,7 @@ export const InicioSesion = () => {
 		formState: { errors },
 		handleSubmit
 	} = useForm();
-	var result;
+
 	const onSubmit = async data => {
 		let result = await actions.login(data.email, data.password);
 		console.log(result);
