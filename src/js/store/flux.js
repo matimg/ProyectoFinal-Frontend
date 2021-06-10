@@ -3,7 +3,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			tipoUsuario: "",
 			errorLogin: { mensaje: "", style: " d-none" },
-			loading: false
+			loading: false,
+			cantFechtPublicaciones: 0
 		},
 
 		actions: {
@@ -58,6 +59,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let resultado = fetchUsuario();
 				return resultado;
 			},
+			activarUsuario: id => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "PUT",
+					headers: myHeaders
+				};
+				const fetchActivarUsuario = async id => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/verificar/" + id, requestOptions);
+						const data = await res.json();
+
+						if (data.message != "Ok") {
+							setStore({ loading: false });
+							return "error";
+						}
+						setStore({ loading: false });
+						return "ok";
+					} catch (error) {
+						console.log(error);
+						setStore({ loading: false });
+						return "error";
+					}
+				};
+				const resultado = fetchActivarUsuario(id);
+				return resultado;
+			},
 			login: (email, password) => {
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
@@ -81,7 +111,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						const res = await fetch(process.env.URL + "/login", requestOptions);
 						const data = await res.json();
 
-						if (data.message != "OK") {
+						if (data.message != "Ok") {
 							let newObject = {
 								mensaje: data.message,
 								style: ""
@@ -113,6 +143,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				sessionStorage.removeItem("token");
 				localStorage.removeItem("usuario");
+			},
+			recuperarPassword: email => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var raw = JSON.stringify({
+					email: email
+				});
+
+				var requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: raw
+				};
+
+				const fetchRecuperarPassword = async () => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/recuperar", requestOptions);
+						const data = await res.json();
+						if (data.message != "Ok") {
+							setStore({ loading: false });
+							return data.message;
+						}
+						setStore({ loading: false });
+						return "ok";
+					} catch (error) {
+						console.log(error);
+						setStore({ loading: false });
+						return "Hay problemas con la conexión, vuelva a intentarlo más tarde";
+					}
+				};
+				let resultado = fetchRecuperarPassword();
+				return resultado;
 			},
 			modificarDatos: (nombre, apellido) => {
 				var myHeaders = new Headers();
