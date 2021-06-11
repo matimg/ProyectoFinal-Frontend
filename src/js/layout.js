@@ -1,10 +1,10 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
+import { Context } from "./store/appContext";
 
 import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
+
 import { InicioSesion } from "./views/inicioSesion";
 import injectContext from "./store/appContext";
 import { ConfirmarUsuario } from "./views/confirmarUsuario";
@@ -19,6 +19,7 @@ import { Registro } from "./component/registro";
 
 //create your first component
 const Layout = () => {
+	const { store, actions } = useContext(Context);
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
@@ -35,36 +36,45 @@ const Layout = () => {
 						<Route exact path="/feed">
 							<Feed />
 						</Route>
-						<Route exact path="/perfilVendedor">
-							<PerfilVendedor />
-						</Route>
-						<Route exact path="/perfilComprador">
-							<PerfilComprador />
-						</Route>
-						<Route exact path="/demo">
-							<Demo />
-						</Route>
-						<Route exact path="/inicioSesion">
-							<InicioSesion />
-						</Route>
-						<Route exact path="/verificacion/:email">
+						<PrivateRoute path="/perfilVendedor" component={PerfilVendedor} exact />
+
+						<PrivateRoute path="/perfilComprador" component={PerfilComprador} exact />
+
+						<RutaLogin path="/inicioSesion" component={InicioSesion} exact />
+
+						<Route exact path="/verificacion/:id">
 							<ConfirmarUsuario />
 						</Route>
-						<Route exact path="/publicar">
-							<Publicar />
-						</Route>
-						<Route exact path="/single/:theid">
-							<Single />
-						</Route>
+
+						<PrivateRoute path="/publicar" component={Publicar} exact />
+
 						<Route>
-							<h1>Not found!</h1>
+							<h1>404 Not found!</h1>
 						</Route>
 					</Switch>
-					<Footer />
+					{/* <Footer /> */}
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
 	);
+
+	function PrivateRoute({ component: Component, ...rest }) {
+		const token = sessionStorage.getItem("token");
+		return <Route {...rest} render={props => (token ? <Component {...props} /> : <Redirect to="/" />)} />;
+	}
+	function RutaLogin({ component: Component, ...rest }) {
+		const token = sessionStorage.getItem("token");
+		const tipoUsuario = store.tipoUsuario;
+		let rol;
+		console.log(tipoUsuario);
+		if (tipoUsuario == "") {
+			rol = false;
+		} else {
+			rol = true;
+		}
+		return <Route {...rest} render={props => (rol ? <Component {...props} /> : <Redirect to="/" />)} />;
+	}
+	// export PrivateRoute;
 };
 
 export default injectContext(Layout);

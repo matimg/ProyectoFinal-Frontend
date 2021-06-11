@@ -2,10 +2,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			tipoUsuario: "",
-			errorLogin: { mensaje: "", style: " d-none" }
+			errorLogin: { mensaje: "", style: " d-none" },
+			loading: false,
+			cantFechtPublicaciones: 0
 		},
 
 		actions: {
+			activarSpinner: estado => {
+				setStore({ loading: estado });
+			},
+
 			rolUsuario: rol => {
 				setStore({ tipoUsuario: rol });
 			},
@@ -33,19 +39,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const fetchUsuario = async () => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/registro", requestOptions);
 						const data = await res.json();
 						console.log(data);
 						if (data.message != "Ok") {
+							setStore({ loading: false });
 							return "error";
 						} else {
+							setStore({ loading: false });
 							return "ok";
 						}
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
-				fetchUsuario();
+				let resultado = fetchUsuario();
+				return resultado;
+			},
+			activarUsuario: id => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "PUT",
+					headers: myHeaders
+				};
+				const fetchActivarUsuario = async id => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/verificar/" + id, requestOptions);
+						const data = await res.json();
+
+						if (data.message != "Ok") {
+							setStore({ loading: false });
+							return "error";
+						}
+						setStore({ loading: false });
+						return "ok";
+					} catch (error) {
+						console.log(error);
+						setStore({ loading: false });
+						return "error";
+					}
+				};
+				const resultado = fetchActivarUsuario(id);
+				return resultado;
 			},
 			login: (email, password) => {
 				var myHeaders = new Headers();
@@ -66,15 +107,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const fetchLogin = async () => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/login", requestOptions);
 						const data = await res.json();
 
-						if (data.message != "OK") {
+						if (data.message != "Ok") {
 							let newObject = {
 								mensaje: data.message,
 								style: ""
 							};
 							setStore({ errorLogin: newObject });
+							setStore({ loading: false });
 							return "error";
 						}
 						sessionStorage.setItem("token", data.token);
@@ -86,9 +129,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(fecha);
 						usuario.fechaNacimiento = fecha;
 						localStorage.setItem("usuario", JSON.stringify(usuario));
+						setStore({ loading: false });
 						return "ok";
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
 				let result = fetchLogin();
@@ -97,6 +143,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				sessionStorage.removeItem("token");
 				localStorage.removeItem("usuario");
+			},
+			recuperarPassword: email => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var raw = JSON.stringify({
+					email: email
+				});
+
+				var requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: raw
+				};
+
+				const fetchRecuperarPassword = async () => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/recuperar", requestOptions);
+						const data = await res.json();
+						if (data.message != "Ok") {
+							setStore({ loading: false });
+							return data.message;
+						}
+						setStore({ loading: false });
+						return "ok";
+					} catch (error) {
+						console.log(error);
+						setStore({ loading: false });
+						return "Hay problemas con la conexión, vuelva a intentarlo más tarde";
+					}
+				};
+				let resultado = fetchRecuperarPassword();
+				return resultado;
 			},
 			modificarDatos: (nombre, apellido) => {
 				var myHeaders = new Headers();
@@ -118,9 +198,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const fetchEditarUsuario = async () => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/usuarios", requestOptions);
 						const data = await res.json();
 						if (data.message != "Ok") {
+							setStore({ loading: false });
 							return "error";
 						}
 						let usuario = JSON.parse(localStorage.getItem("usuario"));
@@ -128,9 +210,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						usuario.apellido = data.usuario.apellido;
 
 						localStorage.setItem("usuario", JSON.stringify(usuario));
+						setStore({ loading: false });
 						return "ok";
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
 				let result = fetchEditarUsuario();
@@ -147,17 +232,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				const fetchEliminarPublicacion = async id => {
 					try {
+						setStore({ loading: true });
 						const res = await fetch(process.env.URL + "/usuarios/publicaciones/" + id, requestOptions);
 						const data = await res.json();
 						if (data.message != "Ok") {
+							setStore({ loading: false });
 							return "error";
 						}
+						setStore({ loading: false });
 						return "ok";
 					} catch (error) {
 						console.log(error);
+						setStore({ loading: false });
+						return "error";
 					}
 				};
 				let result = fetchEliminarPublicacion(id);
+				return result;
+			},
+			publicar: (titulo, descripcion, url, categoria, tipo) => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var raw = JSON.stringify({
+					titulo: titulo,
+					descripcion: descripcion,
+					url: url,
+					categoria: categoria,
+					formato: tipo
+				});
+
+				console.log(raw);
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: raw
+				};
+
+				const fetchPublicar = async () => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/usuarios/publicaciones", requestOptions);
+						const data = await res.json();
+
+						if (data.message != "Ok") {
+							setStore({ loading: false });
+							return "error";
+						}
+						setStore({ loading: false });
+						return "ok";
+					} catch (error) {
+						console.log(error);
+						setStore({ loading: false });
+						return "error";
+					}
+				};
+				let result = fetchPublicar();
 				return result;
 			}
 		}

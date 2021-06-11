@@ -1,6 +1,6 @@
 #iconoFav{
-    color: #b1b251;
-    font-size: 22px;
+    color: white;
+    font-size: 18px;
 }
 
 // #publicaciones{
@@ -22,6 +22,7 @@
     justify-content: center;
   padding-left: 30px; /* gutter size */
   background-clip: padding-box;
+  width: auto;
 }
 
 /* Style your items */
@@ -33,4 +34,29 @@
 
 #divInterno{
     background: none;
+    width: 200px;
+    margin-bottom: 0;
+}
+
+#footer{
+ display: inline-block;
+}
+
+@media (max-width: 1400px) {
+  #divInterno{
+    width: 180px;
+ }
+}
+
+@media (max-width: 1300px) {
+  #divInterno{
+    width: 150px;
+ }
+}
+
+@media (max-width: 350px) {
+  #divInterno{
+    width: 120px;
+ }
+
 }

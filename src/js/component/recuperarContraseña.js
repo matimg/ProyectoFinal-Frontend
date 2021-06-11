@@ -1,22 +1,60 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "../../styles/recuperarContraseña.scss";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-
+import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
-const MySwal = withReactContent(Swal);
 
 export const RecuperarContraseña = () => {
+	const history = useHistory();
+	const { store, actions } = useContext(Context);
 	const {
 		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm();
-	const onSubmit = data => console.log(data);
 
+	const mensajeError = tipoError => {
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: tipoError,
+			confirmButtonColor: "#de6a6a",
+			confirmButton: true,
+			confirmButtonText: "Ok"
+		}).then(result => {
+			if (result.isConfirmed) {
+				history.push("/");
+			}
+		});
+	};
+
+	const mensajeOk = () => {
+		Swal.fire({
+			icon: "success",
+			title: "Verifique su casilla de correos",
+			text: "Le enviamos su nueva contraseña",
+			confirmButtonColor: "#7bffc6",
+			confirmButton: true,
+			confirmButtonText: "Ok"
+		}).then(result => {
+			if (result.isConfirmed) {
+				history.push("/");
+			}
+		});
+	};
+
+	const onSubmit = async data => {
+		//data = {email: "email"}
+		console.log(data);
+		const resultado = await actions.recuperarPassword(data.Email);
+		if (resultado == "ok") {
+			mensajeOk();
+		} else {
+			mensajeError(resultado);
+		}
+	};
 	return (
 		<div className="modal-dialog modal-dialog-centered">
 			<div className="modal-content">
@@ -38,7 +76,7 @@ export const RecuperarContraseña = () => {
 								aria-describedby="emailHelp"
 							/>
 						</div>
-						<button type="submit" className="btn btn-block botonRecuperar mt-4 mb-2">
+						<button type="submit" className="btn btn-block mt-4 mb-2" id="botonRecuperar">
 							Enviar
 						</button>
 					</form>

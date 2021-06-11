@@ -15,12 +15,19 @@ export const InicioSesion = () => {
 		formState: { errors },
 		handleSubmit
 	} = useForm();
-	var result;
+
 	const onSubmit = async data => {
 		let result = await actions.login(data.email, data.password);
 		console.log(result);
 		console.log(store.usuario);
-		if (result == "ok") history.push("/perfilVendedor");
+		if (result == "ok") {
+			console.log(store.tipoUsuario);
+			if (store.tipoUsuario == "Vendedor") {
+				history.push("/perfilVendedor");
+			} else {
+				history.push("/perfilComprador");
+			}
+		}
 	};
 	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
 	const [modalRegistro, setModalRegistro] = useState("");
@@ -35,12 +42,12 @@ export const InicioSesion = () => {
 	}
 
 	return (
-		<div className="container cuerpoInicio d-flex justify-content-center align-items-center mt-n4">
-			<div className={"alert alert-danger" + store.errorLogin.style} role="alert">
-				{store.errorLogin.mensaje}
-			</div>
-			<div className="container bg-white rounded cardInicio card" style={{ width: "350px" }}>
+		<div className="container cuerpoInicio d-flex justify-content-center align-items-center vh-100">
+			<div className="container bg-white rounded cardInicio card " style={{ width: "350px" }}>
 				<h3 className="text-center mt-4 mb-3">Iniciar sesión</h3>
+				<div className={"alert alert-danger" + store.errorLogin.style} role="alert">
+					{store.errorLogin.mensaje}
+				</div>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="form-group">
 						<input
