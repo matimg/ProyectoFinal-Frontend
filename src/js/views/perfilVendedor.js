@@ -116,7 +116,7 @@ export const PerfilVendedor = () => {
 			<div className="col-md-7 col-sm-10 mt-5">
 				<Masonry
 					breakpointCols={breakpointColumnsObj}
-					className="my-masonry-grid"
+					className="my-masonry-grid justify-content-center"
 					columnClassName="my-masonry-grid_column">
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
@@ -130,32 +130,36 @@ export const PerfilVendedor = () => {
 							<div className="col-md-4 col-6 mb-3 " key={iterador} id="contenedor">
 								<div className="">
 									{etiqueta}
-									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
-										{elem.titulo}
-										<div className="btn-group dropleft ml-auto">
-											<button
-												type="button"
-												className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
-												data-toggle="dropdown"
-												aria-haspopup="true"
-												aria-expanded="false">
-												<i className="fas fa-ellipsis-h" />
-											</button>
-											<div className="dropdown-menu bg-transparent border-0">
-												<div className="row d-flex justify-content-end mr-2 mt-n2">
-													<div className="col-2">
-														<i
-															className="fas fa-pen text-white"
-															type="button"
-															onClick={editar}
-														/>
-													</div>
-													<div className="col-2">
-														<i
-															className="fas fa-trash-alt text-white"
-															type="button"
-															onClick={() => eliminar(elem.id)}
-														/>
+									<div className="row d-flex justify-content-around">
+										<div
+											id="footerImagen"
+											className="row d-flex justify-content-around text-white py-1 ">
+											{elem.titulo}
+											<div className="btn-group dropleft ml-auto">
+												<button
+													type="button"
+													className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
+													data-toggle="dropdown"
+													aria-haspopup="true"
+													aria-expanded="false">
+													<i className="fas fa-ellipsis-h" />
+												</button>
+												<div className="dropdown-menu bg-transparent border-0">
+													<div className="row d-flex justify-content-end mr-2 mt-n2">
+														<div className="col-2">
+															<i
+																className="fas fa-pen text-white"
+																type="button"
+																onClick={editar}
+															/>
+														</div>
+														<div className="col-2">
+															<i
+																className="fas fa-trash-alt text-white"
+																type="button"
+																onClick={() => eliminar(elem.id)}
+															/>
+														</div>
 													</div>
 												</div>
 											</div>
