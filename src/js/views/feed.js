@@ -50,11 +50,11 @@ export const Feed = () => {
 		}
 	};
 
-	useEffect(() => {
-		fetchAllPublicaciones();
-		window.addEventListener("scroll", pedirMas);
-		// console.log(onScroll);
-	}, []);
+	// useEffect(() => {
+	// 	fetchAllPublicaciones();
+	// 	window.addEventListener("scroll", pedirMas);
+	// 	// console.log(onScroll);
+	// }, []);
 
 	const pedirMas = () => {
 		if (window.scrollY > pixeles) {
@@ -64,14 +64,6 @@ export const Feed = () => {
 			console.log(pixeles);
 		}
 		console.log(window.scrollY);
-		// console.log("Altura", element.scrollHeight);
-		// console.log("Top", element.scrollTop);
-		// console.log("Cliente", element.ClientHeight);
-
-		// if (element.scrollHeight - element.scrollTop === element.clientHeight) {
-		// 	// do something at end of scroll
-		// 	console.log("entra");
-		// }
 	};
 	const activar = value => {
 		alert(value);
@@ -79,7 +71,7 @@ export const Feed = () => {
 	};
 	return (
 		<div id="divExterno" onScroll={activar} className=" d-flex justify-content-center align-items-center mx-2 mt-5">
-			<Masonry
+			{/* <Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
@@ -112,8 +104,8 @@ export const Feed = () => {
 					);
 				})}
 			</Masonry>
-			){/* ); })} */}
-			{/* <Masonry
+			) */}
+			<Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
@@ -308,7 +300,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-			</Masonry> */}
+			</Masonry>
 		</div>
 	);
 };

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../../styles/recuperarContraseña.scss";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
@@ -7,6 +7,7 @@ import { Context } from "../store/appContext";
 import Swal from "sweetalert2";
 
 export const RecuperarContraseña = () => {
+	const history = useHistory();
 	const { store, actions } = useContext(Context);
 	const {
 		register,
@@ -19,7 +20,13 @@ export const RecuperarContraseña = () => {
 			icon: "error",
 			title: "Oops...",
 			text: tipoError,
-			confirmButtonColor: "#de6a6a"
+			confirmButtonColor: "#de6a6a",
+			confirmButton: true,
+			confirmButtonText: "Ok"
+		}).then(result => {
+			if (result.isConfirmed) {
+				history.push("/");
+			}
 		});
 	};
 
@@ -28,7 +35,13 @@ export const RecuperarContraseña = () => {
 			icon: "success",
 			title: "Verifique su casilla de correos",
 			text: "Le enviamos su nueva contraseña",
-			confirmButtonColor: "#7bffc6"
+			confirmButtonColor: "#7bffc6",
+			confirmButton: true,
+			confirmButtonText: "Ok"
+		}).then(result => {
+			if (result.isConfirmed) {
+				history.push("/");
+			}
 		});
 	};
 
