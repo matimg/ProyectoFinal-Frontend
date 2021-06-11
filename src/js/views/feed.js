@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Masonry from "react-masonry-css";
 import { Spinner } from "../component/spinner";
-var cantidad = 0;
+// var cantidad = 0;
 var pixeles = 400;
 export const Feed = () => {
 	const { store, actions } = useContext(Context);
@@ -13,6 +13,9 @@ export const Feed = () => {
 	const [publicaciones, setPublicaciones] = useState([]);
 	const [spinner, setSpinner] = useState("");
 	const [loading, setLoading] = useState(false);
+
+	const [cantidad, setCantidad] = useState(0);
+	// const [pixeles, setPixeles] = useState(400);
 
 	const [pedirMas, setPedirMas] = useState(false);
 
@@ -44,13 +47,14 @@ export const Feed = () => {
 				let aux = [...publicaciones, ...data];
 				setPublicaciones(aux);
 			}
-			cantidad = cantidad + 1;
+			setCantidad(cantidad + 1);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	useEffect(() => {
+		pixeles = 400;
 		fetchAllPublicaciones();
 		window.addEventListener("scroll", escucharScroll);
 	}, []);
@@ -60,6 +64,7 @@ export const Feed = () => {
 			if (pedirMas) {
 				fetchAllPublicaciones();
 				pixeles = pixeles * 2;
+				console.log(pixeles);
 				setPedirMas(false);
 				console.log(pixeles);
 			}
@@ -69,6 +74,7 @@ export const Feed = () => {
 
 	const escucharScroll = () => {
 		if (window.scrollY > pixeles) {
+			console.log("scroll", window.scrollY);
 			setPedirMas(true);
 		}
 	};
@@ -76,7 +82,6 @@ export const Feed = () => {
 	useEffect(
 		() => {
 			if (loading) {
-				alert("Llego al spinner");
 				setSpinner(<Spinner />);
 			} else {
 				setSpinner("");
