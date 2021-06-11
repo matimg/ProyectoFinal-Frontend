@@ -1,20 +1,110 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/feed.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Masonry from "react-masonry-css";
 
+var cantidad = 0;
+
 export const Feed = () => {
 	const { store, actions } = useContext(Context);
+	const [cantidadDeLlamados, setCantidadLlamados] = useState(0);
+	const [publicaciones, setPublicaciones] = useState([]);
+	const [pixeles, setPixeles] = useState(400);
 	const breakpointColumnsObj = {
 		default: 5,
 		1100: 3,
 		700: 2
 	};
 
+	const fetchAllPublicaciones = async () => {
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+		myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+		var requestOptions = {
+			method: "GET",
+			headers: myHeaders
+		};
+
+		try {
+			const res = await fetch(process.env.URL + "/allPublicaciones/" + cantidad, requestOptions);
+			const data = await res.json();
+			console.log(data);
+			if (cantidad == 0) {
+				setPublicaciones(data);
+			} else {
+				let aux = publicaciones;
+				console.log(aux);
+				for (let i = 0; i < data.length; i++) {
+					aux.push(data[i]);
+				}
+				console.log("final", aux);
+				// const aux = publicaciones.concat(data);
+				setPublicaciones(aux);
+			}
+			cantidad = cantidad + 1;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	// useEffect(() => {
+	// 	fetchAllPublicaciones();
+	// 	window.addEventListener("scroll", pedirMas);
+	// 	// console.log(onScroll);
+	// }, []);
+
+	const pedirMas = () => {
+		if (window.scrollY > pixeles) {
+			fetchAllPublicaciones();
+			let aux = pixeles + 400;
+			setPixeles(aux);
+			console.log(pixeles);
+		}
+		console.log(window.scrollY);
+	};
+	const activar = value => {
+		alert(value);
+		console.log(value);
+	};
 	return (
-		<div id="divExterno" className=" d-flex justify-content-center align-items-center mx-2 mt-5">
+		<div id="divExterno" onScroll={activar} className=" d-flex justify-content-center align-items-center mx-2 mt-5">
+			{/* <Masonry
+				breakpointCols={breakpointColumnsObj}
+				className="my-masonry-grid"
+				columnClassName="my-masonry-grid_column">
+				{publicaciones.map((elem, iterador) => {
+					let etiqueta;
+					if (elem.formato == "image") {
+						etiqueta = <img className="rounded" src={elem.url} alt="" />;
+					} else {
+						etiqueta = <video className="rounded" src={elem.url} alt="" />;
+					}
+					return (
+						<div className="col-md-4 col-6 mb-3 " key={iterador} id="contenedor">
+							<div className="">
+								{etiqueta}
+								<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
+									{elem.titulo}
+									<div className="btn-group dropleft ml-auto">
+										<button
+											type="button"
+											className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
+											data-toggle="dropdown"
+											aria-haspopup="true"
+											aria-expanded="false">
+											<i className="fas fa-ellipsis-h" />
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					);
+				})}
+			</Masonry>
+			) */}
 			<Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"

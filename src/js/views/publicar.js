@@ -118,13 +118,14 @@ export const Publicar = () => {
 		if (form.checkValidity() === false) {
 			event.preventDefault();
 			event.stopPropagation();
+		} else {
+			let titulo = form.titulo.value;
+			let descripcion = form.descripcion.value;
+			let file = form.url.files[0];
+			let categoria = form.categoria.value;
+			publicar(titulo, descripcion, file, categoria);
 		}
-		let titulo = form.titulo.value;
-		let descripcion = form.descripcion.value;
-		let file = form.url.files[0];
-		let categoria = form.categoria.value;
 		setValidated(true);
-		publicar(titulo, descripcion, file, categoria);
 	};
 
 	useEffect(
