@@ -4,14 +4,21 @@ import "../../styles/feed.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Masonry from "react-masonry-css";
-
-var cantidad = 0;
-
+import { Spinner } from "../component/spinner";
+// var cantidad = 0;
+var pixeles = 400;
 export const Feed = () => {
 	const { store, actions } = useContext(Context);
 	const [cantidadDeLlamados, setCantidadLlamados] = useState(0);
 	const [publicaciones, setPublicaciones] = useState([]);
-	const [pixeles, setPixeles] = useState(400);
+	const [spinner, setSpinner] = useState("");
+	const [loading, setLoading] = useState(false);
+
+	const [cantidad, setCantidad] = useState(0);
+	// const [pixeles, setPixeles] = useState(400);
+
+	const [pedirMas, setPedirMas] = useState(false);
+
 	const breakpointColumnsObj = {
 		default: 5,
 		1100: 3,
@@ -29,49 +36,63 @@ export const Feed = () => {
 		};
 
 		try {
+			setLoading(true);
 			const res = await fetch(process.env.URL + "/allPublicaciones/" + cantidad, requestOptions);
 			const data = await res.json();
 			console.log(data);
+			setLoading(false);
 			if (cantidad == 0) {
 				setPublicaciones(data);
 			} else {
-				let aux = publicaciones;
-				console.log(aux);
-				for (let i = 0; i < data.length; i++) {
-					aux.push(data[i]);
-				}
-				console.log("final", aux);
-				// const aux = publicaciones.concat(data);
+				let aux = [...publicaciones, ...data];
 				setPublicaciones(aux);
 			}
-			cantidad = cantidad + 1;
+			setCantidad(cantidad + 1);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	// useEffect(() => {
-	// 	fetchAllPublicaciones();
-	// 	window.addEventListener("scroll", pedirMas);
-	// 	// console.log(onScroll);
-	// }, []);
+	useEffect(() => {
+		pixeles = 400;
+		fetchAllPublicaciones();
+		window.addEventListener("scroll", escucharScroll);
+	}, []);
 
-	const pedirMas = () => {
+	useEffect(
+		() => {
+			if (pedirMas) {
+				fetchAllPublicaciones();
+				pixeles = pixeles * 2;
+				console.log(pixeles);
+				setPedirMas(false);
+				console.log(pixeles);
+			}
+		},
+		[pedirMas]
+	);
+
+	const escucharScroll = () => {
 		if (window.scrollY > pixeles) {
-			fetchAllPublicaciones();
-			let aux = pixeles + 400;
-			setPixeles(aux);
-			console.log(pixeles);
+			console.log("scroll", window.scrollY);
+			setPedirMas(true);
 		}
-		console.log(window.scrollY);
 	};
-	const activar = value => {
-		alert(value);
-		console.log(value);
-	};
+
+	useEffect(
+		() => {
+			if (loading) {
+				setSpinner(<Spinner />);
+			} else {
+				setSpinner("");
+			}
+		},
+		[loading]
+	);
+
 	return (
-		<div id="divExterno" onScroll={activar} className=" d-flex justify-content-center align-items-center mx-2 mt-5">
-			{/* <Masonry
+		<div id="divExterno" className=" d-flex justify-content-center align-items-center mx-2 mt-5">
+			<Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
@@ -104,8 +125,8 @@ export const Feed = () => {
 					);
 				})}
 			</Masonry>
-			) */}
-			<Masonry
+			){spinner}
+			{/* <Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
@@ -300,7 +321,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-			</Masonry>
+			</Masonry> */}
 		</div>
 	);
 };
