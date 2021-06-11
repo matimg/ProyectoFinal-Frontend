@@ -18,7 +18,8 @@ export const RecuperarContraseña = () => {
 		Swal.fire({
 			icon: "error",
 			title: "Oops...",
-			text: tipoError
+			text: tipoError,
+			confirmButtonColor: "#de6a6a"
 		});
 	};
 
@@ -26,7 +27,8 @@ export const RecuperarContraseña = () => {
 		Swal.fire({
 			icon: "success",
 			title: "Verifique su casilla de correos",
-			text: "Le enviamos su nueva contraseña"
+			text: "Le enviamos su nueva contraseña",
+			confirmButtonColor: "#7bffc6"
 		});
 	};
 

@@ -4,8 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Context } from "./store/appContext";
 
 import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
+
 import { InicioSesion } from "./views/inicioSesion";
 import injectContext from "./store/appContext";
 import { ConfirmarUsuario } from "./views/confirmarUsuario";
