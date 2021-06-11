@@ -90,6 +90,36 @@ export const Feed = () => {
 		[loading]
 	);
 
+	const mensajeError = () => {
+		Swal.fire({
+			icon: "error",
+			title: "Oops...",
+			text: "Hubo un problema, intente más tarde"
+		});
+	};
+
+	const agregarFavorito = async idPublicacion => {
+		var myHeaders = new Headers();
+		myHeaders.append("Content-Type", "application/json");
+		myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+		var requestOptions = {
+			method: "POST",
+			headers: myHeaders,
+			body: { idPublicacion: idPublicacion }
+		};
+
+		try {
+			setLoading(true);
+			const res = await fetch(process.env.URL + "/favorito", requestOptions);
+			const data = await res.json();
+			setPublicaciones(data);
+		} catch (error) {
+			console.log(error);
+			mensajeError();
+		}
+	};
+
 	return (
 		<div id="divExterno" className=" d-flex justify-content-center align-items-center mx-2 mt-5">
 			<Masonry
@@ -125,7 +155,7 @@ export const Feed = () => {
 					);
 				})}
 			</Masonry>
-			){spinner}
+			{spinner}
 			{/* <Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
