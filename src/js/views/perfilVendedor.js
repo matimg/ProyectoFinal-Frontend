@@ -62,7 +62,9 @@ export const PerfilVendedor = () => {
 			title: "¿Está seguro que desea eliminar esta publicación?",
 			showCancelButton: true,
 			confirmButtonText: `Confirmar`,
-			cancelButtonText: `Cancelar`
+			cancelButtonText: `Cancelar`,
+			confirmButtonColor: "#7bffc6",
+			cancelButtonColor: "#de6a6a"
 		}).then(result => {
 			if (result.isConfirmed) {
 				llamar(id);
@@ -120,9 +122,9 @@ export const PerfilVendedor = () => {
 						console.log(publicaciones);
 						let etiqueta;
 						if (elem.formato == "image") {
-							etiqueta = <img className="rounded" src={elem.url} alt="" />;
+							etiqueta = <img className="rounded" src={elem.url} alt="" controls />;
 						} else {
-							etiqueta = <video className="rounded" src={elem.url} alt="" />;
+							etiqueta = <video className="rounded" src={elem.url} alt="" controls />;
 						}
 						return (
 							<div className="col-md-4 col-6 mb-3 " key={iterador} id="contenedor">

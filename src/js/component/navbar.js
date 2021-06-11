@@ -45,22 +45,38 @@ export const Navbar = () => {
 								¿Quiénes somos? <span className="sr-only">(current)</span>
 							</Link>
 						</li>
-						<li className="nav-item active">
-							<Link className="nav-link" to="/perfilVendedor">
-								Perfil Vendedor
-								<span className="sr-only">(current)</span>
-							</Link>
-						</li>
-						<li className="nav-item active">
-							<Link className="nav-link" to="/publicar">
-								Publicar <span className="sr-only">(current)</span>
-							</Link>
-						</li>
-						<li className="nav-item active">
-							<button onClick={() => logout()} className="nav-link">
-								Salir <span className="sr-only">(current)</span>
-							</button>
-						</li>
+
+						<div className="dropdown">
+							<button
+								className="btn btn-secondary dropdown-toggle"
+								type="button"
+								id="dropdownMenuButton"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							/>
+							<div
+								className="dropdown-menu dropdown-menu-right text-center"
+								aria-labelledby="dropdownMenuButton">
+								<li className="nav-item active">
+									<Link className="nav-link" to="/perfilVendedor">
+										Perfil Vendedor
+										<span className="sr-only">(current)</span>
+									</Link>
+								</li>
+								<li className="nav-item active">
+									<Link className="nav-link" to="/publicar">
+										Publicar <span className="sr-only">(current)</span>
+									</Link>
+								</li>
+								<li className="nav-item active">
+									<Link onClick={() => logout()} className="nav-link">
+										Salir <i className="fas fa-sign-out-alt" />{" "}
+										<span className="sr-only">(current)</span>
+									</Link>
+								</li>
+							</div>
+						</div>
 					</ul>
 				</div>
 			</nav>
