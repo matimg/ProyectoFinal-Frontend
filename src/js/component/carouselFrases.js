@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import slide1 from "../../img/slide1.png";
 import slide2 from "../../img/slide2.png";
+import slide3 from "../../img/slide3.png";
+import slide4 from "../../img/slide4.png";
+import slide5 from "../../img/slide5.png";
 
 export const Carousel = () => {
 	return (
 		<div className="">
-			<div id="carouselExampleIndicators" className="carousel slide" data-interval="5000" data-ride="carousel">
+			<div id="carouselExampleIndicators" className="carousel slide" data-interval="6000" data-ride="carousel">
 				{/* <ol className="carousel-indicators">
 					<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active" />
 					<li data-target="#carouselExampleIndicators" data-slide-to="1" />
@@ -21,16 +24,13 @@ export const Carousel = () => {
 						<img src={slide2} style={{ width: "90%" }} />
 					</div>
 					<div className="carousel-item">
-						<h1>Tu contenido está a un click de distancia</h1>
+						<img src={slide3} style={{ width: "90%" }} />
 					</div>
 					<div className="carousel-item">
-						<h1>Creamos contenido a tu medida</h1>
+						<img src={slide4} style={{ width: "90%" }} />
 					</div>
 					<div className="carousel-item">
-						<h1>El logo que estás pensando</h1>
-					</div>
-					<div className="carousel-item">
-						<h1>Ponele video, imagen y sonido a tu negocio</h1>
+						<img src={slide5} style={{ width: "90%" }} />
 					</div>
 				</div>
 
