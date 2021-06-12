@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import slide1 from "../../img/slide1.png";
+import slide2 from "../../img/slide2.png";
 
 export const Carousel = () => {
 	return (
 		<div className="">
-			<div id="carouselExampleIndicators" className="carousel slide" data-interval="3500" data-ride="carousel">
+			<div id="carouselExampleIndicators" className="carousel slide" data-interval="5000" data-ride="carousel">
 				{/* <ol className="carousel-indicators">
 					<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active" />
 					<li data-target="#carouselExampleIndicators" data-slide-to="1" />
@@ -13,7 +15,10 @@ export const Carousel = () => {
 				</ol> */}
 				<div className="carousel-inner text-white text-center">
 					<div className="carousel-item active">
-						<h1>Hecho para que vendas rápido y compres fácil</h1>
+						<img src={slide1} style={{ width: "90%" }} />
+					</div>
+					<div className="carousel-item">
+						<img src={slide2} style={{ width: "90%" }} />
 					</div>
 					<div className="carousel-item">
 						<h1>Tu contenido está a un click de distancia</h1>
