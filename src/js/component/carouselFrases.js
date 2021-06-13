@@ -10,15 +10,15 @@ import slide05 from "../../img/slide05.png";
 
 export const Carousel = () => {
 	return (
-		<div className="">
-			<div id="carouselExampleIndicators" className="carousel slide" data-interval="6000" data-ride="carousel">
+		<div className="d-flex justify-content-center align-items-center">
+			<div id="carru" className="carousel slide " data-interval="6000" data-ride="carousel">
 				{/* <ol className="carousel-indicators">
 					<li data-target="#carouselExampleIndicators" data-slide-to="0" className="active" />
 					<li data-target="#carouselExampleIndicators" data-slide-to="1" />
 					<li data-target="#carouselExampleIndicators" data-slide-to="2" />
 				</ol> */}
-				<div className="carousel-inner text-white text-center mb-5 mt-5 mt-md-0">
-					<div className="carousel-item active">
+				<div className="carousel-inner text-white text-center mb-5 ">
+					<div className="carousel-item active ">
 						<div className="row d-flex justify-content-center align-items-center">
 							<div
 								className="col-md-4 col-10 d-flex justify-content-center align-items-center mb-3 mb-md-0"

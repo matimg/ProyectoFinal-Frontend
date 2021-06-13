@@ -12,7 +12,7 @@ export const Home = () => {
 	};
 
 	return (
-		<div className="container cuerpoHome d-flex justify-content-center align-items-center mt-md-n4 mt-n5">
+		<div className="container cuerpoHome d-flex justify-content-center align-items-center ">
 			<Carousel />
 			<div className="central">
 				<Link
