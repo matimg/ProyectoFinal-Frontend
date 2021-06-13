@@ -17,7 +17,7 @@ export const Carousel = () => {
 					<li data-target="#carouselExampleIndicators" data-slide-to="1" />
 					<li data-target="#carouselExampleIndicators" data-slide-to="2" />
 				</ol> */}
-				<div className="carousel-inner text-white text-center mb-5 ">
+				<div className="carousel-inner text-white text-center mb-5 ml-2 ml-md-0">
 					<div className="carousel-item active ">
 						<div className="row d-flex justify-content-center align-items-center">
 							<div
