@@ -8,8 +8,8 @@ export const QuienesSomos = () => {
 	const { store, actions } = useContext(Context);
 
 	return (
-		<div className="container d-flex justify-content-center align-items-center">
-			<div id="contenedorSomos " className="">
+		<div className="container d-flex justify-content-center align-items-center ">
+			<div className="">
 				<h1>¿Quiénes Somos?</h1>
 				<p>
 					EL avance de la virtualidad en el mundo está generando una brecha muy importante entre las personas
