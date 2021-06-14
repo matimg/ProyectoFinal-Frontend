@@ -12,6 +12,7 @@ import { PerfilVendedor } from "./views/perfilVendedor";
 import { PerfilComprador } from "./views/perfilComprador";
 import { Publicar } from "./views/publicar";
 import { Feed } from "./views/feed";
+import { QuienesSomos } from "./views/quienesSomos";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -47,6 +48,10 @@ const Layout = () => {
 						</Route>
 
 						<PrivateRoute path="/publicar" component={Publicar} exact />
+
+						<Route exact path="/quienesSomos">
+							<QuienesSomos />
+						</Route>
 
 						<Route>
 							<h1>404 Not found!</h1>

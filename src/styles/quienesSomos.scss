@@ -1,0 +1,27 @@
+#contenedorSomos{
+    background-color: radial-gradient(circle, #7BFFC6, #719E8B);
+    height: 200px;
+}
+
+#aboutus{
+    text-align: left;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-right: -100px;
+    z-index: 3;
+}
+
+@media (max-width: 750px) {
+ #aboutus{ 
+    font-size: medium;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-right: 0px;
+}
+}
+
+.ecom:hover{
+text-decoration: underline;
+}
