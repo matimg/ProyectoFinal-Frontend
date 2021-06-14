@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../../styles/detalle.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+
 export const Detalle = () => {
 	const { store, actions } = useContext(Context);
 	return (
