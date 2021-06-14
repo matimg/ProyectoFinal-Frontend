@@ -1,0 +1,14 @@
+.contenedorCarta{
+    width: 70%;
+    height: 50%;
+}
+.modificarHeight{
+    height: 100vh;
+}
+.textoDetalle {
+    flex-direction: column;
+    // align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    // align-items: flex-end;
+}
