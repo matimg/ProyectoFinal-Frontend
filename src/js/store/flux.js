@@ -291,6 +291,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				let result = fetchPublicar();
 				return result;
+			},
+			eliminarFavorito: id => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var requestOptions = {
+					method: "DELETE",
+					headers: myHeaders
+				};
+				const fetchEliminarFavorito = async id => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/favorito/" + id, requestOptions);
+						const data = await res.json();
+						if (data.message != "Ok") {
+							setStore({ loading: false });
+							return "error";
+						}
+						setStore({ loading: false });
+						return "ok";
+					} catch (error) {
+						console.log(error);
+						setStore({ loading: false });
+						return "error";
+					}
+				};
+				let result = fetchEliminarFavorito(id);
+				return result;
 			}
 		}
 	};
