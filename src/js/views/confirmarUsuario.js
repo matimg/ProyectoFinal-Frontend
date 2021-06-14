@@ -33,7 +33,7 @@ export const ConfirmarUsuario = () => {
 				<h1 className="display-4 text-center">Usuario verificado</h1>
 				<p className="lead text-center">Disfruta nuestros servicios</p>
 				<hr className="my-4" />
-				<Link onClick={() => activarUsuario(params.id)} className="btn btn-block botonConfirmar mt-n1">
+				<Link onClick={() => activarUsuario(params.id)} className="btn btn-block mt-n1" id="botonConfirmar">
 					Ingresar
 				</Link>
 			</div>

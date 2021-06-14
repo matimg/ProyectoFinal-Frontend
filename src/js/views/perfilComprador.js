@@ -9,7 +9,7 @@ export const PerfilComprador = () => {
 	const { store, actions } = useContext(Context);
 	let usuario = JSON.parse(localStorage.getItem("usuario"));
 	const [modal, setModal] = useState("");
-	const [publicaciones, setPublicaciones] = useState([]);
+	const [favoritos, setFavoritos] = useState([]);
 	const mostrarModal = () => {
 		setModal("");
 		setModal(<CambiarDatosPerfil habilitar={true} funcion={escucharRegistro} />);
@@ -22,7 +22,7 @@ export const PerfilComprador = () => {
 	let fecha = usuario.fechaNacimiento;
 	let email = usuario.email;
 
-	const fetchPublicaciones = async () => {
+	const fetchFavoritos = async () => {
 		var myHeaders = new Headers();
 		myHeaders.append("Content-Type", "application/json");
 		myHeaders.append("Authorization", sessionStorage.getItem("token"));
@@ -33,32 +33,32 @@ export const PerfilComprador = () => {
 		};
 
 		try {
-			const res = await fetch(process.env.URL + "/usuarios/publicaciones", requestOptions);
+			const res = await fetch(process.env.URL + "/favoritos", requestOptions);
 			const data = await res.json();
 			console.log(data);
-			setPublicaciones(data);
+			setFavoritos(data);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	useEffect(() => {
-		fetchPublicaciones();
+		fetchFavoritos();
 	}, []);
 
 	const llamar = async id => {
-		let resultado = await actions.eliminarPublicacion(id);
+		let resultado = await actions.eliminarFavorito(id);
 		if (resultado == "ok") {
 			Swal.fire("Eliminado correctamente", "", "success");
-			fetchPublicaciones();
+			fetchFavoritos();
 		} else {
-			alert("Se rompio");
+			console.log("Error");
 		}
 	};
 
 	const eliminar = id => {
 		Swal.fire({
-			title: "¿Está seguro que desea eliminar esta publicación?",
+			title: "¿Está seguro que desea eliminar de su lista de favoritos?",
 			showCancelButton: true,
 			confirmButtonText: `Confirmar`,
 			cancelButtonText: `Cancelar`
@@ -103,16 +103,16 @@ export const PerfilComprador = () => {
 					Editar perfil
 				</button>
 			</div>
-			<div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-5 ">
-				<div id="publicaciones" className="row m-0 p-0">
-					{publicaciones.map((elem, iterador) => {
-						console.log(publicaciones);
+			<div id="favoritos" className="col-md-7 col-sm-11 p-0 m-0 mt-5 ">
+				<div id="favoritos" className="row m-0 p-0">
+					{favoritos.map((elem, iterador) => {
+						console.log(favoritos);
 						return (
 							<div className="col-md-4 col-6 mb-3" key={iterador}>
 								<div className="">
-									<img className="rounded w-100" src={elem.url} alt="" />
+									<img className="rounded w-100" src={elem.publicaciones.url} alt="" />
 									<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
-										{elem.titulo}
+										{elem.publicaciones.titulo}
 										<div className="btn-group dropleft ml-auto">
 											<button
 												type="button"

@@ -1,5 +1,5 @@
 #iconoFav{
-    color: white;
+    color: #b1b251;
     font-size: 18px;
 }
 
@@ -16,19 +16,19 @@
   display: flex;
   justify-content: center;
   margin-left: -30px;
-  width: auto;
+//   width: auto;
 }
 .my-masonry-grid_column {
     justify-content: center;
   padding-left: 30px; /* gutter size */
   background-clip: padding-box;
-  width: auto;
+//   width: auto;
 }
 
 /* Style your items */
 .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
   justify-content: center;
-  background: grey;
+//   background: grey;
   margin-bottom: 30px;
 }
 
@@ -42,21 +42,37 @@
  display: inline-block;
 }
 
+#imgId{
+    width: 250px;
+}
+
+// #botonCentrar{
+// padding-right: -80px;
+// }
+
 @media (max-width: 1400px) {
   #divInterno{
     width: 180px;
  }
+ #imgId{
+    width: 180px;
+}
 }
 
 @media (max-width: 1300px) {
   #divInterno{
     width: 150px;
  }
+  #imgId{
+    width: 150px;
+}
 }
 
 @media (max-width: 350px) {
   #divInterno{
     width: 120px;
  }
-
+  #imgId{
+    width: 120px;
+}
 }
