@@ -13,7 +13,11 @@ import { PerfilComprador } from "./views/perfilComprador";
 import { Publicar } from "./views/publicar";
 import { Feed } from "./views/feed";
 import { QuienesSomos } from "./views/quienesSomos";
+<<<<<<< HEAD
+import { Detalle } from "./views/detalle";
+=======
 import { Error } from "./views/404";
+>>>>>>> bbbf043105aa55226dfeb1c4f881efed17b32cd7
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -38,6 +42,11 @@ const Layout = () => {
 						<Route exact path="/feed">
 							<Feed />
 						</Route>
+
+						<Route exact path="/detalle">
+							<Detalle />
+						</Route>
+
 						<PrivateRoute path="/perfilVendedor" component={PerfilVendedor} exact />
 
 						<PrivateRoute path="/perfilComprador" component={PerfilComprador} exact />

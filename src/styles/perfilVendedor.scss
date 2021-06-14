@@ -42,7 +42,7 @@
 
 #contenedor{
     background: none;
-
+    width: 200px;
 }
 
 .my-masonry-grid {
@@ -81,7 +81,10 @@ video{
   img{
     width: 180px;
  }
-
+ #contenedor{
+    background: none;
+    width: 180px;
+}
 
  video{
     width: 180px;
@@ -96,6 +99,10 @@ video{
  video{
     width: 150px;
  }
+ #contenedor{
+    background: none;
+    width: 150px;
+}
 }
 
 @media (max-width: 350px) {
@@ -103,8 +110,9 @@ video{
     width: 120px;
  }
 
- #contenedor {
-     margin-left: 20px;
+ #contenedor {   
+     background: none;
+     width: 120px;
  }
  video{
     width: 120px;

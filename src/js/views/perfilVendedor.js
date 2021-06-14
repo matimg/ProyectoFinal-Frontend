@@ -113,10 +113,10 @@ export const PerfilVendedor = () => {
 				</button>
 			</div>
 
-			<div className="col-md-7 col-sm-10 mt-5">
+			<div className="col-md-7 col-sm-10 mt-5 d-flex justify-content-center">
 				<Masonry
 					breakpointCols={breakpointColumnsObj}
-					className="my-masonry-grid justify-content-center"
+					className="my-masonry-grid"
 					columnClassName="my-masonry-grid_column">
 					{publicaciones.map((elem, iterador) => {
 						console.log(publicaciones);
@@ -127,15 +127,12 @@ export const PerfilVendedor = () => {
 							etiqueta = <video className="rounded" src={elem.url} alt="" controls />;
 						}
 						return (
-							<div className="col-md-4 col-6 mb-3 " key={iterador} id="contenedor">
-								<div className="">
+							<div className="col-md-4 col-6 mb-3 " key={iterador}>
+								<div className="" id="contenedor">
 									{etiqueta}
-									<div className="row d-flex justify-content-around">
-										<div
-											id="footerImagen"
-											className="row d-flex justify-content-around text-white py-1 ">
-											{elem.titulo}
-											<div className="btn-group dropleft ml-auto">
+									<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
+										<div className="col-xs-4" id="botonCentrar">
+											<div className="btn-group dropdown">
 												<button
 													type="button"
 													className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
@@ -144,8 +141,8 @@ export const PerfilVendedor = () => {
 													aria-expanded="false">
 													<i className="fas fa-ellipsis-h" />
 												</button>
-												<div className="dropdown-menu bg-transparent border-0">
-													<div className="row d-flex justify-content-end mr-2 mt-n2">
+												<div className="dropdown-menu bg-transparent border-0 p-0">
+													<div className="row d-flex">
 														<div className="col-2">
 															<i
 																className="fas fa-pen text-white"
@@ -162,6 +159,11 @@ export const PerfilVendedor = () => {
 														</div>
 													</div>
 												</div>
+											</div>
+										</div>
+										<div className="col-xs-8">
+											<div id="footerImagen" className=" text-white py-1">
+												<p className="">{elem.titulo}</p>
 											</div>
 										</div>
 									</div>
