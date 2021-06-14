@@ -113,7 +113,7 @@ export const PerfilVendedor = () => {
 				</button>
 			</div>
 
-			<div className="col-md-7 col-sm-10 mt-5">
+			<div className="col-md-7 col-sm-10 mt-5 d-flex justify-content-center">
 				<Masonry
 					breakpointCols={breakpointColumnsObj}
 					className="my-masonry-grid"
