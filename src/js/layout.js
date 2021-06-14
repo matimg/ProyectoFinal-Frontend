@@ -13,6 +13,7 @@ import { PerfilComprador } from "./views/perfilComprador";
 import { Publicar } from "./views/publicar";
 import { Feed } from "./views/feed";
 import { QuienesSomos } from "./views/quienesSomos";
+import { Error } from "./views/404";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -51,6 +52,10 @@ const Layout = () => {
 
 						<Route exact path="/quienesSomos">
 							<QuienesSomos />
+						</Route>
+
+						<Route exact path="/404">
+							<Error />
 						</Route>
 
 						<Route>
