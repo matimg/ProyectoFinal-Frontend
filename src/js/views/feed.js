@@ -4,14 +4,21 @@ import "../../styles/feed.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import Masonry from "react-masonry-css";
-
-var cantidad = 0;
-
+import { Spinner } from "../component/spinner";
+// var cantidad = 0;
+var pixeles = 400;
 export const Feed = () => {
 	const { store, actions } = useContext(Context);
 	const [cantidadDeLlamados, setCantidadLlamados] = useState(0);
 	const [publicaciones, setPublicaciones] = useState([]);
-	const [pixeles, setPixeles] = useState(400);
+	const [spinner, setSpinner] = useState("");
+	const [loading, setLoading] = useState(false);
+
+	const [cantidad, setCantidad] = useState(0);
+	// const [pixeles, setPixeles] = useState(400);
+
+	const [pedirMas, setPedirMas] = useState(false);
+
 	const breakpointColumnsObj = {
 		default: 5,
 		1100: 3,
@@ -29,74 +36,93 @@ export const Feed = () => {
 		};
 
 		try {
+			setLoading(true);
 			const res = await fetch(process.env.URL + "/allPublicaciones/" + cantidad, requestOptions);
 			const data = await res.json();
 			console.log(data);
+			setLoading(false);
 			if (cantidad == 0) {
 				setPublicaciones(data);
 			} else {
-				let aux = publicaciones;
-				console.log(aux);
-				for (let i = 0; i < data.length; i++) {
-					aux.push(data[i]);
-				}
-				console.log("final", aux);
-				// const aux = publicaciones.concat(data);
+				let aux = [...publicaciones, ...data];
 				setPublicaciones(aux);
 			}
-			cantidad = cantidad + 1;
+			setCantidad(cantidad + 1);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	// useEffect(() => {
-	// 	fetchAllPublicaciones();
-	// 	window.addEventListener("scroll", pedirMas);
-	// 	// console.log(onScroll);
-	// }, []);
+	useEffect(() => {
+		pixeles = 400;
+		fetchAllPublicaciones();
+		window.addEventListener("scroll", escucharScroll);
+	}, []);
 
-	const pedirMas = () => {
+	useEffect(
+		() => {
+			if (pedirMas) {
+				fetchAllPublicaciones();
+				pixeles = pixeles * 2;
+				console.log(pixeles);
+				setPedirMas(false);
+				console.log(pixeles);
+			}
+		},
+		[pedirMas]
+	);
+
+	const escucharScroll = () => {
 		if (window.scrollY > pixeles) {
-			fetchAllPublicaciones();
-			let aux = pixeles + 400;
-			setPixeles(aux);
-			console.log(pixeles);
+			console.log("scroll", window.scrollY);
+			setPedirMas(true);
 		}
-		console.log(window.scrollY);
 	};
-	const activar = value => {
-		alert(value);
-		console.log(value);
-	};
+
+	useEffect(
+		() => {
+			if (loading) {
+				setSpinner(<Spinner />);
+			} else {
+				setSpinner("");
+			}
+		},
+		[loading]
+	);
+
 	return (
-		<div id="divExterno" onScroll={activar} className=" d-flex justify-content-center align-items-center mx-2 mt-5">
-			{/* <Masonry
+		<div id="divExterno" className=" d-flex justify-content-center align-items-center mx-2 mx-md-0 mt-5">
+			<Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
 				{publicaciones.map((elem, iterador) => {
 					let etiqueta;
 					if (elem.formato == "image") {
-						etiqueta = <img className="rounded" src={elem.url} alt="" />;
+						etiqueta = <img className="rounded" id="imgId" src={elem.url} alt="" />;
 					} else {
-						etiqueta = <video className="rounded" src={elem.url} alt="" />;
+						etiqueta = <video className="rounded" id="imgId" src={elem.url} alt="" />;
 					}
 					return (
-						<div className="col-md-4 col-6 mb-3 " key={iterador} id="contenedor">
-							<div className="">
+						<div className="col-md-4 col-6 mb-3 " key={iterador}>
+							<div className="mx-md-4" id="divInterno">
 								{etiqueta}
-								<div id="footerImagen" className="d-flex justify-content-around text-white py-1">
+								{/* <div id="footerImagen" className="d-flex justify-content-around text-white py-1">
 									{elem.titulo}
-									<div className="btn-group dropleft ml-auto">
-										<button
-											type="button"
-											className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
-											data-toggle="dropdown"
-											aria-haspopup="true"
-											aria-expanded="false">
-											<i className="fas fa-ellipsis-h" />
-										</button>
+									<div className="btn mr-n2">
+										<i id="iconoFav" className="far fa-star float-right" />
+									</div>
+								</div> */}
+								<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
+									<div className="col-xs-4" id="botonCentrar">
+										<div className="btn">
+											<i id="iconoFav" className="far fa-star" />
+										</div>
+									</div>
+									<div className="col-xs-8">
+										<div id="footerImagen" className=" text-white py-1">
+											<p className="mt-1">{elem.titulo}</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -104,8 +130,8 @@ export const Feed = () => {
 					);
 				})}
 			</Masonry>
-			) */}
-			<Masonry
+			{spinner}
+			{/* <Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
 				columnClassName="my-masonry-grid_column">
@@ -300,7 +326,7 @@ export const Feed = () => {
 						</div>
 					</div>
 				</div>
-			</Masonry>
+			</Masonry> */}
 		</div>
 	);
 };
