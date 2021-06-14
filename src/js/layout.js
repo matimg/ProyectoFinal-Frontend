@@ -15,6 +15,7 @@ import { Feed } from "./views/feed";
 import { Detalle } from "./views/detalle";
 import { QuienesSomos } from "./views/quienesSomos";
 import { Error } from "./views/404";
+import { ComoComprar } from "./views/comoComprar";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -55,6 +56,10 @@ const Layout = () => {
 						</Route>
 
 						<PrivateRoute path="/publicar" component={Publicar} exact />
+
+						<Route exact path="/comoComprar">
+							<ComoComprar />
+						</Route>
 
 						<Route exact path="/quienesSomos">
 							<QuienesSomos />
