@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import rigoImage from "../../img/rigo-baby.jpg";
-import "../../styles/comoComprar.scss";
+import "../../styles/comoVender.scss";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const ComoComprar = () => {
+export const ComoVender = () => {
 	const { store, actions } = useContext(Context);
 	const cambiarRol = rol => {
 		actions.rolUsuario(rol);
@@ -14,8 +14,8 @@ export const ComoComprar = () => {
 		<div className="">
 			<div className="container-fluid blue-bg d-flex justify-content-center align-items-center mt-n5">
 				<div className="container">
-					<h1 className="pt-2 text-center tituloC">
-						<strong>¿Cómo comprar?</strong>
+					<h1 className="pt-2 text-center tituloV">
+						<strong>¿Cómo vender?</strong>
 					</h1>
 					{/* <!--first section--> */}
 					<div className="row align-items-center how-it-works">
@@ -78,12 +78,9 @@ export const ComoComprar = () => {
 						</div>
 						<div className="col-6">
 							<h5>
-								<strong>Contacta al creador ideal</strong>
+								<strong>Publica tus creaciones</strong>
 							</h5>
-							<p>
-								Ingresa al feed de publicaciones y contacta al creador ideal para tu contenido o destaca
-								en tus favoritos a las publicaciones que más te gustaron
-							</p>
+							<p>Publica tus mejores creaciones para conseguir a tus futuros clientes</p>
 						</div>
 					</div>
 					<div className="container mb-5 d-flex justify-content-center align-items-center mt-5">
@@ -91,10 +88,11 @@ export const ComoComprar = () => {
 							to="/inicioSesion"
 							type="button"
 							id="botonVerde"
-							className="btn ml-1 ml-md-4  botonVerde"
-							onClick={() => cambiarRol("Comprador")}>
-							Quiero comprar
+							className="btn ml-1 ml-md-4 botonAmarillo"
+							onClick={() => cambiarRol("Vendedor")}>
+							Quiero vender
 						</Link>
+
 						<Link to="/" type="button" id="btnVolver" className="btn ml-1 ml-md-4  botonVerde">
 							Inicio
 						</Link>
