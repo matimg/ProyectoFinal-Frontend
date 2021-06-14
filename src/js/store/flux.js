@@ -292,6 +292,57 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let result = fetchPublicar();
 				return result;
 			},
+			agregarFavorito: async idPublicacion => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var raw = JSON.stringify({
+					idPublicacion: idPublicacion
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: raw
+				};
+				const fetchAgregarFavorito = async () => {
+					try {
+						const res = await fetch(process.env.URL + "/favorito", requestOptions);
+						const data = await res.json();
+						return "ok";
+					} catch (error) {
+						console.log(error);
+						return "error";
+					}
+				};
+				const result = fetchAgregarFavorito();
+				return result;
+			},
+			getFavoritos: () => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders
+				};
+				const fetchFavoritos = async () => {
+					try {
+						const res = await fetch(process.env.URL + "/favoritos", requestOptions);
+						const data = await res.json();
+						console.log(data);
+						return data;
+						// setFavoritos(data);
+					} catch (error) {
+						console.log(error);
+						return "error";
+					}
+				};
+				const resultado = fetchFavoritos();
+				return resultado;
+			},
 			eliminarFavorito: id => {
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");

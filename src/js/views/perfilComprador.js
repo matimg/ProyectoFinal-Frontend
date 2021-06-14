@@ -22,35 +22,19 @@ export const PerfilComprador = () => {
 	let fecha = usuario.fechaNacimiento;
 	let email = usuario.email;
 
-	const fetchFavoritos = async () => {
-		var myHeaders = new Headers();
-		myHeaders.append("Content-Type", "application/json");
-		myHeaders.append("Authorization", sessionStorage.getItem("token"));
-
-		var requestOptions = {
-			method: "GET",
-			headers: myHeaders
-		};
-
-		try {
-			const res = await fetch(process.env.URL + "/favoritos", requestOptions);
-			const data = await res.json();
-			console.log(data);
-			setFavoritos(data);
-		} catch (error) {
-			console.log(error);
-		}
+	const traerFavoritos = async () => {
+		const fav = await actions.getFavoritos();
+		setFavoritos(fav);
 	};
-
 	useEffect(() => {
-		fetchFavoritos();
+		traerFavoritos();
 	}, []);
 
 	const llamar = async id => {
 		let resultado = await actions.eliminarFavorito(id);
 		if (resultado == "ok") {
 			Swal.fire("Eliminado correctamente", "", "success");
-			fetchFavoritos();
+			traerFavoritos();
 		} else {
 			console.log("Error");
 		}
