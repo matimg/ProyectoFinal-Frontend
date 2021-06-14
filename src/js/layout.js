@@ -12,12 +12,9 @@ import { PerfilVendedor } from "./views/perfilVendedor";
 import { PerfilComprador } from "./views/perfilComprador";
 import { Publicar } from "./views/publicar";
 import { Feed } from "./views/feed";
-import { QuienesSomos } from "./views/quienesSomos";
-<<<<<<< HEAD
 import { Detalle } from "./views/detalle";
-=======
+import { QuienesSomos } from "./views/quienesSomos";
 import { Error } from "./views/404";
->>>>>>> bbbf043105aa55226dfeb1c4f881efed17b32cd7
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -63,13 +60,13 @@ const Layout = () => {
 							<QuienesSomos />
 						</Route>
 
-						<Route exact path="/404">
+						<Route>
 							<Error />
 						</Route>
 
-						<Route>
+						{/* <Route>
 							<h1>404 Not found!</h1>
-						</Route>
+						</Route> */}
 					</Switch>
 					{/* <Footer /> */}
 				</ScrollToTop>
