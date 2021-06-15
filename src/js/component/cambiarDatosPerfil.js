@@ -19,6 +19,8 @@ import { FormLabel } from "react-bootstrap";
 import { FormControl } from "react-bootstrap";
 import { FormText } from "react-bootstrap";
 
+import Swal from "sweetalert2";
+
 import PropTypes from "prop-types";
 export const CambiarDatosPerfil = e => {
 	const props = e;
@@ -36,33 +38,43 @@ export const CambiarDatosPerfil = e => {
 
 	const handleSubmit = async event => {
 		const form = event.currentTarget;
-		if (form.checkValidity() === false) {
-			event.preventDefault();
-			event.stopPropagation();
-		}
+		event.preventDefault();
 		if (form.nombre.value == "") {
-			event.preventDefault();
 			form.nombre.value = nombre;
 		}
 		if (form.apellido.value == "") {
-			event.preventDefault();
 			form.apellido.value = apellido;
 		}
-		let result = await actions.modificarDatos(form.nombre.value, form.apellido.value);
-		if (result == "ok") {
-			props.funcion();
-			setShow(false);
+		if (form.passNueva.value !== form.passNueva2.value) {
+			Swal.fire({
+				icon: "error",
+				title: "Las contraseñas no coinciden",
+				showConfirmButton: true,
+				confirmButtonColor: "#7bffc6"
+			});
 		} else {
-			alert("Algo salio mal!");
+			let result = await actions.modificarDatos(form.nombre.value, form.apellido.value, form.passNueva.value);
+			if (result == "ok") {
+				if (form.passNueva.value !== "") {
+					Swal.fire({
+						icon: "success",
+						title: "La contraseña fue cambiada con éxito",
+						showConfirmButton: true,
+						confirmButtonColor: "#7bffc6"
+					});
+				}
+				props.funcion();
+				setShow(false);
+			} else {
+				alert("Algo salio mal!");
+			}
 		}
-		setValidated(true);
 	};
 
 	const handleClose = () => {
 		props.funcion();
 		setShow(false);
 	};
-	// const handleShow = () => setShow(true);
 
 	return (
 		<>
@@ -75,10 +87,21 @@ export const CambiarDatosPerfil = e => {
 					<Modal.Body>
 						<Form noValidate validated={validated} onSubmit={handleSubmit}>
 							<Form.Group className="mb-3" controlId="nombre">
-								<Form.Control type="text" placeholder={nombre} required />
+								<Form.Control type="text" placeholder={nombre} />
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="apellido">
-								<Form.Control type="text" placeholder={apellido} required />
+								<Form.Control type="text" placeholder={apellido} />
+							</Form.Group>
+
+							{/* PASSWORD */}
+							<Form.Group className="mb-3" controlId="passNueva">
+								<Form.Control type="password" placeholder="Nueva contraseña" required />
+								<Form.Control.Feedback type="invalid">
+									Las contraseñas no coinciden
+								</Form.Control.Feedback>
+							</Form.Group>
+							<Form.Group className="mb-3" controlId="passNueva2">
+								<Form.Control type="password" placeholder="Repetir nueva contraseña" required />
 							</Form.Group>
 							<div className="d-flex justify-content-center align-items-center mt-4">
 								<Button id="botonCambios" className="pl-4 pr-4 p-2" type="submit">

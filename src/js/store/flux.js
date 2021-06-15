@@ -178,14 +178,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let resultado = fetchRecuperarPassword();
 				return resultado;
 			},
-			modificarDatos: (nombre, apellido) => {
+			modificarDatos: (nombre, apellido, pass) => {
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 				myHeaders.append("Authorization", sessionStorage.getItem("token"));
 
 				var raw = JSON.stringify({
 					nombre: nombre,
-					apellido: apellido
+					apellido: apellido,
+					password: pass
 				});
 
 				console.log(raw);

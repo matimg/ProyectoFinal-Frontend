@@ -23,14 +23,15 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 import PropTypes from "prop-types";
+var pass = false;
+var fecha = false;
+var validar = false;
 export const Registro = e => {
 	const props = e;
 	const [show, setShow] = useState(props.habilitar);
 	const [validated, setValidated] = useState(false);
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
-
-	const MySwal = withReactContent(Swal);
 
 	const crearUsuario = async (nombre, apellido, fechaNacimiento, email, password) => {
 		let resultado = await actions.crearUsuario(nombre, apellido, fechaNacimiento, email, password);
@@ -41,33 +42,39 @@ export const Registro = e => {
 			alertaFallo();
 		}
 	};
+
 	const handleSubmit = event => {
 		const form = event.currentTarget;
+		console.log(form);
 		if (form.checkValidity() === false) {
 			event.preventDefault();
 			event.stopPropagation();
 		}
-		if (form.password.value !== form.confirmPassword.value) {
-			form.confirmPassword.value = "";
-			event.preventDefault();
-			event.stopPropagation();
-		}
-		if (form.fechaNacimiento.value > "2000-01-02") {
-			form.fechaNacimiento.value = "";
-			event.preventDefault();
-			event.stopPropagation();
-		}
-
-		crearUsuario(
-			form.nombre.value,
-			form.apellido.value,
-			form.fechaNacimiento.value,
-			form.email.value,
-			form.password.value
-		);
-
-		event.preventDefault();
+		validar = true;
 		setValidated(true);
+		if (form.password.value !== form.confirmPassword.value) {
+			event.preventDefault();
+			form.confirmPassword.value = "";
+			pass = false;
+		} else {
+			pass = true;
+		}
+		if (form.fechaNacimiento.value > "2000-01-02" || form.fechaNacimiento.value == "") {
+			event.preventDefault();
+			form.fechaNacimiento.value = "";
+			fecha = false;
+		} else {
+			fecha = true;
+		}
+		if (validar && pass && fecha) {
+			crearUsuario(
+				form.nombre.value,
+				form.apellido.value,
+				form.fechaNacimiento.value,
+				form.email.value,
+				form.password.value
+			);
+		}
 	};
 
 	function alertaOk() {
@@ -92,9 +99,8 @@ export const Registro = e => {
 		Swal.fire({
 			icon: "error",
 			title: "Oops...",
-			text: "Something went wrong!",
-			showConfirmButton: true,
-			footer: '<a href="">Why do I have this issue?</a>'
+			text: "Este usuario ya existe",
+			showConfirmButton: true
 		}).then(result => {
 			console.log(result);
 			/* Read more about isConfirmed, isDenied below */
@@ -120,7 +126,7 @@ export const Registro = e => {
 						<Modal.Title>Registrarme</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<Form noValidate validated={validated} onSubmit={handleSubmit}>
+						<Form noValidate validated={validated} onSubmit={() => handleSubmit(event)}>
 							<div className="row">
 								<div className="col p-0 ml-3">
 									<Form.Group className="mb-3" controlId="nombre">

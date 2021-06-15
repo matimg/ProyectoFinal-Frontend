@@ -11,6 +11,7 @@ export const PerfilComprador = () => {
 	let usuario = JSON.parse(localStorage.getItem("usuario"));
 	const [modal, setModal] = useState("");
 	const [favoritos, setFavoritos] = useState([]);
+
 	const mostrarModal = () => {
 		setModal("");
 		setModal(<CambiarDatosPerfil habilitar={true} funcion={escucharRegistro} />);
@@ -73,9 +74,6 @@ export const PerfilComprador = () => {
 					alt="avatar"
 					className="rounded-circle w-25 mb-3"
 				/>
-				{/* <h5 className="text-white">
-					{nombre} {apellido}
-				</h5> */}
 				<div id="datos" className="w-75 text-center">
 					<div id="inputPerfil" className="rounded">
 						{nombre}
@@ -108,10 +106,10 @@ export const PerfilComprador = () => {
 						{favoritos.map((elem, iterador) => {
 							console.log(favoritos);
 							let etiqueta;
-							if (elem.formato == "image") {
-								etiqueta = <img className="rounded" src={elem.url} alt="" />;
+							if (elem.publicaciones.formato == "image") {
+								etiqueta = <img className="rounded" src={elem.publicaciones.url} alt="" />;
 							} else {
-								etiqueta = <video className="rounded" src={elem.url} alt="" controls />;
+								etiqueta = <video className="rounded" src={elem.publicaciones.url} alt="" controls />;
 							}
 							return (
 								<div className="col-md-4 col-6 mb-3 " key={iterador}>

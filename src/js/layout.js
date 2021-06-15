@@ -39,9 +39,12 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route exact path="/feed">
+
+						<PrivateRoute path="/feed" component={Feed} exact />
+
+						{/* <Route exact path="/feed">
 							<Feed />
-						</Route>
+						</Route> */}
 
 						<Route exact path="/detalle">
 							<Detalle />
@@ -87,7 +90,9 @@ const Layout = () => {
 
 	function PrivateRoute({ component: Component, ...rest }) {
 		const token = sessionStorage.getItem("token");
-		return <Route {...rest} render={props => (token ? <Component {...props} /> : <Redirect to="/" />)} />;
+		return (
+			<Route {...rest} render={props => (token ? <Component {...props} /> : <Redirect to="/errorPrivado" />)} />
+		);
 	}
 	function RutaLogin({ component: Component, ...rest }) {
 		const token = sessionStorage.getItem("token");
