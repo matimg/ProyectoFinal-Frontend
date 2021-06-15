@@ -10,6 +10,16 @@ import { useHistory } from "react-router-dom";
 export const InicioSesion = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
+	const [modal, setModal] = useState("");
+	const mostrarModal = () => {
+		setModal("");
+		setModal(<RecuperarContraseña habilitar={true} funcion={escucharRecuperar} />);
+	};
+
+	function escucharRecuperar() {
+		console.log("Entra");
+		setModal("");
+	}
 	const {
 		register,
 		formState: { errors },
@@ -32,7 +42,7 @@ export const InicioSesion = () => {
 	const [mostrarRegistro, setMostrarRegistro] = useState("d-none");
 	const [modalRegistro, setModalRegistro] = useState("");
 
-	const mostrarModal = () => {
+	const mostrarModalRegistro = () => {
 		setMostrarRegistro(" ");
 		setModalRegistro(<Registro habilitar={true} funcion={escucharRegistro} />);
 	};
@@ -75,23 +85,18 @@ export const InicioSesion = () => {
 				</form>
 				<div className="d-flex justify-content-center align-items-center">
 					<button
+						onClick={mostrarModal}
 						id="olvidasteContraseña"
 						className="btn border-0 btn-sm olvidasteContraseña"
 						data-toggle="modal"
 						data-target="#recuperarModal">
 						¿Olvidaste tu contraseña?
 					</button>
-					<div
-						className="modal fade"
-						id="recuperarModal"
-						aria-labelledby="recuperarModalLabel"
-						aria-hidden="true">
-						<RecuperarContraseña />
-					</div>
+					{modal}
 				</div>
-				<div className="card-footer d-flex justify-content-center mt-4">
+				<div className="card-footer d-flex justify-content-center mt-4 footerInicio">
 					<button
-						onClick={mostrarModal}
+						onClick={mostrarModalRegistro}
 						id="botonVerdeSecundario"
 						className="btn botonVerdeSecundario"
 						data-toggle="modal"

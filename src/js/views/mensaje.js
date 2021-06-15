@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 export const Mensajes = () => {
 	const { store, actions } = useContext(Context);
 	const [mensajes, setMensajes] = useState([]);
-
+	const params = useParams();
 	const getConversacion = async () => {
 		//El id de la persona me lo tiene que pasar por parametro
 		let resultado = await actions.getConversacion("Persona con la que quiero contactarme");

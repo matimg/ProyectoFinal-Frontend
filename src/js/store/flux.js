@@ -427,6 +427,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				let result = fetchConversacion(idReceptor);
 				return result;
+			},
+			getDetalle: id => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders
+				};
+				const fetchDetalle = async id => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/publicacion/detalle/" + id, requestOptions);
+						const data = await res.json();
+						console.log(data);
+						if (data.message != "Ok") {
+							setStore({ loading: false });
+							return "error";
+						}
+						setStore({ loading: false });
+						return data.publicacion;
+					} catch (error) {
+						console.log(error);
+						return "error";
+					}
+				};
+				const resultado = fetchDetalle(id);
+				return resultado;
 			}
 		}
 	};

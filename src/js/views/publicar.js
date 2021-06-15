@@ -30,7 +30,9 @@ export const Publicar = () => {
 		Swal.fire({
 			icon: "error",
 			title: "Oops...",
-			text: tipoError
+			text: tipoError,
+			confirmButtonColor: "#de6a6a",
+			confirmButtonText: "Volver"
 		});
 	};
 

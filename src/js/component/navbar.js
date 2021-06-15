@@ -12,10 +12,11 @@ export const Navbar = () => {
 		actions.logout();
 		history.push("/");
 	};
+
 	return (
 		<div>
 			<nav className="navbar navbar-expand-lg navbar-light bg-light m-0">
-				<Link to="/feed">
+				<Link to="/">
 					<img className="img-fluid" id="logo" src={logo} />
 				</Link>
 				<button
@@ -31,52 +32,48 @@ export const Navbar = () => {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav ml-auto">
 						<li className="nav-item active ">
-							<Link className="nav-link" to="/comoVender">
+							<Link id="botonNav" className="nav-link" to="/comoVender">
 								¿Cómo vender? <span className="sr-only">(current)</span>
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link className="nav-link" to="/comoComprar">
+							<Link id="botonNav" className="nav-link" to="/comoComprar">
 								¿Cómo comprar? <span className="sr-only">(current)</span>
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link className="nav-link" to="/quienesSomos">
+							<Link id="botonNav" className="nav-link" to="/quienesSomos">
 								¿Quiénes somos? <span className="sr-only">(current)</span>
 							</Link>
 						</li>
-
-						<div className="dropdown">
-							<button
-								className="btn btn-secondary dropdown-toggle"
-								type="button"
-								id="dropdownMenuButton"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false"
-							/>
-							<div
-								className="dropdown-menu dropdown-menu-right text-center"
-								aria-labelledby="dropdownMenuButton">
-								<li className="nav-item active">
-									<Link className="nav-link" to="/perfilVendedor">
-										Perfil Vendedor
-										<span className="sr-only">(current)</span>
-									</Link>
-								</li>
-								<li className="nav-item active">
-									<Link className="nav-link" to="/publicar">
-										Publicar <span className="sr-only">(current)</span>
-									</Link>
-								</li>
-								<li className="nav-item active">
-									<Link onClick={() => logout()} className="nav-link">
-										Salir <i className="fas fa-sign-out-alt" />{" "}
-										<span className="sr-only">(current)</span>
-									</Link>
-								</li>
-							</div>
-						</div>
+						<li className="nav-item active">
+							<Link id="btnIngresar" className="nav-link" to="/inicioSesion">
+								<i className="fas fa-sign-in-alt" />
+								<span className="sr-only">(current)</span>
+							</Link>
+						</li>
+						<li className="nav-item active">
+							<Link id="btnPublicaciones" className="nav-link" to="/feed">
+								<i className="fas fa-list-alt" />
+								<span className="sr-only">(current)</span>
+							</Link>
+						</li>
+						<li className="nav-item active">
+							<Link id="btnPerfil" className="nav-link" to="/perfilVendedor">
+								<i className="fas fa-user" />
+								<span className="sr-only">(current)</span>
+							</Link>
+						</li>
+						<li className="nav-item active">
+							<Link id="btnSubir" className="nav-link" to="/publicar">
+								<i className="fas fa-file-upload" /> <span className="sr-only">(current)</span>
+							</Link>
+						</li>
+						<li className="nav-item active">
+							<Link id="btnSalir" onClick={() => logout()} className="nav-link">
+								<i className="fas fa-sign-out-alt" /> <span className="sr-only">(current)</span>
+							</Link>
+						</li>
 					</ul>
 				</div>
 			</nav>

@@ -13,7 +13,7 @@ export const ConfirmarUsuario = () => {
 		Swal.fire({
 			icon: "error",
 			title: "Oops...",
-			text: "Hubo un problema en el servido, intente mas tarde"
+			text: "Hubo un problema en el servidor, intente mas tarde"
 		});
 	};
 

@@ -119,59 +119,129 @@ export const Feed = () => {
 	};
 	return (
 		<div id="divExterno" className=" d-flex justify-content-center align-items-center mx-2 mx-md-0 mt-5">
-			<Link to="/perfilComprador">Perfil</Link>
-			<Masonry
-				breakpointCols={breakpointColumnsObj}
-				className="my-masonry-grid"
-				columnClassName="my-masonry-grid_column">
-				{publicaciones.map((elem, iterador) => {
-					let etiqueta;
-					if (elem.formato == "image") {
-						etiqueta = <img className="rounded" id="imgId" src={elem.url} alt="" />;
-					} else {
-						etiqueta = <video className="rounded" id="imgId" src={elem.url} alt="" />;
-					}
-
-					let estrella = <i onClick={() => agregarFavorito(elem.id)} id="iconoFav" className="far fa-star" />;
-
-					for (let i = 0; i < favoritos.length; i++) {
-						if (elem.id === favoritos[i].publicaciones.id) {
-							estrella = (
-								<i
-									onClick={() => eliminarFavorito(favoritos[i].id)}
-									id="iconoFav"
-									className="fas fa-star"
-								/>
+			<div id="navSelect" className="mt-n3 mb-4">
+				<ul className="nav nav-tabs" id="myTab" role="tablist">
+					<li className="nav-item" role="presentation">
+						<a
+							className="nav-link active"
+							id="home-tab"
+							data-toggle="tab"
+							href="#home"
+							role="tab"
+							aria-controls="home"
+							aria-selected="true">
+							Todo
+						</a>
+					</li>
+					<li className="nav-item" role="presentation">
+						<a
+							className="nav-link"
+							id="home-tab"
+							data-toggle="tab"
+							href="#home"
+							role="tab"
+							aria-controls="home"
+							aria-selected="true">
+							Imagen
+						</a>
+					</li>
+					<li className="nav-item" role="presentation">
+						<a
+							className="nav-link"
+							id="profile-tab"
+							data-toggle="tab"
+							href="#profile"
+							role="tab"
+							aria-controls="profile"
+							aria-selected="false">
+							Video
+						</a>
+					</li>
+					<li className="nav-item" role="presentation">
+						<a
+							className="nav-link"
+							id="contact-tab"
+							data-toggle="tab"
+							href="#contact"
+							role="tab"
+							aria-controls="contact"
+							aria-selected="false">
+							Sonido
+						</a>
+					</li>
+				</ul>
+				<div className="tab-content" id="myTabContent">
+					<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+						...
+					</div>
+					<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+						...
+					</div>
+					<div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+						...
+					</div>
+				</div>
+			</div>
+			<div className=" ">
+				<Masonry
+					breakpointCols={breakpointColumnsObj}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column">
+					{publicaciones.map((elem, iterador) => {
+						let etiqueta;
+						if (elem.formato == "image") {
+							etiqueta = (
+								<Link to={"/detalle/" + elem.id}>
+									<img className="rounded" id="imgId" src={elem.url} alt="" />
+								</Link>
 							);
-							break;
+						} else {
+							etiqueta = <video className="rounded" id="imgId" src={elem.url} alt="" controls />;
 						}
-					}
-					return (
-						<div className="col-md-4 col-6 mb-3 " key={iterador}>
-							<div className="mx-md-4" id="divInterno">
-								{etiqueta}
-								<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
-									<div className="col-xs-4" id="botonCentrar">
-										<div className="btn">
-											{estrella}
-											{/* <i
+
+						let estrella = (
+							<i onClick={() => agregarFavorito(elem.id)} id="iconoFav" className="far fa-star" />
+						);
+
+						for (let i = 0; i < favoritos.length; i++) {
+							if (elem.id === favoritos[i].publicaciones.id) {
+								estrella = (
+									<i
+										onClick={() => eliminarFavorito(favoritos[i].id)}
+										id="iconoFav"
+										className="fas fa-star"
+									/>
+								);
+								break;
+							}
+						}
+						return (
+							<div className="col-md-4 col-6 mb-3 " key={iterador}>
+								<div className="mx-md-4" id="divInterno">
+									{etiqueta}
+									<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
+										<div className="col-xs-4" id="botonCentrar">
+											<div className="btn">
+												{estrella}
+												{/* <i
 												onClick={() => agregarFavorito(elem.id)}
 												id="iconoFav"
 												className="far fa-star"
 											/> */}
+											</div>
 										</div>
-									</div>
-									<div className="col-xs-8">
-										<div id="footerImagen" className=" text-white py-1">
-											<p className="mt-1">{elem.titulo}</p>
+										<div className="col-xs-8">
+											<div id="footerImagen" className=" text-white py-1">
+												<p className="mt-1">{elem.titulo}</p>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					);
-				})}
-			</Masonry>
+						);
+					})}
+				</Masonry>
+			</div>
 			{spinner}
 		</div>
 	);

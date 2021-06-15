@@ -38,6 +38,10 @@
     margin-bottom: 0;
 }
 
+#divExterno{
+    flex-direction: column;
+}
+
 #footer{
  display: inline-block;
 }
@@ -75,4 +79,8 @@
   #imgId{
     width: 120px;
 }
+}
+
+a:link{
+    color: white;
 }
