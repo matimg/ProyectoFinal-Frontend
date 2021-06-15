@@ -10,10 +10,47 @@
     color: #49ac9f;
 }
 
-#palabra{
-    display: none;
+#btnPublicaciones:hover{
+    color: #49ac9f;
 }
 
-#botonNav:hover + #palabra {
-    display: block;
+#btnPublicaciones:hover::after{
+    content: "Publicaciones";
+    color: #49ac9f;
+}
+
+#btnPerfil:hover{
+    color: #49ac9f;
+}
+
+#btnPerfil:hover::after{
+    content: "Perfil";
+    color: #49ac9f;
+}
+
+#btnSubir:hover{
+    color: #49ac9f;
+}
+
+#btnSubir:hover::after{
+    content: "Postear";
+    color: #49ac9f;
+}
+
+#btnSalir:hover{
+    color: #49ac9f;
+}
+
+#btnSalir:hover::after{
+    content: "Salir";
+    color: #49ac9f;
+}
+
+#btnIngresar:hover{
+    color: #49ac9f;
+}
+
+#btnIngresar:hover::after{
+    content: "Ingresar";
+    color: #49ac9f;
 }
