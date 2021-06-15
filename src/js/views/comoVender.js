@@ -88,7 +88,7 @@ export const ComoVender = () => {
 							to="/inicioSesion"
 							type="button"
 							id="botonVerde"
-							className="btn ml-1 ml-md-4 botonAmarillo"
+							className="btn ml-1 ml-md-4 botonVerde"
 							onClick={() => cambiarRol("Vendedor")}>
 							Quiero vender
 						</Link>

@@ -14,9 +14,10 @@ import { Publicar } from "./views/publicar";
 import { Feed } from "./views/feed";
 import { Detalle } from "./views/detalle";
 import { QuienesSomos } from "./views/quienesSomos";
-import { Error } from "./views/404";
 import { ComoComprar } from "./views/comoComprar";
 import { ComoVender } from "./views/comoVender";
+import { Error404 } from "./views/404";
+import { ErrorPrivado } from "./views/errorPrivado";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -70,8 +71,12 @@ const Layout = () => {
 							<QuienesSomos />
 						</Route>
 
+						<Route exact path="/errorPrivado">
+							<ErrorPrivado />
+						</Route>
+
 						<Route>
-							<Error />
+							<Error404 />
 						</Route>
 					</Switch>
 					{/* <Footer /> */}

@@ -1,0 +1,49 @@
+#contenedorErrPrivado{ 
+    height: 100vh;
+    flex-direction: column;
+    margin-top: -100px;
+}
+
+#imagenErrorPrivado{
+     width: 800px;
+    margin-top: -30px;
+}
+
+#oops{
+  font-size: 350%;
+
+}
+
+#fraseError{
+    margin-top: -15px;
+  font-size: 120%;
+
+}
+
+#btnInicio{
+    width: 150px;
+    margin-top: 5px;
+    background-color: #7bffc6;
+    color: white;
+
+}
+
+#btnInicio:hover{
+    color: black;
+
+}
+
+@media (max-width: 760px) {
+  #imagenErrorPrivado{
+     width: 300px;
+    margin-top: 25px;
+    // margin-bottom: 20px;
+}
+
+#btnInicio{
+    margin-top: 20px;
+    
+
+}
+
+}
