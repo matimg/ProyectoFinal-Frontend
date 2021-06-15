@@ -99,9 +99,8 @@ export const Registro = e => {
 		Swal.fire({
 			icon: "error",
 			title: "Oops...",
-			text: "Something went wrong!",
-			showConfirmButton: true,
-			footer: '<a href="">Why do I have this issue?</a>'
+			text: "Este usuario ya existe",
+			showConfirmButton: true
 		}).then(result => {
 			console.log(result);
 			/* Read more about isConfirmed, isDenied below */
