@@ -58,7 +58,7 @@
     justify-content: center;
   padding-left: 1px !important; /* gutter size */
   background-clip: padding-box;
-  
+//   margin-left: 60px;
   width: auto;
 }
 
@@ -89,6 +89,9 @@ video{
  video{
     width: 180px;
  }
+
+
+
 }
 
 @media (max-width: 1300px) {
@@ -103,6 +106,8 @@ video{
     background: none;
     width: 150px;
 }
+
+
 }
 
 @media (max-width: 350px) {
@@ -117,4 +122,8 @@ video{
  video{
     width: 120px;
  }
+}
+
+#contenedorPublicaciones{
+    flex-direction: column;
 }

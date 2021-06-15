@@ -112,117 +112,68 @@ export const PerfilVendedor = () => {
 					Editar perfil
 				</button>
 			</div>
-
-			<div className="col-md-7 col-sm-10 mt-5 d-flex justify-content-center">
-				<Masonry
-					breakpointCols={breakpointColumnsObj}
-					className="my-masonry-grid"
-					columnClassName="my-masonry-grid_column">
-					{publicaciones.map((elem, iterador) => {
-						console.log(publicaciones);
-						let etiqueta;
-						if (elem.formato == "image") {
-							etiqueta = <img className="rounded" src={elem.url} alt="" controls />;
-						} else {
-							etiqueta = <video className="rounded" src={elem.url} alt="" controls />;
-						}
-						return (
-							<div className="col-md-4 col-6 mb-3 " key={iterador}>
-								<div className="" id="contenedor">
-									{etiqueta}
-									<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
-										<div className="col-xs-4" id="botonCentrar">
-											<div className="btn-group dropdown">
-												<button
-													type="button"
-													className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
-													data-toggle="dropdown"
-													aria-haspopup="true"
-													aria-expanded="false">
-													<i className="fas fa-ellipsis-h" />
-												</button>
-												<div className="dropdown-menu bg-transparent border-0 p-0">
-													<div className="row d-flex">
-														<div className="col-2">
-															<i
-																className="fas fa-pen text-white"
-																type="button"
-																onClick={editar}
-															/>
-														</div>
-														<div className="col-2">
-															<i
-																className="fas fa-trash-alt text-white"
-																type="button"
-																onClick={() => eliminar(elem.id)}
-															/>
+			<div className="col-md-7 col-sm-10 d-flex justify-content-center" id="contenedorPublicaciones">
+				<div className="row d-flex justify-content-center mt-5 mb-3">
+					<h3 className="text-white">
+						<strong>Mis publicaciones</strong>
+					</h3>
+				</div>
+				<div className=" d-flex justify-content-center">
+					<Masonry
+						breakpointCols={breakpointColumnsObj}
+						className="my-masonry-grid"
+						columnClassName="my-masonry-grid_column">
+						{publicaciones.map((elem, iterador) => {
+							console.log(publicaciones);
+							let etiqueta;
+							if (elem.formato == "image") {
+								etiqueta = <img className="rounded" src={elem.url} alt="" controls />;
+							} else {
+								etiqueta = <video className="rounded" src={elem.url} alt="" controls />;
+							}
+							return (
+								<div className="col-md-4 col-6 mb-3 " key={iterador}>
+									<div className="" id="contenedor">
+										{etiqueta}
+										<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
+											<div className="col-xs-4" id="botonCentrar">
+												<div className="btn-group dropdown">
+													<button
+														type="button"
+														className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
+														data-toggle="dropdown"
+														aria-haspopup="true"
+														aria-expanded="false">
+														<i className="fas fa-ellipsis-h" />
+													</button>
+													<div className="dropdown-menu bg-transparent border-0 p-0">
+														<div className="row d-flex">
+															<div className="col-2">
+																<i
+																	className="fas fa-trash-alt text-white"
+																	type="button"
+																	onClick={() => eliminar(elem.id)}
+																/>
+															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-										<div className="col-xs-8">
-											<div id="footerImagen" className=" text-white py-1">
-												<p className="">{elem.titulo}</p>
+											<div className="col-xs-8">
+												<div id="footerImagen" className=" text-white py-1">
+													<p className="">{elem.titulo}</p>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						);
-					})}
-				</Masonry>
+							);
+						})}
+					</Masonry>
+				</div>
 			</div>
 
 			<div>{modal}</div>
 		</div>
 	);
 };
-
-// <div id="publicaciones" className="col-md-7 col-sm-11 p-0 m-0 mt-5 ">
-//     <div id="publicaciones" className="row m-0 p-0">
-/* {publicaciones.map((elem, iterador) => {
-                                console.log(publicaciones); */
-// return (
-// <div className="col-md-4 col-6 mb-3" key={iterador}>
-//     <div className="">
-//         <img className="rounded w-100" src={elem.url} alt="" />
-//         <div
-//             id="footerImagen"
-//             className="d-flex justify-content-around text-white py-1">
-//             {elem.titulo}
-//             <div className="btn-group dropleft ml-auto">
-//                 <button
-//                     type="button"
-//                     className="btn btn-secondary btn-sm bg-transparent border-0 rounded"
-//                     data-toggle="dropdown"
-//                     aria-haspopup="true"
-//                     aria-expanded="false">
-//                     <i className="fas fa-ellipsis-h" />
-//                 </button>
-//                 <div className="dropdown-menu bg-transparent border-0">
-//                     <div className="row d-flex justify-content-end mr-2 mt-n2">
-//                         <div className="col-2">
-//                             <i
-//                                 className="fas fa-pen text-white"
-//                                 type="button"
-//                                 onClick={editar}
-//                             />
-//                         </div>
-//                         <div className="col-2">
-//                             <i
-//                                 className="fas fa-trash-alt text-white"
-//                                 type="button"
-//                                 onClick={() => eliminar(elem.id)}
-//                             />
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-// </div>
-//     );
-// })}
-/* </div>
-                    </div> */
