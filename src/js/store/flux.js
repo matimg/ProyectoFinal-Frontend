@@ -372,6 +372,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				let result = fetchEliminarFavorito(id);
 				return result;
+			},
+			getConversacion: idReceptor => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders
+				};
+				const fetchConversacion = async idReceptor => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/mensajes/" + idReceptor, requestOptions);
+						const data = await res.json();
+						setStore({ loading: false });
+						return data;
+					} catch (error) {
+						console.log(error);
+						return "error";
+					}
+				};
+				let result = fetchConversacion(idReceptor);
+				return result;
 			}
 		}
 	};
