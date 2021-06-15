@@ -93,13 +93,6 @@ export const InicioSesion = () => {
 						¿Olvidaste tu contraseña?
 					</button>
 					{modal}
-					{/* <div
-						className="modal fade"
-						id="recuperarModal"
-						aria-labelledby="recuperarModalLabel"
-						aria-hidden="true">
-						<RecuperarContraseña />
-					</div> */}
 				</div>
 				<div className="card-footer d-flex justify-content-center mt-4 footerInicio">
 					<button
