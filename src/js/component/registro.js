@@ -25,17 +25,13 @@ import withReactContent from "sweetalert2-react-content";
 import PropTypes from "prop-types";
 var pass = false;
 var fecha = false;
-// var validated = false;
+var validar = false;
 export const Registro = e => {
 	const props = e;
 	const [show, setShow] = useState(props.habilitar);
 	const [validated, setValidated] = useState(false);
 	const { store, actions } = useContext(Context);
 	const history = useHistory();
-
-	//Se usan para validar los datos en el modal
-	// const [fecha, setFecha] = useState(false);
-	// const [pass, setPass] = useState(false);
 
 	const crearUsuario = async (nombre, apellido, fechaNacimiento, email, password) => {
 		let resultado = await actions.crearUsuario(nombre, apellido, fechaNacimiento, email, password);
@@ -49,10 +45,12 @@ export const Registro = e => {
 
 	const handleSubmit = event => {
 		const form = event.currentTarget;
-		if (form.checkValidity() === false || form.password.value !== form.confirmPassword.value) {
+		console.log(form);
+		if (form.checkValidity() === false) {
 			event.preventDefault();
 			event.stopPropagation();
 		}
+		validar = true;
 		setValidated(true);
 		if (form.password.value !== form.confirmPassword.value) {
 			event.preventDefault();
@@ -68,7 +66,7 @@ export const Registro = e => {
 		} else {
 			fecha = true;
 		}
-		if (validated && pass && fecha) {
+		if (validar && pass && fecha) {
 			crearUsuario(
 				form.nombre.value,
 				form.apellido.value,
@@ -129,7 +127,7 @@ export const Registro = e => {
 						<Modal.Title>Registrarme</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<Form noValidate validated={validated} onSubmit={handleSubmit}>
+						<Form noValidate validated={validated} onSubmit={() => handleSubmit(event)}>
 							<div className="row">
 								<div className="col p-0 ml-3">
 									<Form.Group className="mb-3" controlId="nombre">
