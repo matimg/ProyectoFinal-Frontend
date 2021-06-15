@@ -22,7 +22,7 @@ export const Detalle = () => {
 	}, []);
 	return (
 		<div className="container d-flex justify-content-center align-items-center modificarHeight">
-			<div className="card mb-3" id="cartaCuerpo">
+			<div className="card mb-3 bg-light" id="cartaCuerpo">
 				<div className="row">
 					<div className="col-md-9 d-flex justify-content-center align-items-center">
 						<img src={publicacion.url} alt="..." id="imagenDetalle" />

@@ -15,7 +15,8 @@
     margin-bottom: -150px;
 }
 #imagenDetalle{
-    width: 100%;
+    width: auto;
+    max-height: 600px;
 }
 #fondoOpacidad{
    background-color: rgba(0, 0, 0, .6);
