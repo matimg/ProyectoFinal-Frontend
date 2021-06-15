@@ -14,6 +14,9 @@
     // align-items: flex-end;
     margin-bottom: -150px;
 }
+#imagenDetalle{
+    width: 100%;
+}
 #fondoOpacidad{
    background-color: rgba(0, 0, 0, .6);
 }
@@ -24,6 +27,10 @@
 #contacto:hover{
     color: #49ac9f;
     text-decoration: underline;
+}
+#cartaCuerpo{
+    width: 800px;
+ 
 }
 @media (max-width: 750px) {
  .contenedorCarta{
