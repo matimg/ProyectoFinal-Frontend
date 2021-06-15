@@ -190,7 +190,11 @@ export const Feed = () => {
 					{publicaciones.map((elem, iterador) => {
 						let etiqueta;
 						if (elem.formato == "image") {
-							etiqueta = <img className="rounded" id="imgId" src={elem.url} alt="" />;
+							etiqueta = (
+								<Link to={"/detalle/" + elem.id}>
+									<img className="rounded" id="imgId" src={elem.url} alt="" />
+								</Link>
+							);
 						} else {
 							etiqueta = <video className="rounded" id="imgId" src={elem.url} alt="" controls />;
 						}

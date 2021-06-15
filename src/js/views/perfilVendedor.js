@@ -127,7 +127,11 @@ export const PerfilVendedor = () => {
 							console.log(publicaciones);
 							let etiqueta;
 							if (elem.formato == "image") {
-								etiqueta = <img className="rounded" src={elem.url} alt="" controls />;
+								etiqueta = (
+									<Link to={"/detalle/" + elem.id}>
+										<img className="rounded" src={elem.url} alt="" controls />
+									</Link>
+								);
 							} else {
 								etiqueta = <video className="rounded" src={elem.url} alt="" controls />;
 							}

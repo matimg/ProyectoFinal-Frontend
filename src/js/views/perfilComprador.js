@@ -107,7 +107,11 @@ export const PerfilComprador = () => {
 							console.log(favoritos);
 							let etiqueta;
 							if (elem.publicaciones.formato == "image") {
-								etiqueta = <img className="rounded" src={elem.publicaciones.url} alt="" />;
+								etiqueta = (
+									<Link to={"/detalle/" + elem.publicaciones.id}>
+										<img className="rounded" src={elem.publicaciones.url} alt="" />
+									</Link>
+								);
 							} else {
 								etiqueta = <video className="rounded" src={elem.publicaciones.url} alt="" controls />;
 							}
@@ -141,7 +145,7 @@ export const PerfilComprador = () => {
 											</div>
 											<div className="col-xs-8">
 												<div id="footerImagen" className=" text-white py-1">
-													<p className="">{elem.titulo}</p>
+													<p className="">{elem.publicaciones.titulo}</p>
 												</div>
 											</div>
 										</div>
