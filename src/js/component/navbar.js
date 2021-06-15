@@ -47,31 +47,30 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link id="botonNav" className="nav-link" to="/feed">
+							<Link id="btnIngresar" className="nav-link" to="/inicioSesion">
+								<i className="fas fa-sign-in-alt" />
+								<span className="sr-only">(current)</span>
+							</Link>
+						</li>
+						<li className="nav-item active">
+							<Link id="btnPublicaciones" className="nav-link" to="/feed">
 								<i className="fas fa-list-alt" />
 								<span className="sr-only">(current)</span>
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link id="botonNav" className="nav-link" to="/perfilVendedor">
-								<div className="row">
-									<div className="col">
-										<i className="fas fa-user" />
-									</div>
-								</div>
-								<div className="row" id="palabra">
-									<div className="col">Publicaciones</div>
-								</div>
+							<Link id="btnPerfil" className="nav-link" to="/perfilVendedor">
+								<i className="fas fa-user" />
 								<span className="sr-only">(current)</span>
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link id="botonNav" className="nav-link" to="/publicar">
+							<Link id="btnSubir" className="nav-link" to="/publicar">
 								<i className="fas fa-file-upload" /> <span className="sr-only">(current)</span>
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link id="botonNav" onClick={() => logout()} className="nav-link">
+							<Link id="btnSalir" onClick={() => logout()} className="nav-link">
 								<i className="fas fa-sign-out-alt" /> <span className="sr-only">(current)</span>
 							</Link>
 						</li>
