@@ -101,7 +101,7 @@ export const InicioSesion = () => {
 						<RecuperarContraseña />
 					</div> */}
 				</div>
-				<div className="card-footer d-flex justify-content-center mt-4">
+				<div className="card-footer d-flex justify-content-center mt-4 footerInicio">
 					<button
 						onClick={mostrarModalRegistro}
 						id="botonVerdeSecundario"
