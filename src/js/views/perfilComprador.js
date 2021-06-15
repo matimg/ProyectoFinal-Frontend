@@ -10,6 +10,7 @@ export const PerfilComprador = () => {
 	let usuario = JSON.parse(localStorage.getItem("usuario"));
 	const [modal, setModal] = useState("");
 	const [favoritos, setFavoritos] = useState([]);
+
 	const mostrarModal = () => {
 		setModal("");
 		setModal(<CambiarDatosPerfil habilitar={true} funcion={escucharRegistro} />);
