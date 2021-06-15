@@ -46,7 +46,7 @@ const Layout = () => {
 							<Feed />
 						</Route> */}
 
-						<Route exact path="/detalle">
+						<Route exact path="/detalle/:id">
 							<Detalle />
 						</Route>
 
