@@ -1,3 +1,19 @@
 #logo{
     width: 80px;
 }
+
+#logo:hover{
+    filter: drop-shadow(0 1px 1px rgb(75, 75, 75));
+}
+
+#botonNav:hover{
+    color: #49ac9f;
+}
+
+#palabra{
+    display: none;
+}
+
+#botonNav:hover + #palabra {
+    display: block;
+}
