@@ -401,10 +401,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return "error";
 					}
 				};
-				let result = fetchEnviar();
+				const result = fetchEnviar();
 				return result;
 			},
 			getConversacion: idReceptor => {
+				console.log("Hola");
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 				myHeaders.append("Authorization", sessionStorage.getItem("token"));
@@ -425,7 +426,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return "error";
 					}
 				};
-				let result = fetchConversacion(idReceptor);
+				const result = fetchConversacion(idReceptor);
 				return result;
 			},
 			getDetalle: id => {

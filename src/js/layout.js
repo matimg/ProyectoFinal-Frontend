@@ -43,9 +43,9 @@ const Layout = () => {
 
 						<PrivateRoute path="/feed" component={Feed} exact />
 
-						<PrivateRoute path="/mensaje" component={Mensajes} exact />
-
-						<PrivateRoute path="/detalle" component={Detalle} exact />
+						<Route exact path="/mensajes/:id">
+							<Mensajes />
+						</Route>
 
 						{/* <Route exact path="/feed">
 							<Feed />

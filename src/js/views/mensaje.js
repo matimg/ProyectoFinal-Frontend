@@ -1,29 +1,33 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Mensajes = () => {
 	const { store, actions } = useContext(Context);
 	const [mensajes, setMensajes] = useState([]);
 	const params = useParams();
-	const getConversacion = async () => {
-		//El id de la persona me lo tiene que pasar por parametro
-		let resultado = await actions.getConversacion("Persona con la que quiero contactarme");
+
+	const getMensajes = async () => {
+		let resultado = await actions.getConversacion(params.id);
+		console.log(resultado);
 		setMensajes(resultado);
 	};
 
-	const enviarMensaje = async () => {
-		let resultado = await actions.enviarMensaje("Receptor", "mensaje", "asunto");
+	const enviarMensaje = async event => {
+		event.preventDefault();
+		const form = event.currentTarget;
+		console.log(form);
+		let resultado = await actions.enviarMensaje(params.id, form.mensaje.value, form.asunto.value);
 		if (resultado == "Ok") {
 			// alertaOK()
 		} else {
 			// alertaError()
 		}
-		getConversacion("Receptor");
+		getMensajes();
 	};
 
 	useEffect(() => {
-		getConversacion();
+		getMensajes();
 	}, []);
 
 	return (
@@ -32,8 +36,9 @@ export const Mensajes = () => {
 				return <div key={iterador}>{elem.mensaje}</div>;
 			})}
 			<form onSubmit={() => enviarMensaje(event)}>
-				<input placeholder="Asunto" />
-				<textarea />
+				<input placeholder="Asunto" id="asunto" />
+				<textarea placeholder="Mensaje" id="mensaje" />
+				<button>Enviar</button>
 			</form>
 		</div>
 	);
