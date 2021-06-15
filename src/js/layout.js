@@ -14,7 +14,10 @@ import { Publicar } from "./views/publicar";
 import { Feed } from "./views/feed";
 import { Detalle } from "./views/detalle";
 import { QuienesSomos } from "./views/quienesSomos";
-import { Error } from "./views/404";
+import { ComoComprar } from "./views/comoComprar";
+import { ComoVender } from "./views/comoVender";
+import { Error404 } from "./views/404";
+import { ErrorPrivado } from "./views/errorPrivado";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -56,17 +59,25 @@ const Layout = () => {
 
 						<PrivateRoute path="/publicar" component={Publicar} exact />
 
+						<Route exact path="/comoVender">
+							<ComoVender />
+						</Route>
+
+						<Route exact path="/comoComprar">
+							<ComoComprar />
+						</Route>
+
 						<Route exact path="/quienesSomos">
 							<QuienesSomos />
 						</Route>
 
-						<Route>
-							<Error />
+						<Route exact path="/errorPrivado">
+							<ErrorPrivado />
 						</Route>
 
-						{/* <Route>
-							<h1>404 Not found!</h1>
-						</Route> */}
+						<Route>
+							<Error404 />
+						</Route>
 					</Switch>
 					{/* <Footer /> */}
 				</ScrollToTop>
