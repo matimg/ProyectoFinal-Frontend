@@ -1,0 +1,124 @@
+#perfil{
+    background-color: rgba(255, 255, 255, .9);
+}
+#inputPerfil{
+    background-color:#f2f2f2;
+    border:1px solid #d9d9d9;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 2px;
+}
+#botonEditarPerfil {
+    background-color: #7bffc6;
+    color: white;
+    font-weight: bold;
+    margin-top: 18px;
+}
+#botonEditarPerfil:hover{
+    color: black;
+}
+
+.cuerpoPerfil{
+    height:100%;
+    margin:0;
+    display: flex;
+}
+
+#footerImagen{
+    background-color: none;
+}
+
+#botonCambios{
+    background-color: #7bffc6;
+    color: white;
+    font-weight: bold;
+    border: none!important;
+}
+
+#botonCambios:hover{
+    color: black;
+    background-color: #7bffc6;
+}
+
+#contenedor{
+    background: none;
+    width: 200px;
+}
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  justify-content: space-around;
+  width: auto;
+  margin-left: 0px !important;
+  
+}
+.my-masonry-grid_column {
+    justify-content: center;
+  padding-left: 1px !important; /* gutter size */
+  background-clip: padding-box;
+  
+  width: auto;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  justify-content: center;
+  background: none;
+  margin-bottom: 30px;
+}
+
+img{
+    width: 200px;
+}
+
+video{
+    width: 200px;
+}
+
+@media (max-width: 1400px) {
+  img{
+    width: 180px;
+ }
+ #contenedor{
+    background: none;
+    width: 180px;
+}
+
+ video{
+    width: 180px;
+ }
+}
+
+@media (max-width: 1300px) {
+  img{
+    width: 150px;
+ }
+
+ video{
+    width: 150px;
+ }
+ #contenedor{
+    background: none;
+    width: 150px;
+}
+}
+
+@media (max-width: 350px) {
+  img{
+    width: 120px;
+ }
+
+ #contenedor {   
+     background: none;
+     width: 120px;
+ }
+ video{
+    width: 120px;
+ }
+}
+
+#contenedorFavoritos{
+    flex-direction: column;
+}
