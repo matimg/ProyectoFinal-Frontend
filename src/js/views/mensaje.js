@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import "../../styles/mensaje.scss";
 import { Context } from "../store/appContext";
 
 export const Mensajes = () => {
@@ -18,8 +19,8 @@ export const Mensajes = () => {
 		event.preventDefault();
 		const form = event.currentTarget;
 		console.log(form);
-		let resultado = await actions.enviarMensaje(params.id, form.mensaje.value, "");
-		form.mensaje.value = "";
+		let resultado = await actions.enviarMensaje(params.id, form.textMensaje.value, "");
+		form.textMensaje.value = "";
 		getMensajes();
 	};
 
@@ -28,33 +29,49 @@ export const Mensajes = () => {
 	}, []);
 
 	return (
-		<div className="bg-dark p-0">
-			{mensajes.map((elem, iterador) => {
-				if (elem.usuarioEmisor.id === usuario.id) {
-					return (
-						<div key={iterador} className="d-flex justify-content-start">
-							<div style={{ width: "350px" }} className="bg-secondary py-2 my-1 text-center">
-								{elem.mensaje}
+		<div className="container d-flex justify-content-center align-items-center" id="fondoMensajes">
+			<div className="container rounded p-0 " id="contenedorMensajes">
+				<div
+					className="rounded-top d-flex justify-content-center align-items-center mb-3"
+					id="tituloContenedor">
+					<h5 className="text-white">Mensajes</h5>
+				</div>
+				{mensajes.map((elem, iterador) => {
+					if (elem.usuarioEmisor.id === usuario.id) {
+						return (
+							<div key={iterador} className="d-flex justify-content-start">
+								<div className="text-white px-2 ml-3 py-2 my-1 text-center mensaje">{elem.mensaje}</div>
 							</div>
-						</div>
-					);
-				} else {
-					return (
-						<div key={iterador} className="d-flex justify-content-end">
-							<div style={{ width: "350px" }} className=" bg-primary py-2 my-1 text-center">
-								{elem.mensaje}
+						);
+					} else {
+						return (
+							<div key={iterador} className="d-flex justify-content-end">
+								<div className="text-white px-2 mr-3 py-2 my-1 text-center mensaje2">
+									{elem.mensaje}
+								</div>
 							</div>
-						</div>
-					);
-				}
-			})}
-			<form onSubmit={() => enviarMensaje(event)} className="d-flex flex-column aling-items-center">
-				<textarea style={{ width: "500px", margin: "auto" }} placeholder="Mensaje" id="mensaje" />
+						);
+					}
+				})}
+				<form
+					onSubmit={() => enviarMensaje(event)}
+					className="container-fluid d-flex justify-content-center align-items-center rounded-bottom mt-5"
+					id="formulario">
+					<textarea
+						className="rounded mx-0 mb-1 mt-1 border-0"
+						style={{ width: "500px", margin: "auto" }}
+						placeholder="Mensaje"
+						id="textMensaje"
+					/>
 
-				<button style={{ width: "75px", margin: "auto" }} className="btn btn-primary mt-1">
-					Enviar
-				</button>
-			</form>
+					<button
+						style={{ width: "75px", margin: "auto" }}
+						className=" btn ml-1 mb-1 mt-1 mx-0"
+						id="botonEnviar">
+						<i className="far fa-paper-plane" id="send" />
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 };

@@ -1,0 +1,62 @@
+#fondoMensajes{
+height: 100vh;
+
+}
+#contenedorMensajes{
+background-color: rgb(255, 243, 228);
+width: 500px;
+
+}
+@media (max-width: 415px) {
+  #contenedorMensajes{
+width: 320px;
+
+}
+}
+
+@media (max-width: 365px) {
+  #contenedorMensajes{
+width: 280px;
+
+}
+}
+
+.mensaje{
+    background-color: #91D98A;
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+border-top-left-radius: 10px;
+}
+
+.mensaje2{
+    background-color: #8AC0D9;
+border-top-right-radius: 10px;
+border-bottom-left-radius: 10px;
+border-top-left-radius: 10px;
+}
+
+#tituloContenedor{
+    height: 40px;
+    background-color: #2c3e50;
+}
+
+#formulario{
+    color: white;
+    background-color: #2c3e50;
+}
+
+#botonEnviar{
+    color: white;
+    background-color: #2c3e50;
+}
+
+#send:hover{
+    color: #7bffc6;
+    font-size: 25px;
+   filter: drop-shadow(0 1px 1px rgb(75, 75, 75));
+}
+
+#send{
+   font-size: 22px;
+}
+
