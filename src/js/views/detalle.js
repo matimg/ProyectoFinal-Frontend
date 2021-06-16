@@ -22,7 +22,27 @@ export const Detalle = () => {
 	}, []);
 	return (
 		<div className="container d-flex justify-content-center align-items-center modificarHeight">
-			<div className="card mb-3 bg-light" id="cartaCuerpo">
+			<div
+				className="container rounded mt-5"
+				id="cuerpoDetalle"
+				style={{ backgroundImage: `url(${publicacion.url})` }}>
+				<div className="container text-white" id="textoDetalle">
+					<h3>{publicacion.titulo}</h3>
+					<p>{publicacion.descripcion}</p>
+					<div className="container ml-1">
+						<div className="rounded-pill bg-dark" id="nombreDetalle">
+							<p className="mx-2" id="soloTexto">
+								{usuario.nombre} {usuario.apellido}
+							</p>
+						</div>
+						<div id="iconoDetalle">
+							<i className="far fa-comment-dots" id="iconoDetalle2" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{/*<div className="card mb-3 bg-light" id="cartaCuerpo" style={{ backgroundImage: `url(${publicacion.url})` }}>
 				<div className="row">
 					<div className="col-md-9 d-flex justify-content-center align-items-center">
 						<img src={publicacion.url} alt="..." id="imagenDetalle" />
@@ -42,7 +62,7 @@ export const Detalle = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>*/}
 			{/* <div className="card bg-transparent text-white border-0 contenedorCarta">
 				<img src={publicacion.url} className="card-img imagen" alt="..." />
 				<div className="card-img-overlay textoDetalle container">
