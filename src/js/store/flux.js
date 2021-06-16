@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			tipoUsuario: "",
 			errorLogin: { mensaje: "", style: " d-none" },
 			loading: false,
-			cantFechtPublicaciones: 0
+			cantFechtPublicaciones: 0,
+			token: false
 		},
 
 		actions: {
@@ -121,6 +122,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							return "error";
 						}
 						sessionStorage.setItem("token", data.token);
+						setStore({ token: true });
 						let usuario = data.usuario;
 						let fecha = "";
 						for (let i = 0; i < 10; i++) {
@@ -143,6 +145,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				sessionStorage.removeItem("token");
 				localStorage.removeItem("usuario");
+				setStore({ token: false });
 			},
 			recuperarPassword: email => {
 				var myHeaders = new Headers();

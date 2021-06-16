@@ -6,6 +6,7 @@ export const Mensajes = () => {
 	const { store, actions } = useContext(Context);
 	const [mensajes, setMensajes] = useState([]);
 	const params = useParams();
+	const usuario = JSON.parse(localStorage.getItem("usuario"));
 
 	const getMensajes = async () => {
 		let resultado = await actions.getConversacion(params.id);
@@ -17,12 +18,8 @@ export const Mensajes = () => {
 		event.preventDefault();
 		const form = event.currentTarget;
 		console.log(form);
-		let resultado = await actions.enviarMensaje(params.id, form.mensaje.value, form.asunto.value);
-		if (resultado == "Ok") {
-			// alertaOK()
-		} else {
-			// alertaError()
-		}
+		let resultado = await actions.enviarMensaje(params.id, form.mensaje.value, "");
+		form.mensaje.value = "";
 		getMensajes();
 	};
 
@@ -31,14 +28,32 @@ export const Mensajes = () => {
 	}, []);
 
 	return (
-		<div className="">
+		<div className="bg-dark p-0">
 			{mensajes.map((elem, iterador) => {
-				return <div key={iterador}>{elem.mensaje}</div>;
+				if (elem.usuarioEmisor.id === usuario.id) {
+					return (
+						<div key={iterador} className="d-flex justify-content-start">
+							<div style={{ width: "350px" }} className="bg-secondary py-2 my-1 text-center">
+								{elem.mensaje}
+							</div>
+						</div>
+					);
+				} else {
+					return (
+						<div key={iterador} className="d-flex justify-content-end">
+							<div style={{ width: "350px" }} className=" bg-primary py-2 my-1 text-center">
+								{elem.mensaje}
+							</div>
+						</div>
+					);
+				}
 			})}
-			<form onSubmit={() => enviarMensaje(event)}>
-				<input placeholder="Asunto" id="asunto" />
-				<textarea placeholder="Mensaje" id="mensaje" />
-				<button>Enviar</button>
+			<form onSubmit={() => enviarMensaje(event)} className="d-flex flex-column aling-items-center">
+				<textarea style={{ width: "500px", margin: "auto" }} placeholder="Mensaje" id="mensaje" />
+
+				<button style={{ width: "75px", margin: "auto" }} className="btn btn-primary mt-1">
+					Enviar
+				</button>
 			</form>
 		</div>
 	);
