@@ -1,10 +1,13 @@
 #fondoMensajes{
-height: 100vh;
+//height: 100vh;
+margin-top: 30px;
 
 }
 #contenedorMensajes{
 background-color: rgb(255, 243, 228);
+height:500px;
 width: 500px;
+border-radius: 15px;
 
 }
 @media (max-width: 415px) {
@@ -43,6 +46,8 @@ border-top-left-radius: 10px;
 #formulario{
     color: white;
     background-color: #2c3e50;
+    position: relative;
+    top: 0px;
 }
 
 #botonEnviar{
