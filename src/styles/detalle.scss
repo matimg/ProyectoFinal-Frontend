@@ -8,7 +8,7 @@
 }
 
 #nombreDetalle{
-    display: inline-block;
+    // display: inline-block;
     position: absolute;
     padding-bottom: 4px;
    
@@ -27,7 +27,7 @@
 
 #iconoDetalle{
     margin-left: -20px;
-    z-index: 3;
+    // z-index: 3;
     
 }
 #iconoDetalle2:hover{
@@ -36,3 +36,7 @@
    filter: drop-shadow(0 1px 1px rgb(75, 75, 75));
 }
 
+#contactoDetalle{
+    position: absolute;
+    display: inline-block;
+}

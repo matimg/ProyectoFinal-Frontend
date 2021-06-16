@@ -32,17 +32,19 @@ export const Detalle = () => {
 					<div className="container text-white" id="textoDetalle">
 						<h3>{publicacion.titulo}</h3>
 						<p>{publicacion.descripcion}</p>
-						<div className="container ml-1">
-							<div className="rounded-pill bg-dark" id="nombreDetalle">
+						<div className="container">
+							<div className="rounded-pill bg-dark ml-n3" id="nombreDetalle">
 								<p className="mx-2" id="soloTexto">
 									{usuario.nombre} {usuario.apellido}
 								</p>
 							</div>
-							<div id="iconoDetalle">
-								<Link to={"/mensajes/" + usuario.id}>
-									<i className="far fa-comment-dots" id="iconoDetalle2" type="button" />
-								</Link>
-							</div>
+						</div>
+						<div className="container mt-5 ml-0 p-0" id="contactoDetalle">
+							<p className="m-0 ml-1 d-inline">Contactar</p>
+							<Link to={"/mensajes/" + usuario.id}>
+								<i className="far fa-comment-dots d-inline ml-2" id="iconoDetalle2" type="button" />
+							</Link>
+							<div id="iconoDetalle" />
 						</div>
 					</div>
 				</div>
