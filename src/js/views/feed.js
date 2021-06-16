@@ -221,6 +221,8 @@ export const Feed = () => {
 					className="my-masonry-grid"
 					columnClassName="my-masonry-grid_column">
 					{array.map((elem, iterador) => {
+						let footer;
+
 						let etiqueta;
 						if (elem.formato == "image") {
 							etiqueta = (
@@ -247,6 +249,9 @@ export const Feed = () => {
 								);
 								break;
 							}
+						}
+						if (store.tipoUsuario === "Vendedor") {
+							estrella = "";
 						}
 						return (
 							<div className="col-md-4 col-6 mb-3 " key={iterador}>
