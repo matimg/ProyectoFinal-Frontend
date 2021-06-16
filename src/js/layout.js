@@ -18,6 +18,7 @@ import { ComoComprar } from "./views/comoComprar";
 import { ComoVender } from "./views/comoVender";
 import { Error404 } from "./views/404";
 import { ErrorPrivado } from "./views/errorPrivado";
+import { Mensajes } from "./views/mensaje";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -41,6 +42,10 @@ const Layout = () => {
 						</Route>
 
 						<PrivateRoute path="/feed" component={Feed} exact />
+
+						<Route exact path="/mensajes/:id">
+							<Mensajes />
+						</Route>
 
 						{/* <Route exact path="/feed">
 							<Feed />

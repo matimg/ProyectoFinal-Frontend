@@ -13,7 +13,7 @@ export const Error404 = () => {
 			<div
 				className="container d-flex justify-content-center align-items-center mt-n5 mt-md-0"
 				id="contenedor404">
-				<div className="row mt-4 d-flex justify-content-center align-items-center">
+				<div className="row d-flex justify-content-center align-items-center" id="filaOops">
 					<div className="col">
 						<h1 className="text-white mb-3 text-center" id="oops">
 							<strong>OOPS!</strong>

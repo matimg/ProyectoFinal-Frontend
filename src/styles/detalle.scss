@@ -1,89 +1,38 @@
-.contenedorCarta{
-    width: 90%;
-    height: 60%;
-    margin-top: -180px;
+#cuerpoDetalle{
+    
+    background: no-repeat;
+    background-size: 100%;
+    height: 1000px;
+    width: 100% ;
+    
 }
-.modificarHeight{
-    height: 100vh;
+
+#nombreDetalle{
+    display: inline-block;
+    position: absolute;
+    padding-bottom: 4px;
+   
+    
 }
-.textoDetalle {
-    flex-direction: column;
-    // align-self: flex-end;
-    display: flex;
-    justify-content: flex-end;
-    // align-items: flex-end;
-    margin-bottom: -150px;
+
+#soloTexto{
+    margin-bottom: -1px;
+    
 }
-#imagenDetalle{
-    width: 100%;
+
+#textoDetalle{
+    margin-top: 10px;
+    
 }
-#fondoOpacidad{
-   background-color: rgba(0, 0, 0, .6);
+
+#iconoDetalle{
+    margin-left: -20px;
+    z-index: 3;
+    
 }
-#contacto{
-    color: rgb(204, 204, 204);
-   text-decoration: underline;
+#iconoDetalle2:hover{
+    color: #7bffc6;
+    font-size: large;
+   filter: drop-shadow(0 1px 1px rgb(75, 75, 75));
 }
-#contacto:hover{
-    color: #49ac9f;
-    text-decoration: underline;
-}
-#cartaCuerpo{
-    width: 800px;
- 
-}
-@media (max-width: 750px) {
- .contenedorCarta{
-    width: 90%;
-    height: 60%;
-    margin-top: 0px;
-}
-.textoDetalle {
-    flex-direction: column;
-    // align-self: flex-end;
-    display: flex;
-    justify-content: flex-end;
-    // align-items: flex-end;
-    margin-bottom: 80px;
-}
-}
-@media (max-width: 400px) {
-.textoDetalle {
-    flex-direction: column;
-    // align-self: flex-end;
-    display: flex;
-    justify-content: flex-end;
-    // align-items: flex-end;
-    margin-bottom: 150px;
-}
-}
-// @media (max-width: 380px) {
-// .textoDetalle {
-//     flex-direction: column;
-//     // align-self: flex-end;
-//     display: flex;
-//     justify-content: flex-end;
-//     // align-items: flex-end;
-//     margin-bottom: 75px;
-// }
-// }
-@media (max-width: 365px) {
-.textoDetalle {
-    flex-direction: column;
-    // align-self: flex-end;
-    display: flex;
-    justify-content: flex-end;
-    // align-items: flex-end;
-    margin-bottom: 70px;
-}
-}
-@media (max-width: 325px) {
-.textoDetalle {
-    flex-direction: column;
-    // align-self: flex-end;
-    display: flex;
-    justify-content: flex-end;
-    // align-items: flex-end;
-    margin-bottom: 50px;
-}
-}
+

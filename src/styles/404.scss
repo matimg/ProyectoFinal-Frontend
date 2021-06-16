@@ -1,11 +1,14 @@
 #contenedor404{ 
     height: 100vh;
     flex-direction: column;
-    // margin-top: -50px;
+    // margin-top: 50px;
+}
+#filaOops{
+margin-top: 100px;
 }
 
 #imagenError{
-     width: 70%;
+     width: 60%;
     margin-top: -30px;
 }
 
@@ -25,6 +28,7 @@
     margin-top: 5px;
     background-color: #7bffc6;
     color: white;
+    margin-bottom: 30px;
 
 }
 

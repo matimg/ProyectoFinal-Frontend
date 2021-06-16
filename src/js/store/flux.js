@@ -4,7 +4,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			tipoUsuario: "",
 			errorLogin: { mensaje: "", style: " d-none" },
 			loading: false,
-			cantFechtPublicaciones: 0
+			cantFechtPublicaciones: 0,
+			token: false
 		},
 
 		actions: {
@@ -121,6 +122,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							return "error";
 						}
 						sessionStorage.setItem("token", data.token);
+						setStore({ token: true });
 						let usuario = data.usuario;
 						let fecha = "";
 						for (let i = 0; i < 10; i++) {
@@ -143,6 +145,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			logout: () => {
 				sessionStorage.removeItem("token");
 				localStorage.removeItem("usuario");
+				setStore({ token: false });
 			},
 			recuperarPassword: email => {
 				var myHeaders = new Headers();
@@ -371,6 +374,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				};
 				let result = fetchEliminarFavorito(id);
+				return result;
+			},
+			enviarMensaje: (idReceptor, mensaje, asunto) => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var raw = JSON.stringify({
+					receptor: idReceptor,
+					asunto: asunto,
+					mensaje: mensaje
+				});
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: raw
+				};
+				const fetchEnviar = async () => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/mensaje", requestOptions);
+						const data = await res.json();
+						setStore({ loading: false });
+						return data;
+					} catch (error) {
+						console.log(error);
+						return "error";
+					}
+				};
+				const result = fetchEnviar();
+				return result;
+			},
+			getConversacion: idReceptor => {
+				console.log("Hola");
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders
+				};
+				const fetchConversacion = async idReceptor => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/mensajes/" + idReceptor, requestOptions);
+						const data = await res.json();
+						setStore({ loading: false });
+						return data;
+					} catch (error) {
+						console.log(error);
+						return "error";
+					}
+				};
+				const result = fetchConversacion(idReceptor);
 				return result;
 			},
 			getDetalle: id => {
