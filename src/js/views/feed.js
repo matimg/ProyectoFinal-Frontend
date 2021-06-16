@@ -221,19 +221,6 @@ export const Feed = () => {
 					className="my-masonry-grid"
 					columnClassName="my-masonry-grid_column">
 					{array.map((elem, iterador) => {
-						let footer;
-
-						let etiqueta;
-						if (elem.formato == "image") {
-							etiqueta = (
-								<Link to={"/detalle/" + elem.id}>
-									<img className="rounded" id="imgId" src={elem.url} alt="" />
-								</Link>
-							);
-						} else {
-							etiqueta = <video className="rounded" id="imgId" src={elem.url} alt="" controls />;
-						}
-
 						let estrella = (
 							<i onClick={() => agregarFavorito(elem.id)} id="iconoFav" className="far fa-star" />
 						);
@@ -253,20 +240,51 @@ export const Feed = () => {
 						if (store.tipoUsuario === "Vendedor") {
 							estrella = "";
 						}
+
+						let footer;
+						let etiqueta;
+						if (elem.formato == "image") {
+							etiqueta = (
+								<Link to={"/detalle/" + elem.id}>
+									<img className="rounded" id="imgId" src={elem.url} alt="" />
+								</Link>
+							);
+							footer = (
+								<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
+									<div className="col-xs-4" id="botonCentrar">
+										<div className="btn">{estrella}</div>
+									</div>
+									<div className="col-xs-8">
+										<div id="footerImagen" className=" text-white py-1">
+											<p className="mt-1">{elem.titulo}</p>
+										</div>
+									</div>
+								</div>
+							);
+						} else {
+							etiqueta = <video className="rounded" id="imgId" src={elem.url} alt="" controls />;
+							footer = (
+								<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
+									<div className="col-xs-4" id="botonCentrar">
+										<div className="btn">{estrella}</div>
+									</div>
+									<div className="col-xs-8">
+										<div id="footerImagen" className=" text-white py-1 d-flex">
+											<p className="mt-1">{elem.titulo}</p>
+											<Link to={"/detalle/" + elem.id}>
+												<i className="fas fa-plus-circle text-white ml-2 mt-2" />
+											</Link>
+										</div>
+									</div>
+								</div>
+							);
+						}
+
 						return (
 							<div className="col-md-4 col-6 mb-3 " key={iterador}>
 								<div className="mx-md-4" id="divInterno">
 									{etiqueta}
-									<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
-										<div className="col-xs-4" id="botonCentrar">
-											<div className="btn">{estrella}</div>
-										</div>
-										<div className="col-xs-8">
-											<div id="footerImagen" className=" text-white py-1">
-												<p className="mt-1">{elem.titulo}</p>
-											</div>
-										</div>
-									</div>
+									{footer}
 								</div>
 							</div>
 						);
