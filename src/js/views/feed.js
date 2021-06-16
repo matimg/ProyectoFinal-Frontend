@@ -15,6 +15,10 @@ export const Feed = () => {
 	const [loading, setLoading] = useState(false);
 	const [favoritos, setFavoritos] = useState([]);
 	const [cantidad, setCantidad] = useState(0);
+	const [image, setImage] = useState([]);
+	const [video, setVideo] = useState([]);
+	const [sonido, setSonido] = useState([]);
+	const [array, setArray] = useState([]);
 
 	const [pedirMas, setPedirMas] = useState(false);
 
@@ -40,12 +44,31 @@ export const Feed = () => {
 			const data = await res.json();
 			console.log("Publicaciones", data);
 			setLoading(false);
-			if (cantidad == 0) {
-				setPublicaciones(data);
-			} else {
-				let aux = [...publicaciones, ...data];
-				setPublicaciones(aux);
+			if (cantidad === 0) {
+				setArray(data);
 			}
+			//Separamos las publicaciones en distintos array dependiendo de la categoria
+			let auxVideo = [];
+			let auxImage = [];
+			let auxSonido = [];
+			for (let i = 0; i < data.length; i++) {
+				if (data[i].categoria === "Video") {
+					auxVideo.push(data[i]);
+				} else if (data[i].categoria === "Imagen") {
+					auxImage.push(data[i]);
+				} else {
+					auxSonido.push(data[i]);
+				}
+			}
+			let aux2 = [...video, ...auxVideo];
+			setVideo(aux2);
+			aux2 = [...image, ...auxImage];
+			setImage(aux2);
+			aux2 = [...sonido, ...auxSonido];
+			setSonido(aux2);
+			//Guardamos un array con todas las publicaciones
+			let aux = [...publicaciones, ...data];
+			setPublicaciones(aux);
 			setCantidad(cantidad + 1);
 		} catch (error) {
 			console.log(error);
@@ -117,12 +140,24 @@ export const Feed = () => {
 		await actions.eliminarFavorito(id);
 		traerFavoritos();
 	};
+	const mostrarArray = categoria => {
+		if (categoria === "todo") {
+			setArray(publicaciones);
+		} else if (categoria === "imagen") {
+			setArray(image);
+		} else if (categoria === "video") {
+			setArray(video);
+		} else {
+			setArray(sonido);
+		}
+	};
 	return (
 		<div id="divExterno" className=" d-flex justify-content-center align-items-center mx-2 mx-md-0 mt-5">
 			<div id="navSelect" className="mt-n3 mb-4">
 				<ul className="nav nav-tabs" id="myTab" role="tablist">
 					<li className="nav-item" role="presentation">
 						<a
+							onClick={() => mostrarArray("todo")}
 							className="nav-link active"
 							id="home-tab"
 							data-toggle="tab"
@@ -135,6 +170,7 @@ export const Feed = () => {
 					</li>
 					<li className="nav-item" role="presentation">
 						<a
+							onClick={() => mostrarArray("imagen")}
 							className="nav-link"
 							id="home-tab"
 							data-toggle="tab"
@@ -147,6 +183,7 @@ export const Feed = () => {
 					</li>
 					<li className="nav-item" role="presentation">
 						<a
+							onClick={() => mostrarArray("video")}
 							className="nav-link"
 							id="profile-tab"
 							data-toggle="tab"
@@ -159,6 +196,7 @@ export const Feed = () => {
 					</li>
 					<li className="nav-item" role="presentation">
 						<a
+							onClick={() => mostrarArray("sonido")}
 							className="nav-link"
 							id="contact-tab"
 							data-toggle="tab"
@@ -181,7 +219,7 @@ export const Feed = () => {
 					breakpointCols={breakpointColumnsObj}
 					className="my-masonry-grid"
 					columnClassName="my-masonry-grid_column">
-					{publicaciones.map((elem, iterador) => {
+					{array.map((elem, iterador) => {
 						let etiqueta;
 						if (elem.formato == "image") {
 							etiqueta = (
