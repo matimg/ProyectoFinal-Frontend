@@ -17,10 +17,7 @@ export const Navbar = () => {
 	const [rolVendedor, setRolVendedor] = useState("d-none");
 	const [cualquierRol, setCualquierRol] = useState("d-none");
 	const [sinRol, setSinRol] = useState("");
-	// var rolComprador;
-	// var rolVendedor;
-	// var cualquierRol;
-	// var sinRol;
+
 	useEffect(
 		() => {
 			if (store.tipoUsuario === "Comprador" && store.token) {
