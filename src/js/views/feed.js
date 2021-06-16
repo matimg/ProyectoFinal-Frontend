@@ -171,15 +171,9 @@ export const Feed = () => {
 					</li>
 				</ul>
 				<div className="tab-content" id="myTabContent">
-					<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-						...
-					</div>
-					<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-						...
-					</div>
-					<div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-						...
-					</div>
+					<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" />
+					<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab" />
+					<div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab" />
 				</div>
 			</div>
 			<div className=" ">
@@ -221,14 +215,7 @@ export const Feed = () => {
 									{etiqueta}
 									<div className="row d-flex justify-content-start px-4 px-md-0 pl-md-2">
 										<div className="col-xs-4" id="botonCentrar">
-											<div className="btn">
-												{estrella}
-												{/* <i
-												onClick={() => agregarFavorito(elem.id)}
-												id="iconoFav"
-												className="far fa-star"
-											/> */}
-											</div>
+											<div className="btn">{estrella}</div>
 										</div>
 										<div className="col-xs-8">
 											<div id="footerImagen" className=" text-white py-1">
