@@ -44,9 +44,10 @@ export const Feed = () => {
 			const data = await res.json();
 			console.log("Publicaciones", data);
 			setLoading(false);
-			if (cantidad === 0) {
-				setArray(data);
-			}
+			// if (cantidad === 0) {
+			let aux3 = [...array, ...data];
+			setArray(aux3);
+			// }
 			//Separamos las publicaciones en distintos array dependiendo de la categoria
 			let auxVideo = [];
 			let auxImage = [];
@@ -54,7 +55,7 @@ export const Feed = () => {
 			for (let i = 0; i < data.length; i++) {
 				if (data[i].categoria === "Video") {
 					auxVideo.push(data[i]);
-				} else if (data[i].categoria === "Imagen") {
+				} else if (data[i].categoria === "Image") {
 					auxImage.push(data[i]);
 				} else {
 					auxSonido.push(data[i]);
