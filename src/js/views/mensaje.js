@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import "../../styles/mensaje.scss";
 import { Context } from "../store/appContext";
 
 export const Mensajes = () => {
@@ -28,12 +29,15 @@ export const Mensajes = () => {
 	}, []);
 
 	return (
-		<div className="bg-dark p-0">
+		<div className="container mt-3 rounded  p-0 " style={{ width: "620px" }} id="contenedorMensajes">
 			{mensajes.map((elem, iterador) => {
 				if (elem.usuarioEmisor.id === usuario.id) {
 					return (
 						<div key={iterador} className="d-flex justify-content-start">
-							<div style={{ width: "350px" }} className="bg-secondary py-2 my-1 text-center">
+							<div
+								style={{ width: "350px" }}
+								className="ml-3 bg-secondary py-2 my-1 text-center"
+								id="mensaje">
 								{elem.mensaje}
 							</div>
 						</div>
@@ -41,15 +45,23 @@ export const Mensajes = () => {
 				} else {
 					return (
 						<div key={iterador} className="d-flex justify-content-end">
-							<div style={{ width: "350px" }} className=" bg-primary py-2 my-1 text-center">
+							<div
+								style={{ width: "350px" }}
+								className="mr-3 bg-primary py-2 my-1 text-center"
+								id="mensaje2">
 								{elem.mensaje}
 							</div>
 						</div>
 					);
 				}
 			})}
-			<form onSubmit={() => enviarMensaje(event)} className="d-flex flex-column aling-items-center">
-				<textarea style={{ width: "500px", margin: "auto" }} placeholder="Mensaje" id="mensaje" />
+			<form onSubmit={() => enviarMensaje(event)} className="mt-5 mb-3 d-flex aling-items-center">
+				<textarea
+					className="rounded"
+					style={{ width: "500px", margin: "auto" }}
+					placeholder="Mensaje"
+					id="mensaje"
+				/>
 
 				<button style={{ width: "75px", margin: "auto" }} className="btn btn-primary mt-1">
 					Enviar
