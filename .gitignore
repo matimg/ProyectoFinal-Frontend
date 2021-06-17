@@ -39,7 +39,7 @@ Thumbs.db
 *.o
 *.so
 * .env.example
-
+a
 # ignore packaged files
 *.7z
 *.dmg
