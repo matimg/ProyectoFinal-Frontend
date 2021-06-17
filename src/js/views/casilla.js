@@ -19,7 +19,7 @@ export const Casilla = () => {
 
 	return (
 		<div className="container d-flex justify-content-center">
-			<table className="table table-sm table-dark w-50 mt-5">
+			<table className="table table-sm table-dark w-50 mt-5 rounded">
 				<thead>
 					<tr>
 						<th scope="col">Conversaciones</th>
