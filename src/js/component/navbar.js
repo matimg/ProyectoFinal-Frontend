@@ -85,7 +85,7 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item active">
-							<Link id="btnMensajes" className={"nav-link " + cualquierRol} to="/feed">
+							<Link id="btnMensajes" className={"nav-link " + cualquierRol} to="/casilla">
 								<i className="far fa-comment-dots" />
 								<span className="sr-only">(current)</span>
 							</Link>

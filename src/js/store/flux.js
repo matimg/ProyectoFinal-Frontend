@@ -408,7 +408,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return result;
 			},
 			getConversacion: idReceptor => {
-				console.log("Hola");
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 				myHeaders.append("Authorization", sessionStorage.getItem("token"));
@@ -430,6 +429,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				};
 				const result = fetchConversacion(idReceptor);
+				return result;
+			},
+			getCasilla: () => {
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+				myHeaders.append("Authorization", sessionStorage.getItem("token"));
+
+				var requestOptions = {
+					method: "GET",
+					headers: myHeaders
+				};
+				const fetchCasilla = async () => {
+					try {
+						setStore({ loading: true });
+						const res = await fetch(process.env.URL + "/casilla", requestOptions);
+						const data = await res.json();
+						setStore({ loading: false });
+						return data;
+					} catch (error) {
+						console.log(error);
+						return "error";
+					}
+				};
+				const result = fetchCasilla();
 				return result;
 			},
 			getDetalle: id => {

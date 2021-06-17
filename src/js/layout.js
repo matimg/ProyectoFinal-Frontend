@@ -19,6 +19,7 @@ import { ComoVender } from "./views/comoVender";
 import { Error404 } from "./views/404";
 import { ErrorPrivado } from "./views/errorPrivado";
 import { Mensajes } from "./views/mensaje";
+import { Casilla } from "./views/casilla";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
@@ -45,6 +46,10 @@ const Layout = () => {
 
 						<Route exact path="/mensajes/:id">
 							<Mensajes />
+						</Route>
+
+						<Route exact path="/casilla">
+							<Casilla />
 						</Route>
 
 						{/* <Route exact path="/feed">
