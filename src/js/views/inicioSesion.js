@@ -35,7 +35,7 @@ export const InicioSesion = () => {
 			if (store.tipoUsuario == "Vendedor") {
 				history.push("/perfilVendedor");
 			} else {
-				history.push("/perfilComprador");
+				history.push("/feed");
 			}
 		}
 	};
