@@ -38,6 +38,7 @@ Thumbs.db
 *.exe
 *.o
 *.so
+* .env.example
 
 # ignore packaged files
 *.7z
