@@ -85,6 +85,12 @@ export const Navbar = () => {
 							</Link>
 						</li>
 						<li className="nav-item active">
+							<Link id="btnMensajes" className={"nav-link " + cualquierRol} to="/feed">
+								<i className="far fa-comment-dots" />
+								<span className="sr-only">(current)</span>
+							</Link>
+						</li>
+						<li className="nav-item active">
 							<Link id="btnPerfil" className={"nav-link " + rolVendedor} to="/perfilVendedor">
 								<i className="fas fa-user" />
 								<span className="sr-only">(current)</span>

@@ -54,3 +54,12 @@
     content: "Ingresar";
     color: #49ac9f;
 }
+
+#btnMensajes:hover{
+    color: #49ac9f;
+}
+
+#btnMensajes:hover::after{
+    content: "Mensajes";
+    color: #49ac9f;
+}
