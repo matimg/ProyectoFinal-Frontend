@@ -50,15 +50,19 @@ export const Detalle = () => {
 		);
 	} else {
 		return (
-			<div className="container d-flex flex-column justify-content-center align-items-center modificarHeight">
-				<video className="rounded mt-2" style={{ width: "75%" }} src={publicacion.url} alt="" controls />
-				<div style={{ width: "75%" }} className="d-flex flex-column justify-content-start bg-secondary">
-					<h3 className="text-start">{publicacion.titulo}</h3>
-					<div className="d-flex">
-						<p>{publicacion.descripcion}</p>
-						<p className="ml-3">
-							{usuario.nombre} {usuario.apellido}
-						</p>
+			<div className="container py-5">
+				<div className="row">
+					<div className="col">
+						<div className="video-card h-75 w-100 rounded shadow position-relative">
+							<video className="vvideo" src={publicacion.url} alt="" controls />
+							<div className="videoDescripcion position-absolute text-white">
+								<h3 className="soloTextoNu font-weight-bold">{publicacion.titulo}</h3>
+								<div className="soloTextoNu">{publicacion.descripcion}</div>
+								<div className="soloTextoNu rounded-pill bg-dark mt-2 ml-n1 px-2" id="nombreDetalle">
+									{usuario.nombre} {usuario.apellido}
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

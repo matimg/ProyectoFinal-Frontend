@@ -36,3 +36,33 @@
    filter: drop-shadow(0 1px 1px rgb(75, 75, 75));
 }
 
+.vvideo{
+    width: 100%;
+}
+
+.videoDescripcion{
+    margin-top: -610px;
+    margin-left: 20px;
+}
+
+
+
+@media (max-width: 415px) {
+    .videoDescripcion{
+    margin-top: -210px;
+}
+.soloTextoNu{
+    font-size: small;
+}
+ 
+}
+
+@media (max-width: 380px) {
+    .videoDescripcion{
+    margin-top: -190px;
+}
+.soloTextoNu{
+    font-size: small;
+}
+ 
+}
